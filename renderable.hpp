@@ -29,12 +29,13 @@ typedef struct
 
 class Renderable {
 private:
-  Sprites sprite_list;
+  Sprites *sprite_list;
   std::vector<Vector2> position;
   std::vector<Vector2> size;
 
 public:
-  Renderable();
+  Renderable() {sprite_list = new Sprites();}
+  ~Renderable() {delete sprite_list;}
   virtual void Draw() = 0;
   bool add_sprite(std::string textureLocation);
   bool set_position(int index, Vector2 position);
