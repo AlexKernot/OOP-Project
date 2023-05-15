@@ -32,9 +32,11 @@ private:
   std::vector<sf::Sprite*> sprites;
   std::vector<std::string> sprite_name;
 
+public:
+  ~Sprites();
+
 protected:
   sf::Sprite *get_sprite_name(std::string sprite_name);
   sf::Sprite *get_sprite_index(int index);
-  ~Sprites();
 };
 #endif
