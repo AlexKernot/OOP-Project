@@ -30,13 +30,15 @@ class Sprites
 {
 private:
   std::vector<sf::Sprite*> sprites;
-  std::vector<std::string> sprite_name;
+  std::vector<sf::Texture*> textures;
+  std::vector<std::string> spriteName;
 
 public:
   ~Sprites();
 
 protected:
-  sf::Sprite *get_sprite_name(std::string sprite_name);
+  void  add_sprite(std::string spriteName, std::string texturePath);
+  sf::Sprite *get_sprite_name(std::string spriteName);
   sf::Sprite *get_sprite_index(int index);
 };
 #endif

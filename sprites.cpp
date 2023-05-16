@@ -19,11 +19,25 @@
 
 #include "sprites.hpp"
 
+/*  Loads the texture from the relative path 'texture path' and puts the      */
+/*  pointer to the sprite on the heap.                                        */
+void  Sprites::add_sprite(std::string spriteName, std::string texturePath){
+  sf::Sprite *newSprite = new sf::Sprite();
+  sf::Texture *newTexture = new sf::Texture();
+  bool loadResult = newTexture->loadFromFile(texturePath);
+  if (loadResult == false)
+    newTexture->loadFromFile("resources/placeholder.png");
+  newSprite->setTexture(*newTexture);
+  sprites.push_back(newSprite);
+  textures.push_back(newTexture);
+  this->spriteName.push_back(spriteName);
+}
+
 /* returns the sprite that corrosponds to a named texture within the array.   */
 /* will return a null pointer if no texture with that name is found.          */
-sf::Sprite *Sprites::get_sprite_name(std::string sprite_name) {
-  int sprite_index = sprite_name.find(sprite_name);
-  return sprites[sprite_index];
+sf::Sprite *Sprites::get_sprite_name(std::string spriteName) {
+  int spriteIndex = spriteName.find(spriteName);
+  return sprites[spriteIndex];
 }
 
 /* returns the sprite that corrosponds to an index within the array.         */
