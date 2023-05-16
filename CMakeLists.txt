@@ -16,21 +16,7 @@ set(SFML_BUILD_AUDIO OFF)
 set(SFML_BUILD_NETWORK OFF)
 set(SFML_BUILD_EXAMPLES OFF)
 set(BUILD_SHARED_LIBS OFF)
-set(SFML_DEPENDENCIES  
-        opengl32 # window, graphics  
-        winmm # window, system  
-        gdi32 # window  
-        freetype # graphics  
-# Audio dependencies
-#        openal32
-#        FLAC
-#        vorbis
-#        vorbisfile
-#        vorbisenc
-#        ogg
-# Network dependencies
-#        ws2_32
-)
+
 FetchContent_Declare(sfml 
                       GIT GIT_REPOSITORY https://github.com/SFML/SFML.git 
                       GIT_TAG 2.5.1 )
@@ -38,7 +24,6 @@ FetchContent_MakeAvailable(sfml)
 
 target_link_libraries(pokemon 
                       PRIVATE nlohmann_json::nlohmann_json
-                      SFML_DEPENDENCIES
                       sfml-system
                       sfml-window
                       sfml-graphics)
