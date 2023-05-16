@@ -17,6 +17,9 @@
 /*                                                                           */
 /*****************************************************************************/
 
+#ifndef POKEMON_WINDOW_H
+#define POKEMON_WINDOW_H
+
 #include "SFML/Window.hpp"
 
 #include <vector>
@@ -43,3 +46,5 @@ protected:
 	void ClearEntireWindow();
 	void RenderWindow();
 };
+
+#endif

@@ -21,6 +21,9 @@
 
 #include "sprites.hpp"
 
+#ifndef POKEMON_RENDERABLE_H
+#define POKEMON_RENDERABLE_H
+
 typedef struct 
 {
   int x;
@@ -44,3 +47,5 @@ public:
 private:
   void render_single(int index);
 };
+
+#endif
