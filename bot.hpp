@@ -17,12 +17,19 @@
 /*                                                                           */
 /*****************************************************************************/
 
-#ifndef __BOT_H__
-#define __BOT_H__
+#ifndef BOT_H
+#define BOT_H
 
-class Bot {
+#include "move.hpp"
+#include "player.hpp"
+#include "pokemon.hpp"
+
+class Bot : public Player {
  public:
-  void make_move();
+  Bot(std::string name, vector<Pokemon*> pokemons);
+  void make_choice();
+  Move make_move();
+  void swap_pokemon();
 };
 
 #endif
