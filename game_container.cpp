@@ -18,7 +18,18 @@
 /*****************************************************************************/
 
 #include "game_container.hpp"
+#include "renderable.hpp"
 #include <iostream>
+
+/*class TestClass : public Renderable {
+public:
+  TestClass() {
+    Renderable::add_sprite("test", "noFile.png");
+  }
+  void Draw(sf::RenderWindow *window) {
+    window->draw(*Renderable::get_sprite(0));
+  }
+};*/
 
 void Game_container::ButtonPress(sf::Event event)
 {
@@ -36,14 +47,20 @@ void Game_container::ButtonPress(sf::Event event)
 
 //void Game_container::draw();
 void Game_container::StartGame(){
-    while (true) {
-        sf::Event event;
-        while (Window::PollEvent(&event)) {
-            if (event.type == sf::Event::Closed)
-               return ;
-		    if (event.type == sf::Event::MouseButtonPressed) {
-                ButtonPress(event);
-            }
-    	}
-	}
+/*  TestClass testClass = TestClass();
+  Window::AddToWindow(&testClass);*/
+  while (true) {
+    sf::Event event;
+    while (Window::PollEvent(&event)) {
+      if (event.type == sf::Event::Closed)
+      {
+        std::cout << "Close\n";
+        return ;
+      }
+    if (event.type == sf::Event::MouseButtonPressed) {
+      ButtonPress(event);
+    }
+    Window::RenderWindow();
+  }
+}
 }

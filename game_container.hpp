@@ -33,6 +33,7 @@ class Game_container : protected Window
 	public:
 		void draw();
 		void StartGame();
+		void TestRenderable();
 };
 
 #endif
