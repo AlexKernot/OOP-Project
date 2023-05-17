@@ -73,6 +73,7 @@ void Pokemon::take_damage(int pwr)
 /*modifies the stat when stat modifying moves are used or taken*/
 void modify_stats(struct stats)
 {
+
 }
 
 /* this function receives the moves and performs calculations to return the total hp for a Pokemon to lose and stats modifications*/
@@ -84,46 +85,88 @@ void Pokemon::receive_move(Move moves)
 		randomNumber = 2;
 	else 
 		randomNumber = 1;
-	if ((mod_stats.attack || mod_stats.defense) > 255) {
-		mod_stats.attack /= 4;
-		floor(mod_stats.attack);
-		mod_stats.defense /= 4;
-		floor(mod_stats.defense);
-		// < 0 checker (???)
-	}
-	if (moves.get_name == "Explosion" || moves.get_name == "Selfdestruct") {
-		mod_stats.defense /= 2;
-		floor(mod_stats.defense);
-	}
-	if (crit == 2) {
-		division = base_stats.attack / base_stats.defense;
-		floor(division);
-	}
-	else {
-		division = mod_stats.attack / mod_stats.defense;
-		floor(division);
-	}
-	total_damage = ((((((crit * 2) / 5) + 2) * move.get_power) * division) / 50)
-	floor(total_damage);
-	if (total_damage > 997)
-	total_damage = 997;
-	total_damage += 2; //im doing this at 2am pls chile kek
-	if (type == moves.get_type) {
-		stab =  total_damage / 2;
-		floor(stab);
-		total_damage += stab;
-	}
-	//type 1 type 2 calculation (idk how to do that) ->type checker?
-	if (total_damage == 0)
+	if (moves.get_effect = " Physical Attack")
 	{
-		cout << "Move missed." << endl;
-	}
-	if (total_damage == 1)
+		if ((mod_stats.attack || mod_stats.defense) > 255) {
+			mod_stats.attack /= 4;
+			floor(mod_stats.attack);
+			mod_stats.defense /= 4;
+			floor(mod_stats.defense);
+			// < 0 checker (???)
+		}
+		if (moves.get_name == "Explosion" || moves.get_name == "Selfdestruct") {
+			mod_stats.defense /= 2;
+			floor(mod_stats.defense);
+		}
+		if (crit == 2) {
+			division = base_stats.attack / base_stats.defense;
+			floor(division);
+		}
+		else {
+			division = mod_stats.attack / mod_stats.defense;
+			floor(division);
+		}
+		total_damage = ((((((crit * 2) / 5) + 2) * move.get_power) * division) / 50)
+		floor(total_damage);
+		if (total_damage > 997)
+		total_damage = 997;
+		total_damage += 2;
+		if (type == moves.get_type) {
+			stab =  total_damage / 2;
+			floor(stab);
+			total_damage += stab;
+		}
+		//type 1 type 2 calculation (idk how to do that) ->type checker?
+		if (total_damage == 0)
+		{
+			cout << "Move missed." << endl;
+		}
+		if (total_damage == 1)
+			take_damage(total_damage);
+		randomNumber = 217 + (rand() % (39));
+		total_damage = ((total_damage * randomNumber) / 255)
+		floor(total_damage);
 		take_damage(total_damage);
-	randomNumber = 217 + (rand() % (39));
-	total_damage = ((total_damage * randomNumber) / 255)
-	floor(total_damage);
-	take_damage(total_damage);
+	}
+	else if (moves.get_effect = " Special Attack")
+	{
+		if ((mod_stats.special_attack || mod_stats.special_defense) > 255) {
+			mod_stats.special_attack /= 4;
+			floor(mod_stats.special_attack);
+			mod_stats.special_defense /= 4;
+			floor(mod_stats.special_defense);
+			// < 0 checker (???)
+		}
+		if (crit == 2) {
+			division = base_stats.special_attack / base_stats.special_defense;
+			floor(division);
+		}
+		else {
+			division = mod_stats.special_attack / mod_stats.special_defense;
+			floor(division);
+		}
+		total_damage = ((((((crit * 2) / 5) + 2) * move.get_power) * division) / 50)
+		floor(total_damage);
+		if (total_damage > 997)
+		total_damage = 997;
+		total_damage += 2;
+		if (type == moves.get_type) {
+			stab =  total_damage / 2;
+			floor(stab);
+			total_damage += stab;
+		}
+		//type 1 type 2 calculation (idk how to do that) ->type checker?
+		if (total_damage == 0)
+		{
+			cout << "Move missed." << endl;
+		}
+		if (total_damage == 1)
+			take_damage(total_damage);
+		randomNumber = 217 + (rand() % (39));
+		total_damage = ((total_damage * randomNumber) / 255)
+		floor(total_damage);
+		take_damage(total_damage);
+	}
 }
 
 /* sets the name of the Pokemon */
