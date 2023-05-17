@@ -24,14 +24,15 @@
 
 #include "window.hpp"
 
-class Game_container : public Window
+class Game_container : protected Window
 {
 	private:
+		void ButtonPress(sf::Event event);
 		int hp_index;
 		int background_index;
 	public:
 		void draw();
-		void show_game_menu();
+		void StartGame();
 };
 
 #endif

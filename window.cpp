@@ -39,6 +39,13 @@ void Window::AddToWindow(Renderable *object) {
   objects.push_back(object);
 }
 
+bool Window::PollEvent(sf::Event *event)
+{
+  bool eventsPending;
+  eventsPending = sfWindow->pollEvent(*event);
+  return eventsPending;
+}
+
 void Window::ClearFromWindow(Renderable *object) {
   int size = static_cast<int>(objects.size());
   for (int i = 0; i < size; ++i) {

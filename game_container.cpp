@@ -18,20 +18,31 @@
 /*****************************************************************************/
 
 #include "game_container.hpp"
+#include <iostream>
+
+void Game_container::ButtonPress(sf::Event event)
+{
+    if (event.mouseButton.button == sf::Mouse::Left)
+    {
+        std::cout << "Left\n";
+        // Button logic here
+    }
+    if (event.mouseButton.button == sf::Mouse::Right)
+    {
+        std::cout << "Right\n";
+    }
+
+}
 
 //void Game_container::draw();
-void Game_container::show_game_menu(){
-	Window window; // a a a a a a
-    while (window.isOpen()) {
+void Game_container::StartGame(){
+    while (true) {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (Window::PollEvent(&event)) {
             if (event.type == sf::Event::Closed)
-               // window.close();
-        }
-		 if (event.type == sf::Event::MouseButtonPressed) {
-            if (event.mouseButton.button == sf::Mouse::Left)
-            {
-				//logic insert here
+               return ;
+		    if (event.type == sf::Event::MouseButtonPressed) {
+                ButtonPress(event);
             }
     	}
 	}
