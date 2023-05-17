@@ -41,6 +41,12 @@ class Pokemon
 		string type;
 		int max_hp;
 		int current_hp;
+		int crit;  //generate random number to randomize crit move 10% chance
+		int randomNumber;
+		int division;
+		int total_damage;
+		int crit_stats;
+		int stab;
 		struct Stats
     	{
 			int attack;
@@ -51,6 +57,7 @@ class Pokemon
     	} base_stats, mod_stats;
 	public:
 		virtual Pokemon();
+		int typeChecker(Move moves);
 		void take_damage(int pwr);
 		void modify_stats(struct stats);
 		void receive_move(Move moves);
