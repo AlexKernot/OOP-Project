@@ -60,7 +60,7 @@ void Game_container::StartGame(){
     if (event.type == sf::Event::MouseButtonPressed) {
       ButtonPress(event);
     }
-    Window::RenderWindow();
   }
+  Window::RenderWindow();
 }
 }

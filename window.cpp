@@ -27,7 +27,6 @@ Window::Window() {
     static_cast<unsigned int>(height)), 
     "Pokemon Simulator", 
     sf::Style::Close);
-  sfWindow->setFramerateLimit(fpsLimit);
 }
 
 Window::~Window() {
@@ -69,6 +68,7 @@ void Window::RenderWindow() {
   sfWindow->clear();
   int size = static_cast<int>(objects.size());
   for (int i = 0; i < size; ++i)
-    objects[i]->Draw(sfWindow);
+    if (objects[i] != nullptr)
+      objects[i]->Draw(sfWindow);
   sfWindow->display();
 }
