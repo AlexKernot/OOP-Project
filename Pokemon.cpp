@@ -66,7 +66,12 @@ void Pokemon::receive_move(Move moves) {
 			floor(mod_stats.attack);
 			mod_stats.defense /= 4;
 			floor(mod_stats.defense);
-			// < 0 checker (???)
+			if(mod_stats.attack <= 0) {
+				mod_stats.attack = 1;
+			}
+			if(mod_stats.defense <= 0) {
+				mod_stats.defense = 1;
+			}
 		}
 		if (moves.get_name == "Explosion" || moves.get_name == "Selfdestruct") {
 			mod_stats.defense /= 2;
@@ -80,6 +85,9 @@ void Pokemon::receive_move(Move moves) {
 			division = mod_stats.attack / mod_stats.defense;
 			floor(division);
 		}
+		if (division <= 0) {
+			division = 1;
+		}
 		total_damage = ((((((crit * 2) / 5) + 2) * move.get_power) * division) / 50)
 		floor(total_damage);
 		if (total_damage > 997)
@@ -91,9 +99,10 @@ void Pokemon::receive_move(Move moves) {
 			total_damage += stab;
 		}
 		//type 1 type 2 calculation (idk how to do that) ->type checker?
-		if (total_damage == 0)
-		{
-			cout << "Move missed." << endl;
+		//non effect type 
+		if (total_damage <= 0) {
+			cout << "Move missed." << endl; //note that this might have to be displayed on the battle log somehow
+			return ;
 		}
 		if (total_damage == 1)
 			take_damage(total_damage);
@@ -108,7 +117,12 @@ void Pokemon::receive_move(Move moves) {
 			floor(mod_stats.special_attack);
 			mod_stats.special_defense /= 4;
 			floor(mod_stats.special_defense);
-			// < 0 checker (???)
+			if(mod_stats.special_attack <= 0) {
+				mod_stats.special_attack = 1;
+			}
+			if(mod_stats.special_defense <= 0) {
+				mod_stats.special_defense = 1;
+			}
 		}
 		if (crit == 2) {
 			division = base_stats.special_attack / base_stats.special_defense;
@@ -117,6 +131,9 @@ void Pokemon::receive_move(Move moves) {
 		else {
 			division = mod_stats.special_attack / mod_stats.special_defense;
 			floor(division);
+		}
+		if (division <= 0) {
+			division = 1;
 		}
 		total_damage = ((((((crit * 2) / 5) + 2) * move.get_power) * division) / 50)
 		floor(total_damage);
@@ -129,12 +146,13 @@ void Pokemon::receive_move(Move moves) {
 			total_damage += stab;
 		}
 		//type 1 type 2 calculation (idk how to do that) ->type checker?
-		if (total_damage == 0)
-		{
+		//if type effectivity is 0 move misses
+		if (total_damage <= 0)
 			cout << "Move missed." << endl;
-		}
-		if (total_damage == 1)
+		if (total_damage == 1) {
 			take_damage(total_damage);
+			return ;
+		}
 		randomNumber = 217 + (rand() % (39));
 		total_damage = ((total_damage * randomNumber) / 255)
 		floor(total_damage);

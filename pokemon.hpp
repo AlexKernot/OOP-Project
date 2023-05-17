@@ -28,7 +28,8 @@
 #include <string>
 #include <vector>
 
-#include "move.h"
+#include "move.hpp"
+#include "type.hpp"
 
 using std::string;
 using std::time;

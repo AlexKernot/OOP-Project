@@ -95,7 +95,7 @@ void Menu::loop_events(){
       std::cout << options[pos] << '\n';
     }
 
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
       if(winclose->getGlobalBounds().contains(mouse_coord)){
         //std::cout << "Close the window!" << '\n';
         window->close();
