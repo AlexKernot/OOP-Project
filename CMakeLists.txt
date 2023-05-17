@@ -5,7 +5,7 @@ set(EXECUTABLE_OUTPUT_PATH ../)
 set(RUNTIME_OUTPUT_DIRECTORY ./bin)
 set(CMAKE_EXECUTABLE_SUFFIX ".out")
 set(COMPILE_OPTIONS -Wall; -Wextra; -Wpedantic; -Werror)
-add_executable(pokemon renderable.cpp sprites.cpp window.cpp main.cpp game_container.cpp main.cpp)
+add_executable(pokemon type.cpp renderable.cpp sprites.cpp window.cpp main.cpp game_container.cpp main.cpp)
 
 include(FetchContent)
 
