@@ -26,7 +26,7 @@ Window::Window() {
     sf::VideoMode(static_cast<unsigned int>(width), 
     static_cast<unsigned int>(height)), 
     "Pokemon Simulator", 
-    sf::Style::Titlebar);
+    sf::Style::Close);
   sfWindow->setFramerateLimit(fpsLimit);
 }
 
@@ -69,6 +69,6 @@ void Window::RenderWindow() {
   sfWindow->clear();
   int size = static_cast<int>(objects.size());
   for (int i = 0; i < size; ++i)
-    objects[i]->Draw();
+    objects[i]->Draw(sfWindow);
   sfWindow->display();
 }

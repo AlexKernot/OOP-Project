@@ -39,8 +39,6 @@ public:
 	~Window();
 	int GetWindowWidth() {return width;}
 	int GetWindowHeight() {return height;}
-
-protected:
 	bool PollEvent(sf::Event *event);
 	void AddToWindow(Renderable *object);
 	void ClearFromWindow(Renderable *object);
