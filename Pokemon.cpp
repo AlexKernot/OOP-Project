@@ -194,9 +194,6 @@ string Pokemon::get_moves()
 {
 	for (int i = 0; i < 4; i++) {
             moveList += moves[i].get_name();
-            if (i != 3) {
-            moveList += ", ";
-        	}
     }
         return moveList;
 }
