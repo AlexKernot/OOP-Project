@@ -33,16 +33,22 @@ typedef struct
 class Renderable {
 private:
   Sprites *sprite_list;
-  std::vector<Vector2> position;
-  std::vector<Vector2> size;
+  sf::Vector2i position;
+  sf::Vector2i size;
 
 public:
   Renderable() {sprite_list = new Sprites();}
   ~Renderable() {delete sprite_list;}
-  virtual void Draw() = 0;
-  bool add_sprite(std::string textureLocation);
-  bool set_position(int index, Vector2 position);
-  bool offset_position(int index, Vector2 offset);
+  virtual void Draw(sf::RenderWindow *window) = 0;
+  sf::Sprite *get_sprite(int index) {return (sprite_list->get_sprite_index(index));}
+  sf::Sprite add_sprite(std::string spriteName, std::string texturePath);
+  void set_position(int index, sf::Vector2i position) {
+    sprite_list->get_sprite_index(index)->setPosition(static_cast<sf::Vector2f>(position));
+  }
+  void set_size(int index, sf::Vector2f size) {
+    sprite_list->get_sprite_index(index)->setScale(size);
+  }
+  bool offset_position(int index, sf::Vector2i offset);
 
 private:
   void render_single(int index);
