@@ -60,11 +60,9 @@ int typeChecker(Move moves, string pkm_type)
 /*reduces the hp of the Pokemon by the damage passed in the parameter */
 void Pokemon::take_damage(int pwr)
 {
-	if(current_hp > 0)
-	{
+	if(current_hp > 0) {
 		current_hp -= pwr;
-		if (current_hp < 0)
-		{
+		if (current_hp < 0) {
 			current_hp = 0;
 		}
 	}
@@ -85,8 +83,7 @@ void Pokemon::receive_move(Move moves)
 		randomNumber = 2;
 	else 
 		randomNumber = 1;
-	if (moves.get_effect = " Physical Attack")
-	{
+	if (moves.get_effect = " Physical Attack") {
 		if ((mod_stats.attack || mod_stats.defense) > 255) {
 			mod_stats.attack /= 4;
 			floor(mod_stats.attack);
@@ -128,8 +125,7 @@ void Pokemon::receive_move(Move moves)
 		floor(total_damage);
 		take_damage(total_damage);
 	}
-	else if (moves.get_effect = " Special Attack")
-	{
+	else if (moves.get_effect = " Special Attack") {
 		if ((mod_stats.special_attack || mod_stats.special_defense) > 255) {
 			mod_stats.special_attack /= 4;
 			floor(mod_stats.special_attack);
@@ -184,11 +180,23 @@ void set_type(string type)
 /* returns the name of the Pokemon */
 string get_name()
 {
-	return (name);
+	return name;
 }
 
 /* returns the type of the Pokemon */
 string get_type()
 {
-	return (type);
+	return type;
+}
+
+/* returns all the moves of the Pokemon*/
+string Pokemon::get_moves()
+{
+	for (int i = 0; i < 4; i++) {
+            moveList += moves[i].get_name();
+            if (i != 3) {
+            moveList += ", ";
+        	}
+    }
+        return moveList;
 }

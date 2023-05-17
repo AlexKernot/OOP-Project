@@ -26,6 +26,7 @@
 #include <iostream>
 
 #include <string>
+#include <vector>
 
 #include "move.h"
 
@@ -47,6 +48,7 @@ class Pokemon
 		int total_damage;
 		int crit_stats;
 		int stab;
+		vector<string>moveList;
 		struct Stats
     	{
 			int attack;
@@ -65,6 +67,7 @@ class Pokemon
 		void set_type(string type);
 		string get_name();
 		string get_type();
+		string get_moves();
 };
 
 #endif
