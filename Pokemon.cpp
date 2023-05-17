@@ -20,8 +20,7 @@
 #include "pokemon.hpp"
 
 /* constructor for the Stats class to intialize values for stat variables */
-Pokemon::Stats::Stats(int atk, int def, int specatk, int specdef, int spd)
-{
+Pokemon::Stats::Stats(int atk, int def, int specatk, int specdef, int spd) {
 	attack = atk;
 	defense = def;
 	special_attack = specatk;
@@ -30,36 +29,15 @@ Pokemon::Stats::Stats(int atk, int def, int specatk, int specdef, int spd)
 }
 
 /* virtual constructor for creating Pokemon that gives it stats and 4 moves each */
-virtual Pokemon::Pokemon(Stats stats, Move moves, int maximum_hp)
-{
+virtual Pokemon::Pokemon(Stats stats, Move moves, int maximum_hp) {
 	base_stats = stats;
 	mod_stats = stats; //own note: for modify stats;
 	max_hp = maximum_hp;
 	current_hp = maximum_hp;
 }
 
-int typeChecker(Move moves, string pkm_type)
-{
-	if(moves.get_type == "Fire")
-	{
-		if(pkm_type() == "Grass" || pkm_type == "Bug")
-		{ 
-			//include all types fire is effective against
-			return 1.5   
-		}
-		else if(pkm_type == "Water" || pkm_type == "Rock")
-		{ 
-		//include all types fire is weak against
-		return 0.5   
-		} 
-		else 
-			return 1;
-  } //and so on for all types :>
-}
-
 /*reduces the hp of the Pokemon by the damage passed in the parameter */
-void Pokemon::take_damage(int pwr)
-{
+void Pokemon::take_damage(int pwr) {
 	if(current_hp > 0) {
 		current_hp -= pwr;
 		if (current_hp < 0) {
@@ -75,8 +53,7 @@ void modify_stats(struct stats)
 }
 
 /* this function receives the moves and performs calculations to return the total hp for a Pokemon to lose and stats modifications*/
-void Pokemon::receive_move(Move moves)
-{
+void Pokemon::receive_move(Move moves) {
 	srand(static_cast<unsigned>(time(nullptr)));
 	randomNumber = rand() % 10;
 	if (randomNumber == 9)
@@ -166,32 +143,27 @@ void Pokemon::receive_move(Move moves)
 }
 
 /* sets the name of the Pokemon */
-void set_name(string name)
-{
+void set_name(string name) {
 	this->name = name;
 }
 
 /* sets the type of the Pokemon */
-void set_type(string type)
-{
+void set_type(string type) {
 	this->type = type;
 }
 
 /* returns the name of the Pokemon */
-string get_name()
-{
+string get_name() {
 	return name;
 }
 
 /* returns the type of the Pokemon */
-string get_type()
-{
+string get_type() {
 	return type;
 }
 
 /* returns all the moves of the Pokemon*/
-string Pokemon::get_moves()
-{
+string Pokemon::get_moves() {
 	for (int i = 0; i < 4; i++) {
             moveList += moves[i].get_name();
     }
