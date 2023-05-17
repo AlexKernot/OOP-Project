@@ -3,7 +3,7 @@
 
 int main()
 {
-	Game_container g1;
-
-	g1.show_game_menu();
+	Game_container game;
+	game.StartGame();
+	return 0;
 }
