@@ -25,7 +25,7 @@ Pokemon::Pokemon(string name, Type type_one, Type type_two, int maximum_hp, stat
 	this->type_one = type_one;
 	
 	base_stats = stats;
-	mod_stats = stats; //own note: for modify stats;
+	mod_stats = stats;
 	max_hp = maximum_hp;
 	current_hp = maximum_hp;
 }
@@ -42,19 +42,25 @@ void Pokemon::take_damage(int pwr) {
 
 /*modifies the stat when stat modifying moves are used or taken*/
 void modify_stats(Pokemon::stats newStats) {
-
 }
 
-/* this function receives the moves and performs calculations to return the total hp for a Pokemon to lose and stats modifications*/
+/* this function receives the moves and sends the power to the dmg calculator based on the moves effect*/
 void Pokemon::receive_move(Move moves) {
+	if (moves.get_effect() == " Physical Attack")
+		attack_damage(moves.get_power());
+	else if (moves.get_effect() == " Special Attack")
+		special_attack_damage(moves.get_power());
+}
+
+/* Dmg calculator for attack moves based on generation 1 calculation*/
+void Pokemon::attack_damage(int pwr) {
 	srand(static_cast<unsigned>(time(nullptr)));
 	randomNumber = rand() % 10;
 	if (randomNumber == 9)
-		randomNumber = 2;
+		crit = 2;
 	else 
-		randomNumber = 1;
-	if (moves.get_effect() == " Physical Attack") {
-		if ((mod_stats.attack || mod_stats.defense) > 255) {
+		crit = 1;
+	if ((mod_stats.attack || mod_stats.defense) > 255) {
 			mod_stats.attack /= 4;
 			division = floor(mod_stats.attack);
 			mod_stats.defense /= 4;
@@ -89,7 +95,7 @@ void Pokemon::receive_move(Move moves) {
 		if (moves.getIsStab()) {
 			stab =  total_damage / 2;
 			stab = floor(stab);
-			total_damage += stab;
+			total_damage *= stab;
 		}
 		//type 1 type 2 calculation (idk how to do that) ->type checker?
 		//non effect type 
@@ -106,10 +112,17 @@ void Pokemon::receive_move(Move moves) {
 		total_damage = ((total_damage * randomNumber) / 255);
 		total_damage = floor(total_damage);
 		take_damage(total_damage);
-		return ;
-	}
-	else if (moves.get_effect() == " Special Attack") {
-		if ((mod_stats.special_attack || mod_stats.special_defense) > 255) {
+}
+
+/* Dmg calculator for special attack moves based on generation 1 calculation*/
+void Pokemon::special_attack_damage(int pwr) {
+	srand(static_cast<unsigned>(time(nullptr)));
+	randomNumber = rand() % 10;
+	if (randomNumber == 9)
+		crit = 2;
+	else 
+		crit = 1;
+	if ((mod_stats.special_attack || mod_stats.special_defense) > 255) {
 			mod_stats.special_attack /= 4;
 			mod_stats.special_attack = floor(mod_stats.special_attack);
 			mod_stats.special_defense /= 4;
@@ -140,7 +153,7 @@ void Pokemon::receive_move(Move moves) {
 		if (moves.getIsStab()) {
 			stab =  total_damage / 2;
 			stab = floor(stab);
-			total_damage += stab;
+			total_damage *= stab;
 		}
 		//type 1 type 2 calculation (idk how to do that) ->type checker?
 		if (total_damage == 0)
@@ -157,8 +170,6 @@ void Pokemon::receive_move(Move moves) {
 		total_damage = ((total_damage * randomNumber) / 255);
 		total_damage = floor(total_damage);
 		take_damage(total_damage);
-		return ;
-	}
 }
 
 /* sets the name of the Pokemon */

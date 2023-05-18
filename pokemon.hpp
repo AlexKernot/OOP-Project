@@ -66,6 +66,8 @@ class Pokemon
 	public:
 		Pokemon(string name, Type type_one, Type type_two, int maximum_hp, stats stats, vector<Move> moves);
 		void take_damage(int pwr);
+		void attack_damage(int pwr);
+		void special_attack_damage(int pwr);
 		void modify_stats(stats);
 		void receive_move(Move moves);
 		void set_name(string name);
