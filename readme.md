@@ -25,7 +25,7 @@ All the required dependancies are packaged with sfml. Run the following commands
 
 
 ```cmake -S. -Bbuild``` </br>
-```cmake -build build```
+```cmake --build build```
 
 ### **Linux**
 To build from source, the following dependancies are required:
