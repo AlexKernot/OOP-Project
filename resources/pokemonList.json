@@ -1,0 +1,44 @@
+{
+    "pokemon": [
+        {
+        "name": "Pikachu",
+        "type_one": "Electric",
+        "type_two": "None",
+        "stats": 
+        {
+            "hp": 35,
+            "attack": 55,
+            "defense": 40,
+            "s_attack": 50,
+            "s_defense": 50,
+            "speed": 90
+        },
+        "possible_moves":
+        [
+            "test1",
+            "test2",
+            "test3"
+        ]
+    },
+    {
+        "name": "Raichu",
+        "type_one": "Electric",
+        "type_two": "None",
+        "stats": 
+        {
+            "hp": 35,
+            "attack": 55,
+            "defense": 40,
+            "s_attack": 50,
+            "s_defense": 50,
+            "speed": 90
+        },
+        "possible_moves":
+        [
+            "test1",
+            "test2",
+            "test3"
+        ]
+    }
+    
+]}
