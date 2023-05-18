@@ -41,7 +41,7 @@ public:
   ~Renderable() {delete sprite_list;}
   virtual void Draw(sf::RenderWindow *window) = 0;
   sf::Sprite *get_sprite(int index) {return (sprite_list->get_sprite_index(index));}
-  sf::Sprite add_sprite(std::string spriteName, std::string texturePath);
+  sf::Sprite *add_sprite(std::string spriteName, std::string texturePath);
   void set_position(int index, sf::Vector2i position) {
     sprite_list->get_sprite_index(index)->setPosition(static_cast<sf::Vector2f>(position));
   }
