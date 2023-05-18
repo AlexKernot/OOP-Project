@@ -1,3 +1,6 @@
+#ifndef POKEMON_JSON_H
+#define POKEMON_JSON_H
+
 #include <fstream>
 #include <nlohmann/json.hpp>
 #include <string>
@@ -8,5 +11,7 @@ using json = nlohmann::json;
 class JSON {
 
 public:
-  Pokemon LoadPokemonData(std::string name);
+  bool LoadPokemonData(std::string name);
 };
+
+#endif
