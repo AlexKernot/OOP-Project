@@ -22,8 +22,9 @@
 
 #include <cstdlib>
 #include <ctime>
-#include <cmath>
 #include <iostream>
+#include <algorithm>
+#include <map>
 
 #include <string>
 #include <vector>
@@ -36,6 +37,9 @@ using std::time;
 using std::rand;
 using std::cout;
 using std::vector;
+using std::max;
+using std::min;
+using std::map;
 
 class Pokemon
 {
@@ -62,6 +66,7 @@ class Pokemon
 		int stab;
 		stats base_stats;
 		stats mod_stats;
+		stats current_stats;
 		vector<string>moveList;
 	public:
 		Pokemon(string name, Type type_one, Type type_two, int maximum_hp, stats stats, vector<Move> moves);
