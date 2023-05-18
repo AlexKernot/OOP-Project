@@ -1,6 +1,22 @@
+/*****************************************************************************/
+/*                                                                           */
+/*         █████  ██████  ███████ ██       █████  ██ ██████  ███████         */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ███████ ██   ██ █████   ██      ███████ ██ ██   ██ █████           */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ██   ██ ██████  ███████ ███████ ██   ██ ██ ██████  ███████         */
+/*                                                                           */
+/*        ██    ██ ███    ██ ██    |                            |            */
+/*        ██    ██ ████   ██ ██    |   OOP Semester 1 2023      |            */
+/*        ██    ██ ██ ██  ██ ██    |   Camille, Rose, Alex      |            */
+/*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
+/*         ██████  ██   ████ ██    |                            |            */
+/*                                                                           */
+/*        This is the main menu class that displays the menu with            */
+/*         the corresponding choices to start and play the game              */
+/*                                                                           */
+/*****************************************************************************/
 #include "main_menu.hpp"
-
-#include "menu.hpp"
 
 Menu::Menu(){
   window = new sf::RenderWindow();
@@ -21,12 +37,12 @@ Menu::~Menu() {
 }
 
 void Menu::set_values() {
-  window->create(sf::VideoMode(1280,720), "Menu SFML", sf::Style::Titlebar | sf::Style::Close);
-  window->setPosition(sf::Vector2i(0,0));
+  // window->create(sf::VideoMode(1280,720), "Menu SFML", sf::Style::Titlebar | sf::Style::Close);
+  // window->setPosition(sf::Vector2i(0,0));
 
   pos = 0;
   pressed = theselect = false;
-  font->loadFromFile("./ethn.otf");
+  font->loadFromFile("./Minecraft.ttf");
   image->loadFromFile("./resources/TitleScreen.png");
 
   bg->setTexture(*image);
@@ -52,7 +68,6 @@ void Menu::set_values() {
   winclose->setSize(sf::Vector2f(23,26));
   winclose->setPosition(1178,39);
   winclose->setFillColor(sf::Color::Transparent);
-
 }
 
 void Menu::loop_events(){

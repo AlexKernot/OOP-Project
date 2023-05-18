@@ -1,14 +1,33 @@
+/*****************************************************************************/
+/*                                                                           */
+/*         █████  ██████  ███████ ██       █████  ██ ██████  ███████         */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ███████ ██   ██ █████   ██      ███████ ██ ██   ██ █████           */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ██   ██ ██████  ███████ ███████ ██   ██ ██ ██████  ███████         */
+/*                                                                           */
+/*        ██    ██ ███    ██ ██    |                            |            */
+/*        ██    ██ ████   ██ ██    |   OOP Semester 1 2023      |            */
+/*        ██    ██ ██ ██  ██ ██    |   Camille, Rose, Alex      |            */
+/*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
+/*         ██████  ██   ████ ██    |                            |            */
+/*                                                                           */
+/*        This is the main menu class that displays the menu with            */
+/*         the corresponding choices to start and play the game              */
+/*                                                                           */
+/*****************************************************************************/
+
 #ifndef MAIN_MENU
 #define MAIN_MENU
 
 #include <SFML/GRaphics.hpp>
 #include <iostream>
+
 class Menu {
 	private:
 		int position;
 		bool pressed;
 		bool theselect;
-		//draw function
 		sf::Sprite * bg; // (?)
 		sf::RectangleShape * windowclose;
 		sf::Font * font;
