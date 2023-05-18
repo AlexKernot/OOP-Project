@@ -2,7 +2,7 @@
 
 #include "menu.hpp"
 
-/*Menu::Menu(){
+Menu::Menu(){
   window = new sf::RenderWindow();
   winclose = new sf::RectangleShape();
   font = new sf::Font();
@@ -10,7 +10,7 @@
   bg = new sf::Sprite();
 
   set_values();
-} incorrect menu creation im just throwing it here either ways */
+} 
 
 Menu::~Menu() {
   delete window;
