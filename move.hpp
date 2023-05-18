@@ -21,28 +21,31 @@
 #define __MOVE_H__
 
 #include <iostream>
+#include "type.hpp"
 
-using namespace std;
+using std::string;
 
 class Move {
- private:
+private:
+  int power;
   string name;
   string effect;
-  string type_one;
-  string type_two;
+  Type type;
+  bool isStab;
 
- public:
-  Move(string name, string effect, string type_one, string type_two);
+public:
+  Move(string name, int power, string effect, string type, bool isStab);
 
   void set_name(string name);
   void set_effect(string effect);
-  void set_type_one(string type_one);
-  void set_type_two(string type_two);
+  void set_type(string type);
+  void set_power(int power);
 
+  int get_power();
   string get_name();
   string get_effect();
-  string get_type_one();
-  string get_type_two();
+  Type get_type();
+  bool getIsStab() { return isStab;  }
 };
 
 #endif

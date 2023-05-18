@@ -1,7 +1,7 @@
 #include "type.hpp"
 #include <iostream>
 
-Type::Type(std::string type) {
+Type::Type(const std::string type) {
   int validateType = typeToNumber.find(type)->second;
   if (validateType > 16 || validateType < 0)
   {
@@ -10,6 +10,14 @@ Type::Type(std::string type) {
     return ;
   }
   this->type = type;
+}
+
+Type::Type(const Type &type) {
+  this->type = type.type;
+}
+
+void Type::operator=(const Type newType) {
+  this->type = newType.type;
 }
 
 float Type::GenerateTypeEffectiveness(std::string defendingType1, 
