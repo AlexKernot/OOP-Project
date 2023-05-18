@@ -22,9 +22,13 @@ FetchContent_Declare(sfml
                       GIT_TAG 2.5.1 )
 FetchContent_MakeAvailable(sfml)
 
+include(CTest)
+
+enable_testing()
+add_subdirectory(Tests)
+
 target_link_libraries(pokemon 
                       PRIVATE nlohmann_json::nlohmann_json
                       sfml-system
                       sfml-window
                       sfml-graphics)
-
