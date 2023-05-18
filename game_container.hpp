@@ -23,6 +23,7 @@
 #include <SFML/Window.hpp>
 
 #include "window.hpp"
+#include "menu.hpp"
 
 class Game_container : protected Window
 {
