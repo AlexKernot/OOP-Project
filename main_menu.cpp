@@ -19,7 +19,7 @@
 #include "main_menu.hpp"
 
 Menu::Menu(){
-  window = new sf::RenderWindow();
+  
   winclose = new sf::RectangleShape();
   font = new sf::Font();
   image = new sf::Texture();
@@ -30,30 +30,30 @@ Menu::Menu(){
 
 Menu::~Menu() {
   delete window;
-  delete windowclose;
+  delete winclose;
   delete font;
   delete image;
   delete bg;
 }
 
 void Menu::set_values() {
-  // window->create(sf::VideoMode(1280,720), "Menu SFML", sf::Style::Titlebar | sf::Style::Close);
-  // window->setPosition(sf::Vector2i(0,0));
+  window->create(sf::VideoMode(1280,720), "Menu SFML", sf::Style::Titlebar | sf::Style::Close);
+  window->setPosition(sf::Vector2i(0,0));
 
   pos = 0;
   pressed = theselect = false;
   font->loadFromFile("./Minecraft.ttf");
   image->loadFromFile("./resources/TitleScreen.png");
 
-  bg->setTexture(*image);
+  bg->setTexture(*image, true);
 
   pos_mouse = {0,0};
   mouse_coord = {0, 0};
 
-  options = {"Pokemon Showdown", "Play", "Exit"};
+  options = {"Play", "Exit"};
   texts.resize(5);
-  coords = {{590,40},{610,191},{590,282},{600,370},{623,457}};
-  sizes = {20,28,24,24,24};
+  coords = {{590,40},{610,191}};
+  sizes = {20,28};
 
   for (std::size_t i{}; i < texts.size(); ++i){
    texts[i].setFont(*font); 

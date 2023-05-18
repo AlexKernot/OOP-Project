@@ -20,33 +20,36 @@
 #ifndef MAIN_MENU
 #define MAIN_MENU
 
-#include <SFML/GRaphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 class Menu {
 	private:
-		int position;
-		bool pressed;
-		bool theselect;
-		sf::Sprite * bg; // (?)
-		sf::RectangleShape * windowclose;
+		int pos;
+		bool pressed, theselect;
+
+		sf::RenderWindow * window;
+		sf::RectangleShape * winclose;
 		sf::Font * font;
 		sf::Texture * image;
-		sf::Vector2i position_mouse
-		sf::Vector2f m_coord; //mouse coordinates
+		sf::Sprite * bg;
+
+		sf::Vector2i pos_mouse;
+		sf::Vector2f mouse_coord;
+
 		std::vector<const char *> options;
-		std::vector<sf::Vector2f> coords; //coordinates
-		std::vector<sf::Text> texts; //text to be displayed
+		std::vector<sf::Vector2f> coords;
 		std::vector<sf::Text> texts;
-		std::vecotr<std::size_t> sizes;
+		std::vector<std::size_t> sizes;
+	protected:
+		void set_values();
+		void loop_events();
+		void draw_all();
+
 	public:
 		Menu();
 		~Menu();
 		void run_menu();
-		void set_values(); //set values for each obj
-		void loop_events(); //events of mouseclick
-		void draw_all(); //draw everything (?) not necessary
-		void draw();
 };
 
 #endif
