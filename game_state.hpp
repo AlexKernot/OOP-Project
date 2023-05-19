@@ -32,7 +32,6 @@ class Gamestate: public Game_container {
  public:
   Gamestate();
   void swap_move();
-  void start_game();
 };
 
 #endif
