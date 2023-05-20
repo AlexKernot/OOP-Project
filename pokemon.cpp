@@ -58,6 +58,29 @@ Pokemon::Pokemon(string name, Type type_one, Type type_two,
 	currentHp = maxHp;
 }
 
+/*  Pretty prints pokemon info to terminal for debugging.             */
+void Pokemon::PrettyPrint() {
+  std::cout << "Name: " << name << std::endl
+  << "Type one: " << typeOne.GetType() << std::endl
+  << "Type two: " << typeTwo.GetType() << std::endl
+  << "Level:    " << level << std::endl
+  << "Max HP:   " << maxHp << std::endl
+  << "Current HP: " << currentHp << std::endl
+  << "Stats: " << std::endl 
+  << "  HP: " << stats.GetHP() << std::endl
+  << "  Attack: " << stats.GetAttack() << std::endl
+  << "  Special Atk: " << stats.GetSpecialAttack() << std::endl
+  << "  Defense: " << stats.GetDefense() << std::endl
+  << "  Special Defense: " << stats.GetSpecialDefense() << std::endl
+  << "  Speed: " << stats.GetSpeed() << std::endl
+  << "Moves: " << std::endl ;
+  int size = static_cast<int>(moveList.size());
+  for (int i = 0; i < size; ++i)
+  {
+    std::cout << "  - " << moveList[i].get_name() << std::endl;
+  }
+}
+
 /*reduces the hp of the Pokemon by the damage passed in the parameter */
 void Pokemon::take_damage(int pwr) {
 	if(currentHp > 0) {
