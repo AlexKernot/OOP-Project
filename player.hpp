@@ -12,8 +12,8 @@
 /*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
 /*         ██████  ██   ████ ██    |                            |            */
 /*                                                                           */
-/*        This is the base class for all objects that need rendering         */
-/*      It is an abstract class that holds the sprites for each object       */
+/*        This is the class that handles Players. Players will               */
+/*                 direct their 6 Pokemon and 4 moves                        */
 /*                                                                           */
 /*****************************************************************************/
 

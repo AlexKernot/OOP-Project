@@ -49,7 +49,7 @@ Gamestate::Gamestate() : current_turn(0) {
 };
 
 void Gamestate::swap_move() {
-  if (current_turn = 0) {
+  if (current_turn == 0) {
     if (players[0].make_choice() == "Make move") {
       players[0].make_move();
     } else if (players[0].make_choice() == "Swap Pokemon") {
