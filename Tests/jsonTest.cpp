@@ -1,15 +1,17 @@
 #include "../json.hpp"
+#include "../readPokemonTeam.hpp"
 
-class jsonTest : private JSON {
+class jsonTest : private ReadPokemonTeam{
 public:
-    bool Start() {
-        std::cout << "All tests passed.";
-        return true;
-    }
+  jsonTest() : ReadPokemonTeam("playerTeams/testTeam", 0) {}
+  bool Start() {
+    ReadPokemonTeam::PrettyPrint();
+    return false;
+  }
 };
 
 int main(void) {
     jsonTest tests;
     bool result = tests.Start();
-    return result;
+    return !result;
 }

@@ -1,13 +1,36 @@
 {
     "moveList": [
         {
+            "name": "Thunder Wave",
+            "type": "Electric",
+            "base_power": 0,
+            "accuracy": 100,
+            "effect": "Paralysis target 100"
+        },{
+            "name": "Growl",
+            "type": "Normal",
+            "base_power": 0,
+            "accuracy": 100,
+            "effect": "Attack target -1"
+        },{
+            "name": "Tail Whip",
+            "type": "Normal",
+            "base_power": 0,
+            "accuracy": 100,
+            "effect": "Defense target -1"
+        },{
+            "name": "ThunderShock",
+            "type": "Electric",
+            "base_power": 40,
+            "accuracy": 100,
+            "effect": "Paralysis target 10"
+        },{
             "name": "Fire Punch",
             "type": "Fire",
             "base_power": 75,
             "accuracy": 100,
             "effect": "Burn 10"
-        },
-        {
+        },{
             "name": "Blizzard",
             "type": "Ice",
             "base_power": 120,

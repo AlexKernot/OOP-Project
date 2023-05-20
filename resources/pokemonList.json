@@ -3,7 +3,7 @@
         {
         "name": "Pikachu",
         "type_one": "Electric",
-        "type_two": "None",
+        "type_two": "NULL",
         "stats": 
         {
             "hp": 35,
@@ -15,15 +15,18 @@
         },
         "possible_moves":
         [
-            "test1",
-            "test2",
-            "test3"
+            "ThunderShock",
+            "Growl",
+            "Tail Whip",
+            "Thunder Wave",
+            "Quick Attack",
+            "Double Team"
         ]
     },
     {
         "name": "Raichu",
         "type_one": "Electric",
-        "type_two": "None",
+        "type_two": "NULL",
         "stats": 
         {
             "hp": 35,

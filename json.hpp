@@ -17,15 +17,16 @@ class JSON {
 
 public:
   JSON();
-  Pokemon *CreatePokemon(std::string name);
-  Move CreateMove(std::string name);
+  Pokemon CreatePokemon(std::string name, vector<Move> moves, int level);
+  vector<Move> CreateMoveList(json pokemonData, string pokemon);
   bool GetParseResult() {return parseSuccess;}
+  json ParseFile(std::string fileName);
 
-private:
+protected:
   void GenerateTypeError(json data, std::string expectedType, 
                               std::string at);
-  vector<Move> CreateMoveList(json pokemonData);
-  json ParseFile(std::string fileName);
+  Move CreateMove(std::string name);
+  bool ValidateMove(string moveName, string pokemon);
   json LoadSingleJsonObject(std::string name, vector<json> data);
   Stats GetStatsJson(json statsJson);
   int GetIndividualStat(json statsJson, std::string name);

@@ -1,0 +1,15 @@
+{
+    "playerTeams/testTeam": [
+    {
+        "name": "Pikachu",
+        "level": 50,
+        "moves": [
+            "ThunderShock",
+            "Growl",
+            "Tail Whip",
+            "Thunder Wave"
+        ]
+    },
+        {}
+    ]
+}
