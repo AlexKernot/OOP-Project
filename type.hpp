@@ -38,13 +38,14 @@ class Type {
     {1, 0.5, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 0.5}};
 
 public:
+  Type() : Type("Normal") {};
   Type(const std::string type);
   Type(const Type &type);
   void operator=(const Type newType);
   std::string GetType() {return type;}
   //std::string SetType();
-  float GenerateTypeEffectiveness(std::string defendingType1, 
-                                  std::string defendingType2);
+  float GenerateTypeEffectiveness(Type defendingType1, 
+                                  Type defendingType2);
 };
 
 #endif

@@ -27,8 +27,8 @@ using std::string;
 
 class Move {
 private:
-  int power;
   string name;
+  int power;
   string effect;
   Type type;
   bool isStab;

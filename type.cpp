@@ -20,11 +20,11 @@ void Type::operator=(const Type newType) {
   this->type = newType.type;
 }
 
-float Type::GenerateTypeEffectiveness(std::string defendingType1, 
-                                      std::string defendingType2) {
+float Type::GenerateTypeEffectiveness(Type defendingType1, 
+                                      Type defendingType2) {
   int attackingIndex = typeToNumber.find(type)->second;
-  int type1Index = typeToNumber.find(defendingType1)->second;
-  int type2Index = typeToNumber.find(defendingType2)->second;
+  int type1Index = typeToNumber.find(defendingType1.GetType())->second;
+  int type2Index = typeToNumber.find(defendingType2.GetType())->second;
   float type1Effectiveness = typeMatchups[attackingIndex][type1Index];
 
   float type2Effectiveness;

@@ -31,6 +31,7 @@
 
 #include "move.hpp"
 #include "type.hpp"
+#include "stats.hpp"
 
 using std::string;
 using std::time;
@@ -43,45 +44,31 @@ using std::map;
 
 class Pokemon
 {
-	public:
-		typedef struct
-    	{
-			int attack;
-			int defense;
-			int special_attack;
-			int special_defense;
-			int speed;
-    	} stats;
-	private: 
-		string name;
-		Type type_one;
-		Type type_two;
-		int max_hp;
-		int current_hp;
-		int crit;
-		int randomNumber;
-		int division;
-		int total_damage;
-		int crit_stats;
-		int stab;
-		stats base_stats;
-		stats mod_stats;
-		stats current_stats;
-		vector<string>moveList;
-	public:
-		Pokemon(string name, Type type_one, Type type_two, int maximum_hp, stats stats, vector<Move> moves);
-		void take_damage(int pwr);
-		void attack_damage(int pwr);
-		void special_attack_damage(int pwr);
-		void modify_stats(stats);
-		void receive_move(Move moves);
-		void set_name(string name);
-		void set_type_one(Type type);
-		void set_type_two(Type type);
-		string get_name();
-		Type get_type_one();
-		Type get_type_two();
-		vector<string> get_moves();
+private: 
+  string name;
+  Type typeOne;
+  Type typeTwo;
+  int level;
+  int maxHp;
+  int currentHp;
+  Stats baseStats;
+  Stats stats;
+  vector<Move>moveList;
+public:
+  Pokemon(string name, Type type_one, Type type_two, 
+          Stats stats, vector<Move> moves, int level);
+  void receive_move(Move moves, int level, int atk, int baseAtk);
+  void set_name(string name);
+  void set_type_one(Type type);
+  void set_type_two(Type type);
+  string get_name();
+  Type get_type_one();
+  Type get_type_two();
+  vector<Move> get_moves();
+private:
+  void take_damage(int pwr);
+  void attack_damage(Move move, int level, int atk, int baseAtk);
+  void special_attack_damage(Move move);
 };
 
 #endif

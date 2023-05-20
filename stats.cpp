@@ -1,12 +1,13 @@
 #include "stats.hpp"
 
 Stats::Stats(int hp, int attack, int specialAttack, 
-              int specialDefense, int speed) {
+              int defense, int specialDefense, int speed) {
   stats[0] = hp;
   stats[1] = attack;
   stats[2] = specialAttack;
-  stats[3] = specialDefense;
-  stats[4] = speed;
+  stats[3] = defense;
+  stats[4] = specialDefense;
+  stats[5] = speed;
 }
 
 /*  Deep copy of a class' stats and stat modifiers.                           */
@@ -27,14 +28,32 @@ void Stats::operator=(const Stats& statsClass) {
   }
 }
 
+void Stats::GenerateStats(int level) {
+  stats[0] =(((2 * stats[0] /* + IV + EV/4*/)* level) / 100 );
+  stats[0] = floor(stats[0]) + level + 10;
+  for (int i = 1; i < 6; ++i)
+  {
+    stats[i] = floor(((2 * stats[i] /*+ IV + EV/4 */) * level));
+    stats[i] = floor((stats[i] + 5) /* x nature*/);
+  }
+}
+
 bool Stats::ModifyStats(std::vector<int> statsMod, int stages) {
   if (stages == 0 || stages < -6 || stages > 6)
     return false;
   int size = static_cast<int>(statsMod.size());
   for (int i = 0; i < size; ++i)
   {
-    if (statsMod[i] < 0 || statsMod[i] > 5)
+    if (statsMod[i] == 0)
+    {
+      std::cout << "Forbidden: Attempting to modify hp stat." << std::endl;
       return false;
+    }
+    if (statsMod[i] < 0 || statsMod[i] > 5)
+    {
+      std::cout << "Error: Attempting to modify invalid stat." << std::endl;
+      return false;
+    }
     int tempStage = stages;
     if (stages + statModifiers[statsMod[i]] > 6)
       tempStage = 6 - statModifiers[statsMod[i]];
