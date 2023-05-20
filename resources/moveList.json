@@ -1,0 +1,18 @@
+{
+    "moveList": [
+        {
+            "name": "Fire Punch",
+            "type": "Fire",
+            "base_power": 75,
+            "accuracy": 100,
+            "effect": "Burn 10"
+        },
+        {
+            "name": "Blizzard",
+            "type": "Ice",
+            "base_power": 120,
+            "accuracy": 90,
+            "effect": "Freeze 10"
+        }
+    ]
+}
