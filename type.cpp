@@ -3,7 +3,7 @@
 
 Type::Type(const std::string type) {
   int validateType = typeToNumber.find(type)->second;
-  if (validateType > 16 || validateType < 0)
+  if (validateType > 17 || validateType < 0)
   {
     std::cout << "Type " << type << " not recognised. Defaulting to normal.\n";
     this->type = "Normal";
@@ -25,6 +25,11 @@ float Type::GenerateTypeEffectiveness(Type defendingType1,
   int attackingIndex = typeToNumber.find(type)->second;
   int type1Index = typeToNumber.find(defendingType1.GetType())->second;
   int type2Index = typeToNumber.find(defendingType2.GetType())->second;
+  if (type1Index < 0 || type1Index > 16)
+  {
+    std::cout << "Invalid type 1 found. Defaulting to 1x effectiveness.\n";
+    return 1.0F;
+  }
   float type1Effectiveness = typeMatchups[attackingIndex][type1Index];
 
   float type2Effectiveness;
