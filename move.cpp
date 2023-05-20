@@ -19,8 +19,9 @@
 
 #include "move.hpp"
 
-Move::Move(string name, int power, string effect, string type, bool isStab)
-    : name(name), power(power), effect(effect), type(type),  isStab(isStab){}
+Move::Move(string name, int power, int accuracy, string effect, string type)
+    : name(name), power(power), accuracy(accuracy), 
+      effect(effect), type(type) {}
 
 void Move::set_name(string name) { this->name = name; }
 void Move::set_effect(string effect) { this->effect = effect; }

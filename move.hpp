@@ -29,17 +29,19 @@ class Move {
 private:
   string name;
   int power;
+  int accuracy;
   string effect;
   Type type;
-  bool isStab;
+  bool isStab = false;
 
 public:
-  Move(string name, int power, string effect, string type, bool isStab);
+  Move(string name, int power, int accuracy, string effect, string type);
 
   void set_name(string name);
   void set_effect(string effect);
   void set_type(string type);
   void set_power(int power);
+  void SetStab(bool isStab) {this->isStab = isStab;}
 
   int get_power();
   string get_name();
