@@ -1,4 +1,5 @@
+cmake --build build
 cd build;
-ctest;
-cd Testing/Temporary;
-cat LastTest.log
+ctest --output-on-failure;
+#cd Testing/Temporary;
+#cat LastTest.log
