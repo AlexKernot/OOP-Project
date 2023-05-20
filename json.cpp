@@ -1,5 +1,21 @@
 #include "json.hpp"
 
+JSON::JSON() {
+  json temp;
+  temp = ParseFile("pokemonList");
+  if (!temp.is_array()) {
+    parseSuccess = false;
+    return ;
+  }
+  pokemonData = temp;
+  temp = ParseFile("moveList");
+  if (!temp.is_array()) {
+    parseSuccess = false;
+    return ;
+  }
+  moveData = temp;
+}
+
 json JSON::ParseFile(std::string name) {
   std::string fileName = "resources/" + name + ".json";
   std::ifstream file(fileName);
@@ -10,9 +26,8 @@ json JSON::ParseFile(std::string name) {
   }
   json tempData = json::parse(file, nullptr, false, true);
   file.close();
-  if (tempData.is_discarded() == true)
-  {
-    std::cout << "A syntax error was found in pokemonList.json";
+  if (tempData.is_discarded() == true) {
+    std::cout << "A syntax error was found in resources/" << name << ".json";
     parseSuccess = false;
     return json(nullptr);
   }
@@ -27,48 +42,69 @@ json JSON::ParseFile(std::string name) {
   return tempData;
 }
 
-JSON::JSON() {
-  json temp;
-  temp = ParseFile("pokemonList");
-  if (!temp.is_array())
-  {
-    parseSuccess = false;
-    return ;
+Move JSON::CreateMove(std::string name) {
+  json moveJson = LoadSingleJsonObject(name, moveData);
+  if (moveJson.is_null()) {
+    std::cout << "!! - Alert - !! move " << name 
+    << " defaulting to struggle.\n";
+    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
   }
-  pokemonData = temp;
-  temp = ParseFile("moveList");
-  if (!temp.is_array())
-  {
-    parseSuccess = false;
-    return ;
+  json tempJson = GetField(moveJson, "type");
+  if (!tempJson.is_string()) {
+    GenerateTypeError(moveJson, "string", "type");
+    std::cout << "!! - Alert - !! move " << name 
+    << " defaulting to struggle.\n";
+    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
   }
-  moveData = temp;
+  std::string moveType = tempJson;
+  tempJson = GetField(moveJson, "base_power");
+  if (!tempJson.is_number_integer()) {
+    GenerateTypeError(moveJson, "integer (number)", "base_power");
+    std::cout << "!! - Alert - !! move " << name 
+    << " defaulting to struggle.\n";
+    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
+  }
+  int movePower = tempJson;
+  tempJson = GetField(moveJson, "accuracy");
+  if (!tempJson.is_number_integer()) {
+    GenerateTypeError(moveJson, "integer (number)", "accuracy");
+    std::cout << "!! - Alert - !! move " << name 
+    << " defaulting to struggle.\n";
+    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
+  }
+  int moveAccuracy = tempJson;
+  tempJson = GetField(moveJson, "effect");
+  if (!tempJson.is_string()) {
+    GenerateTypeError(moveJson, "string", "effect");
+    std::cout << "!! - Alert - !! move " << name 
+    << " defaulting to struggle.\n";
+    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
+  }
+  std::string moveEffect = tempJson;
+  return Move(name,  movePower, moveAccuracy, moveEffect, moveType);
 }
 
-json JSON::LoadSinglePokemonData(std::string name) {
-  json tempPokemonName;
-  json pokemon;
-  int size = static_cast<int>(pokemonData.size());
+json JSON::LoadSingleJsonObject(std::string name, vector<json> data) {
+  json tempJsonObjectName;
+  json jsonObject;
+  int size = static_cast<int>(data.size());
   for (int i = 0; i < size; ++i) {
     try {
-      tempPokemonName = pokemonData[i].at("name");
+      tempJsonObjectName = data[i].at("name");
     } catch (const json::out_of_range&) {
       std::cout << "Missing \"name\" field at index: " << i;
       return json(nullptr);
     }
-    if (!tempPokemonName.is_string()) {
-      GenerateTypeError(pokemonData[i], "String", "name");
+    if (!tempJsonObjectName.is_string()) {
+      GenerateTypeError(data[i], "String", "name");
       return json(nullptr);
     }
-    if (pokemonData[i].at("name") == name) {
-      pokemon = pokemonData[i];
+    if (data[i].at("name") == name) {
+      jsonObject = data[i];
       break;
     }
   }
-  if (pokemon == nullptr)
-    return false;
-  std::string s_name = pokemon.at("name");
-  return true;
+  return jsonObject;
 }
 
 json JSON::GetField(json data, std::string name) {
@@ -82,51 +118,62 @@ json JSON::GetField(json data, std::string name) {
   return field;
 }
 
+int JSON::GetIndividualStat(json statsJson, std::string name) {
+  json tempStat;
+  tempStat = GetField(statsJson, name);
+  if (!tempStat.is_number_integer()) {
+    GenerateTypeError(statsJson, "number (integer)", name);
+    std::cout << "\n!! - Alert - !! stat " << name << " is defaulting to 1.\n";
+    return 1;
+  }
+  return tempStat;
+}
+
 Stats JSON::GetStatsJson(json statsJson) {
   Stats pokemonStats = Stats(11, 4, 4, 4, 4, 4);
-  json tempStat;
-  tempStat = GetField(statsJson, "hp");
-  if (!tempStat.is_number_integer()) {
-    GenerateTypeError(statsJson, "number (integer)", "hp");
-    return pokemonStats;
-  }
-  pokemonStats.SetHP(tempStat);
-  tempStat = GetField(statsJson, "attack");
-  if (!tempStat.is_number_integer()) {
-    GenerateTypeError(statsJson, "number (integer)", "attack");
-    return pokemonStats;
-  }
-  pokemonStats.SetAttack(tempStat);
-  tempStat = GetField(statsJson, "defense");
-  if (!tempStat.is_number_integer()) {
-    GenerateTypeError(statsJson, "number (integer)", "defense");
-    return pokemonStats;
-  }
-  pokemonStats.SetDefense(tempStat);
-  tempStat = GetField(statsJson, "s_attack");
-  if (!tempStat.is_number_integer()) {
-    GenerateTypeError(statsJson, "number (integer)", "s_attack");
-    return pokemonStats;
-  }
-  pokemonStats.SetSpecialAttack(tempStat);
-  tempStat = GetField(statsJson, "s_defense");
-  if (!tempStat.is_number_integer()) {
-    GenerateTypeError(statsJson, "number (integer)", "s_defense");
-    return pokemonStats;
-  }
-  pokemonStats.SetDefense(tempStat);
-  tempStat = GetField(statsJson, "speed");
-  if (!tempStat.is_number_integer()) {
-    GenerateTypeError(statsJson, "number (integer)", "speed");
-    return pokemonStats;
-  }
-  pokemonStats.SetSpeed(tempStat);
+  pokemonStats.SetHP(GetIndividualStat(statsJson, "hp"));
+  pokemonStats.SetAttack(GetIndividualStat(statsJson, "attack"));
+  pokemonStats.SetSpecialAttack(GetIndividualStat(statsJson, "s_attack"));
+  pokemonStats.SetDefense(GetIndividualStat(statsJson, "defense"));
+  pokemonStats.SetSpecialDefense(GetIndividualStat(statsJson, "s_defense"));
+  pokemonStats.SetSpeed(GetIndividualStat(statsJson, "speed"));
   return pokemonStats;
+}
+
+vector<Move> JSON::CreateMoveList(json pokemonData) {
+  vector<Move> moves{};
+  json tempJson = GetField(pokemonData, "moves");
+  if (!tempJson.is_array())
+  {
+    GenerateTypeError(pokemonData, "array", "moves");
+    return moves;
+  }
+  vector<string> moveJson = tempJson;
+  int size = static_cast<int>(moveJson.size());
+  if (size > 4)
+  {
+    size = 4;
+    std::cout << "!! -- alert -- !! more than 4 moves detected."
+    << " only the first 4 will be read. \n";
+  }
+  for (int i = 0; i < size; ++i) {
+    tempJson = moveJson.at(i);
+    if (!tempJson.is_string())
+    {
+      GenerateTypeError(moveJson, "string", "index " + std::to_string(i));
+      moves[i] = Move("Struggle", 50, 100, "Recoil 50", "Normal");
+      std::cout << "!! -- Alert -- !! Move defaulting to Struggle\n";
+      continue;
+    }
+    std::string moveName = tempJson;
+    moves[i] = CreateMove(moveName);
+  }
+  return moves;
 }
 
 Pokemon *JSON::CreatePokemon(std::string name) {
   json tempJson;
-  json pokemonJson = LoadSinglePokemonData(name);
+  json pokemonJson = LoadSingleJsonObject(name, pokemonData);
   if (pokemonJson.is_null() == true)
     return nullptr;
   tempJson = GetField(pokemonJson, "type_one");
@@ -147,12 +194,9 @@ Pokemon *JSON::CreatePokemon(std::string name) {
     return nullptr;
   }
   Stats pokemonStats = GetStatsJson(statsJson);
-  std::vector<Move> moves = {
-    Move("Test1", 100, "None", "Normal", false),
-    Move("Test2", 100, "None", "Normal", false),
-    Move("Test3", 100, "None", "Normal", false),
-    Move("Test4", 100, "None", "Normal", false)};
-  Pokemon *pokemon = new Pokemon(name, Type(type1), Type(type2), pokemonStats, moves, 1);
+  std::vector<Move> moves = CreateMoveList(pokemonJson);
+  Pokemon *pokemon = new Pokemon(name, Type(type1), Type(type2), 
+                                  pokemonStats, moves, 1);
   return pokemon;
 }
 
