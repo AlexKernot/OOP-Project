@@ -19,8 +19,31 @@
 
 #include "pokemon.hpp"
 
-/* NOTE FOR ROSE: this class isn't virtual. Constructors cannot be virtual    */
-/* virtual constructor for creating Pokemon that gives it stats and 4 moves each */
+Pokemon::Pokemon(const Pokemon& pokemon) {
+	name = pokemon.name;
+  typeOne = pokemon.typeOne;
+  typeTwo = pokemon.typeTwo;
+  level = pokemon.level;
+  maxHp = pokemon.maxHp;
+  currentHp = pokemon.currentHp;
+  baseStats = pokemon.baseStats;
+  stats = pokemon.stats;
+  moveList = pokemon.moveList;
+}
+
+void Pokemon::operator=(const Pokemon& pokemon) {
+  name = pokemon.name;
+  typeOne = pokemon.typeOne;
+  typeTwo = pokemon.typeTwo;
+  level = pokemon.level;
+  maxHp = pokemon.maxHp;
+  currentHp = pokemon.currentHp;
+  baseStats = pokemon.baseStats;
+  stats = pokemon.stats;
+  moveList = pokemon.moveList;
+}
+
+/*  Constructor for creating Pokemon that gives it stats and 4 moves each  */
 Pokemon::Pokemon(string name, Type type_one, Type type_two, 
 					        Stats baseStats, vector<Move> moves, int level) {
   this->name = name;

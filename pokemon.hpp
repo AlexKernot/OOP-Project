@@ -53,10 +53,15 @@ private:
   int currentHp;
   Stats baseStats;
   Stats stats;
-  vector<Move>moveList;
+  vector<Move> moveList;
 public:
   Pokemon(string name, Type type_one, Type type_two, 
           Stats stats, vector<Move> moves, int level);
+  Pokemon(const Pokemon& pokemon);
+  Pokemon() : Pokemon("Missingno", Type("Normal"), Type("NULL"), Stats(), 
+                       vector<Move>{}, 1) {}
+  ~Pokemon() {}
+  void operator=(const Pokemon& pokemon);
   void receive_move(Move moves, int level, int atk, int baseAtk);
   void set_name(string name);
   void set_type_one(Type type);
@@ -65,6 +70,7 @@ public:
   Type get_type_one();
   Type get_type_two();
   vector<Move> get_moves();
+  void set_moves(vector<Move> moves) {  moveList = moves; }
 private:
   void take_damage(int pwr);
   void attack_damage(Move move, int level, int atk, int baseAtk);
