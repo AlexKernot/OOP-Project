@@ -33,7 +33,7 @@ void Stats::GenerateStats(int level) {
   stats[0] = floor(stats[0]) + level + 10;
   for (int i = 1; i < 6; ++i)
   {
-    stats[i] = floor(((2 * stats[i] /*+ IV + EV/4 */) * level));
+    stats[i] = floor(((2 * stats[i] /*+ IV + EV/4 */) * level) / 100);
     stats[i] = floor((stats[i] + 5) /* x nature*/);
   }
 }

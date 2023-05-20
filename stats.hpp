@@ -28,8 +28,8 @@ public:
     void SetAttack(int attack) {stats[1] = attack;}
     void SetSpecialAttack(int specialAttack) {stats[2] = specialAttack;}
     void SetDefense(int defense) {stats[3] = defense;}
-    void SetSpecialDefense(int specialDefense) {stats[3] = specialDefense;}
-    void SetSpeed(int speed) {stats[4] = speed;}
+    void SetSpecialDefense(int specialDefense) {stats[4] = specialDefense;}
+    void SetSpeed(int speed) {stats[5] = speed;}
 };
 
 #endif
