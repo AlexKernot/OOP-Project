@@ -45,14 +45,13 @@ class Menu {
     std::vector<sf::Text> texts;
     std::vector<std::size_t> sizes;
 
-  protected:
-    void set_values();
-    int loop_events();
-    void draw_all();
-
   public:
     Menu();
     ~Menu();
     void run_menu();
     void Draw(sf::RenderWindow *window);
+    void set_values();
+    int loop_events();
+    void draw_all();
+
 };

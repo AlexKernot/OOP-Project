@@ -21,7 +21,7 @@
 #include "menu.hpp"
 
 Menu::Menu(){
-  Draw();
+  Draw(sf::RenderWindow *window);
   winclose = Renderable::add_sprite(sf::RectangleShape());
   font = Renderable::add_sprite(sf::Font(), "./resources/Minecraft.ttf");
   image = Renderable::add_sprite(sf::Texture(), "./resources/TitleScreen2.png");
