@@ -29,7 +29,7 @@
 class Window {
 private:
 	const int width = 800;
-	const int height = 500;
+	const int height = 600;
 	const int fpsLimit = 10;
 	std::vector<Renderable *> objects;
 	sf::RenderWindow *sfWindow;
