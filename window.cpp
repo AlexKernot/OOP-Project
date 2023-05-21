@@ -31,7 +31,6 @@ Window::Window() {
 
 Window::~Window() {
   sfWindow->close();
-  delete sfWindow;
 }
 
 void Window::AddToWindow(Renderable *object) {
@@ -49,7 +48,6 @@ void Window::ClearFromWindow(Renderable *object) {
   int size = static_cast<int>(objects.size());
   for (int i = 0; i < size; ++i) {
     if (objects[i] == object) {
-      delete objects[i];
       objects.erase(objects.begin() + i);
       return;
     }
@@ -58,9 +56,6 @@ void Window::ClearFromWindow(Renderable *object) {
 }
 
 void Window::ClearEntireWindow() {
-  int size = static_cast<int>(objects.size());
-  for (int i = 0; i < size; ++i)
-    delete objects[i];
   objects.clear();
 }
 
