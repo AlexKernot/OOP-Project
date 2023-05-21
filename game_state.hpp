@@ -12,25 +12,25 @@
 /*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
 /*         ██████  ██   ████ ██    |                            |            */
 /*                                                                           */
-/*        This is the base class for all objects that need rendering         */
-/*      It is an abstract class that holds the sprites for each object       */
+/*        This class represents the game state and its logic                 */
+/*        It manages the players, their turns, and the game board            */
 /*                                                                           */
 /*****************************************************************************/
 
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include "player.hpp"
 #include "game_container.hpp"
+#include "player.hpp"
 
-
-class Gamestate: public Game_container {
+class Gamestate : public Game_container {
  private:
   int current_turn;
   Player* players;
 
  public:
   Gamestate();
+  void draw(sf::RenderWindow* window);
   void swap_move();
 };
 
