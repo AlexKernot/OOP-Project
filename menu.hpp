@@ -24,14 +24,12 @@
 #include <iostream>
 
 #include "window.hpp"
-#include "renderable.hpp"
 
 class Menu {
   private:
     int pos;
     bool pressed, theselect;
 
-    sf::RenderWindow * window;
     sf::RectangleShape * winclose;
     sf::Font * font;
     sf::Texture * image;
@@ -46,12 +44,12 @@ class Menu {
     std::vector<std::size_t> sizes;
 
   public:
-    Menu();
+    Menu(sf::RenderWindow* window);
     ~Menu();
-    void run_menu();
+    void run_menu(sf::RenderWindow* window);
     void Draw(sf::RenderWindow *window);
-    void set_values();
-    int loop_events();
-    void draw_all();
+    void set_values(sf::RenderWindow* window);
+    int loop_events(sf::RenderWindow* window);
+    void Draw();
 
 };

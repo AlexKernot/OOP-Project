@@ -20,14 +20,13 @@
 
 #include "menu.hpp"
 
-Menu::Menu(){
-  Draw(sf::RenderWindow *window);
-  winclose = Renderable::add_sprite(sf::RectangleShape());
-  font = Renderable::add_sprite(sf::Font(), "./resources/Minecraft.ttf");
-  image = Renderable::add_sprite(sf::Texture(), "./resources/TitleScreen2.png");
-  bg = Renderable::add_sprite(sf::Sprite(), *image); //ok this idk
+Menu::Menu(sf::RenderWindow* window){
+  winclose = new sf::RectangleShape();
+  font = new sf::Font();
+  image = new sf::Texture();
+  bg = new sf::Sprite();
 
-  set_values();
+  set_values(window);
 }
 
 Menu::~Menu(){
@@ -37,16 +36,15 @@ Menu::~Menu(){
   delete bg;
 }
 
-void Menu::set_values(){
-  Draw();
-  Renderable::set_position(sf::Vector2i(0,0));
+void Menu::set_values(sf::RenderWindow* window){
+  window->setPosition(sf::Vector2i(0,0));
 
   pos = 0;
   pressed = theselect = false;
-  //font->loadFromFile("./resources/Minecraft.ttf");
-  //image->loadFromFile("./resources/TitleScreen2.png");
+  font->loadFromFile("./resources/Minecraft.ttf");
+  image->loadFromFile("./resources/TitleScreen2.png");
 
-  //bg->setTexture(*image);
+  bg->setTexture(*image);
 
   pos_mouse = {0,0};
   mouse_coord = {0, 0};
@@ -67,12 +65,12 @@ void Menu::set_values(){
   pos = 0;
 
   winclose->setSize(sf::Vector2f(23,26));
-  winclose->setPosition(1178,39); //ehr
+  winclose->setPosition(1178,39); 
   winclose->setFillColor(sf::Color::Transparent);
 
 }
 
-int Menu::loop_events(){
+int Menu::loop_events(sf::RenderWindow* window){
   sf::Event event;
   while(window->pollEvent(event)){
     if( event.type == sf::Event::Closed){
@@ -143,7 +141,7 @@ int Menu::loop_events(){
   return (0);
 }
 
-void Menu::draw_all(){
+void Menu::Draw(sf::RenderWindow* window){
   window->clear();
   window->draw(*bg);
   for(auto t : texts){
@@ -152,14 +150,9 @@ void Menu::draw_all(){
   window->display();
 }
 
-void Menu::run_menu(){
+void Menu::run_menu(sf::RenderWindow* window){
   while(window->isOpen()){
-    loop_events();
-    draw_all();
+    loop_events(window);
+    Draw(window);
   }
-}
-
-void Menu::Draw(sf::RenderWindow *window)
-{
-  window->draw(Sprites);
 }

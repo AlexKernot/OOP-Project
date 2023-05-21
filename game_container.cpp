@@ -49,7 +49,10 @@ void Game_container::ButtonPress(sf::Event event)
 void Game_container::StartGame(){
 /*  TestClass testClass = TestClass();
   Window::AddToWindow(&testClass);*/
-  Window::AddToWindow(Menu menus); 
+  sf::RenderWindow window(sf::VideoMode(800, 600), "Pokemon Simulator");
+  //Window* window;
+  Menu menu(&window);
+  menu.run_menu(&window);
   while (true) {
     sf::Event event;
     while (Window::PollEvent(&event)) {
