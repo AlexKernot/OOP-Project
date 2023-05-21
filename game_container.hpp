@@ -25,7 +25,7 @@
 #include "window.hpp"
 #include "menu.hpp"
 
-class Game_container : protected Window {
+class Game_container : public Window {
 private:
 	void ButtonPress(sf::Event event);
 	int hp_index;
@@ -34,6 +34,8 @@ private:
 	void draw();
 	void StartGame();
 	void TestRenderable();
+private:
+	int MainMenu();
 };
 
 #endif

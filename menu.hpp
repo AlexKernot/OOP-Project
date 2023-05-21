@@ -25,18 +25,12 @@
 
 #include "window.hpp"
 
-class Menu {
+class Menu : public Renderable{
   private:
-    int pos;
-    bool pressed, theselect;
+    int pos = 0;
+    bool pressed = false;
 
-    sf::RectangleShape * winclose;
     sf::Font * font;
-    sf::Texture * image;
-    sf::Sprite * bg;
-
-    sf::Vector2i pos_mouse;
-    sf::Vector2f mouse_coord;
 
     std::vector<const char *> options;
     std::vector<sf::Vector2f> coords;
@@ -44,12 +38,8 @@ class Menu {
     std::vector<std::size_t> sizes;
 
   public:
-    Menu(sf::RenderWindow* window);
+    Menu();
     ~Menu();
-    void run_menu(sf::RenderWindow* window);
     void Draw(sf::RenderWindow *window);
-    void set_values(sf::RenderWindow* window);
-    int loop_events(sf::RenderWindow* window);
-    void Draw();
-
+    int HandleKeyboard();
 };

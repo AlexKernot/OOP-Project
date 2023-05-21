@@ -45,14 +45,31 @@ void Game_container::ButtonPress(sf::Event event)
 
 }
 
+int Game_container::MainMenu() {
+  Menu menu = Menu();
+  AddToWindow(&menu);
+  sf::Event event;
+  while (true) {
+    while (PollEvent(&event)) {
+      if (event.type == sf::Event::Closed)
+        return false;
+      if(event.type == sf::Event::KeyPressed)
+      {
+        int result = menu.HandleKeyboard();
+        if (result != 0)
+          return result;
+      }
+    }
+    RenderWindow();
+  }
+}
+
 //void Game_container::draw();
-void Game_container::StartGame(){
-/*  TestClass testClass = TestClass();
-  Window::AddToWindow(&testClass);*/
-  sf::RenderWindow window(sf::VideoMode(800, 600), "Pokemon Simulator");
-  //Window* window;
-  Menu menu(&window);
-  menu.run_menu(&window);
+void Game_container::StartGame() {
+  int gameMode = MainMenu();
+  if (gameMode == -1)
+    return;
+  ClearEntireWindow();
   while (true) {
     sf::Event event;
     while (Window::PollEvent(&event)) {
@@ -65,6 +82,6 @@ void Game_container::StartGame(){
       ButtonPress(event);
     }
   }
-  Window::RenderWindow();
+  RenderWindow();
 }
 }
