@@ -4,7 +4,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(EXECUTABLE_OUTPUT_PATH ../)
 set(RUNTIME_OUTPUT_DIRECTORY ./bin)
 set(CMAKE_EXECUTABLE_SUFFIX ".out")
-set(COMPILE_OPTIONS -Wall; -Wextra; -Wpedantic; -Werror)
 add_executable(pokemon move.cpp pokemon.cpp stats.cpp type.cpp renderable.cpp sprites.cpp window.cpp menu.cpp game_container.cpp main.cpp)
 
 include(FetchContent)
@@ -26,7 +25,7 @@ include(CTest)
 
 enable_testing()
 add_subdirectory(Tests)
-
+target_compile_options(pokemon PRIVATE -Wall; -Wextra; -g)
 target_link_libraries(pokemon 
                       PRIVATE nlohmann_json::nlohmann_json
                       sfml-system
