@@ -1,4 +1,4 @@
-cmake --build build --target 'jsonTest'
+cmake --build build
 cd build;
 ctest --output-on-failure;
 #cd Testing/Temporary;
