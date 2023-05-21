@@ -34,6 +34,7 @@ private:
   std::vector<std::string> spriteName;
 
 public:
+  Sprites();
   ~Sprites();
   void  add_sprite(std::string spriteName, std::string texturePath);
   sf::Sprite *get_sprite_name(std::string spriteName);

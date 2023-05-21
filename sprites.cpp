@@ -19,6 +19,12 @@
 
 #include "sprites.hpp"
 
+Sprites::Sprites() {
+  sprites = std::vector<sf::Sprite*>{};
+  textures = std::vector<sf::Texture*>{};
+  spriteName = std::vector<std::string>{};
+}
+
 /*  Loads the texture from the relative path 'texture path' and puts the      */
 /*  pointer to the sprite on the heap.                                        */
 void  Sprites::add_sprite(std::string spriteName, std::string texturePath){
@@ -48,6 +54,11 @@ sf::Sprite *Sprites::get_sprite_index(int index) {
 
 /* this will free all the sprites for a given renderable object.             */
 Sprites::~Sprites() {
-  for (int i = 0; i < sprites.size(); ++i)
+  int size = static_cast<int>(sprites.size());
+  for (int i = 0; i < size; ++i)
+  {
+    if (sprites[i] == nullptr)
+      return;
     delete sprites[i];
+  }
 }
