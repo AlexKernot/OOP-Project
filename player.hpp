@@ -25,6 +25,7 @@
 #include "move.hpp"
 #include "pokemon.hpp"
 #include "renderable.hpp"
+#include "window.hpp"
 
 class Player : public Renderable {
  private:
@@ -35,11 +36,11 @@ class Player : public Renderable {
 
  public:
   Player(std::string name, vector<Pokemon*> pokemons);
-  void draw();
-  virtual Move make_move();
-  virtual void swap_pokemon();  // make it virtual --> add to bot
-  virtual void make_choice();   // 10% swap_pokemon - bot
-  Pokemon get_current_pokemon();
+  void Draw(sf::RenderWindow* window){};
+  virtual Move make_move(sf::RenderWindow* window);
+  virtual void swap_pokemon(sf::RenderWindow* window);  // make it virtual --> add to bot
+  virtual void make_choice(sf::RenderWindow* window);   // 10% swap_pokemon - bot
+  Pokemon* get_current_pokemon();
   ~Player();
 };
 
