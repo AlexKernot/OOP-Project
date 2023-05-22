@@ -27,7 +27,7 @@ Menu::Menu(){
   options = {"Normal Mode ", "Normal Random Mode", "Mayhem Mode", "Broken Cup", "Quit"};
 
   texts.resize(5);
-  coords = {{320, 265},{302,335},{320,400},{320,470},{360,542}};
+  coords = {{328, 265},{305,335},{328,400},{333,470},{360,542}};
   sizes = {20, 17, 20, 20 ,20};
 
   int size = static_cast<int>(texts.size());

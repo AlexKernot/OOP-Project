@@ -26,7 +26,7 @@ Window::Window() {
   sfWindow = new sf::RenderWindow(
     sf::VideoMode(static_cast<unsigned int>(width), 
     static_cast<unsigned int>(height)), 
-    "Pokemon Simulator", 
+    "Pokemon Showdown", 
     sf::Style::Close);
 }
 
