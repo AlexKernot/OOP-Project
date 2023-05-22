@@ -29,7 +29,7 @@
 
 Player::Player() {
   for (int i = 0; i < 6; ++i) {
-    pokemons.push_back(&Pokemon());
+    pokemons.push_back(new Pokemon());
   }
 }
 
@@ -49,6 +49,10 @@ void Draw(sf::RenderWindow* window){};
 Pokemon* Player::get_current_pokemon() { return this->current_pokemon; }
 
 std::vector<Pokemon*> Player::getPokemons() { return this->pokemons; };
+
+void Player::Draw(sf::RenderWindow* window) {
+  return;
+}
 
 Player::~Player() {
   // Clean up resources
