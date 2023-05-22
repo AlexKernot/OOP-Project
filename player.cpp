@@ -27,14 +27,19 @@
 #include "move.hpp"
 #include "pokemon.hpp"
 
-Player::Player(std::string name, std::vector<Pokemon*> pokemons) {
-  this->name = name;
+Player::Player() {
+  for (int i = 0; i < 6; ++i) {
+    pokemons.push_back(&Pokemon());
+  }
+}
+
+Player::Player(std::vector<Pokemon*> pokemons) {
   this->pokemons = pokemons;
-  this->moves = = current_pokemon->get_moves();
+  this->moves = current_pokemon->get_moves();
 }
 
 // This allows the Player to make a move
-Move Player::make_move(int i) { this->current_move = moves[i]; }
+void Player::make_move(int i) { this->current_move = moves[i]; }
 
 // This allows the Player to swap between Pokemons
 void Player::swap_pokemon(int i) { this->current_pokemon = pokemons[i]; }
@@ -43,7 +48,11 @@ void Draw(sf::RenderWindow* window){};
 
 Pokemon* Player::get_current_pokemon() { return this->current_pokemon; }
 
+std::vector<Pokemon*> Player::getPokemons() { return this->pokemons; };
+
 Player::~Player() {
   // Clean up resources
-  delete[] pokemons;
+  for (int i = 0; i < 6; i++) {
+    delete pokemons[i];
+  }
 }

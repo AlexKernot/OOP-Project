@@ -67,7 +67,7 @@ public:
   void set_name(string name);
   void set_type_one(Type type);
   void set_type_two(Type type);
-  void set_moves(vector<Move> moves) {  moveList = moves; }
+  void set_moves(vector<Move*> moves);
   void set_level(int level) {this->level = level;}
   void set_current_hp(int hp) {currentHp = hp;}
   void set_max_hp(int maxHp) {this->maxHp = maxHp;}
@@ -78,7 +78,7 @@ public:
   int get_max_hp() {return maxHp;}
   Type get_type_one();
   Type get_type_two();
-  vector<Move> get_moves();
+  vector<Move*> get_moves();
   int get_level() {return level;}
   Stats get_base_stats() {return baseStats;}
   Stats get_stats() {return stats;}

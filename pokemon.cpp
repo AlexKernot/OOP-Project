@@ -176,8 +176,20 @@ Type Pokemon::get_type_one() {
 Type Pokemon::get_type_two() {
 	return typeTwo;
 }
+void Pokemon::set_moves(vector<Move*> moves) {
+  int size = static_cast<int>(moves.size());
+  for (int i = 0; i < size; ++i) {
+    moveList[i] = *moves[i];
+  }
+}
 
 /* returns all the moves of the Pokemon*/
-vector<Move> Pokemon::get_moves() {
-    return moveList;
+vector<Move*> Pokemon::get_moves() {
+  vector<Move*> moves;
+  int size = static_cast<int>(moveList.size());
+  for (int i = 0; i < size; ++i)
+  {
+    moves.push_back(&moveList[i]);
+  }
+    return moves;
 }

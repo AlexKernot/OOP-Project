@@ -28,7 +28,8 @@
 
 class Bot : public Player {
  public:
-  Bot(std::string name, vector<Pokemon*> pokemons);
+  Bot() : Player() {}
+  Bot(vector<Pokemon*> pokemons);
   void bot_make_choice();
 };
 

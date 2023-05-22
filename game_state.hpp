@@ -27,9 +27,10 @@
 class Gamestate : public Game_container {
  private:
   int current_turn;
-  Player* players;
-  Button* pokemon_buttons;
-  Button* move_buttons;
+  Player player1;
+  Bot player2;
+  std::vector<Button*> pokemon_buttons;
+  std::vector<Button*> move_buttons;
 
  public:
   Gamestate();

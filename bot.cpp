@@ -28,16 +28,15 @@
 #include "move.hpp"
 #include "pokemon.hpp"
 
-Bot::Bot(std::string name, vector<Pokemon*> pokemons)
-    : Player(name, pokemons){};
+Bot::Bot(vector<Pokemon*> pokemons) : Player(pokemons){};
 
 void Bot::bot_make_choice() {
   // Generate a random probability between 0 and 10
-  double prob = double(rand()) % 10;
+  int prob = rand() % 10;
   // 90% chance to make a move, 10% chance to swap Pokemon
   if (prob < 9) {
-    make_move(rand() % this->pokemons.size());
+    make_move(rand() % this->getPokemons().size());
   } else {
-    swap_pokemon(rand() % this->moves.size());
+    swap_pokemon(rand() % get_current_pokemon()->get_moves().size());
   }
 }

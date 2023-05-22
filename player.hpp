@@ -31,17 +31,19 @@ class Player : public Renderable {
  private:
   std::vector<Pokemon*> pokemons;
   Pokemon* current_pokemon;
-  std::vector<Move> moves;
+  std::vector<Move*> moves;
   Move* current_move;
   std::string name;
   std::string choice;
 
  public:
-  Player(std::string name, vector<Pokemon*> pokemons);
+  Player();
+  Player(vector<Pokemon*> pokemons);
   void Draw(sf::RenderWindow* window);
-  virtual void swap_pokemon(int i);  
-  virtual void make_move(int i);   
+  void swap_pokemon(int i);
+  void make_move(int i);
   Pokemon* get_current_pokemon();
+  std::vector<Pokemon*> getPokemons();
   ~Player();
 };
 
