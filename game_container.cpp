@@ -46,6 +46,8 @@ void Game_container::ButtonPress(sf::Event event)
 
 void Game_container::Draw(sf::RenderWindow *window) {
   window->draw(*get_sprite(0));
+  window->draw(*get_sprite(1));
+  window->draw(*get_sprite(2));
 }
 
 int Game_container::MainMenu() {
@@ -76,6 +78,12 @@ void Game_container::StartGame() {
   Renderable::add_sprite("Battleui", "./resources/bg_battle.png");
   Renderable::set_size(0, sf::Vector2f(0.75f, 0.75f));
   Renderable::set_position(0, sf::Vector2i(200, 0));
+  Renderable::add_sprite("player 2_HP", "./resources/health bar.jpg");
+  Renderable::set_size(1, sf::Vector2f(0.20f, 0.20f));
+  Renderable::set_position(1, sf::Vector2i(680, 0));
+  Renderable::add_sprite("player 1_HP", "./resources/health bar.jpg");
+  Renderable::set_size(2, sf::Vector2f(0.20f, 0.20f));
+  Renderable::set_position(2, sf::Vector2i(300, 380));
   AddToWindow(this);
   while (true) {
     sf::Event event;
