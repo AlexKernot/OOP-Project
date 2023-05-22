@@ -21,6 +21,7 @@
 
 #include <SFML/Window.hpp>
 
+/*Creates a new renderable window to display the UI of the game*/
 Window::Window() {
   sfWindow = new sf::RenderWindow(
     sf::VideoMode(static_cast<unsigned int>(width), 
@@ -29,6 +30,7 @@ Window::Window() {
     sf::Style::Close);
 }
 
+/*Closes the renderable Window*/
 Window::~Window() {
   sfWindow->close();
 }
