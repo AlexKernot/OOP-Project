@@ -23,12 +23,12 @@
 Menu::Menu(){
   font = new sf::Font();
   font->loadFromFile("./resources/Minecraft.ttf");
-  add_sprite("background", "./resources/TitleScreen2.png");
-  options = {"Normal Mode", "Mayhem Mode", "Broken Cup", "Quit"};
+  add_sprite("background", "./resources/Title Screen.png");
+  options = {"Normal Mode ", "Normal Random Mode", "Mayhem Mode", "Broken Cup", "Quit"};
 
-  texts.resize(4);
-  coords = {{320,260},{320,340},{320,422},{350,500}};
-  sizes = {24, 24, 24 ,24};
+  texts.resize(5);
+  coords = {{320, 265},{302,335},{320,400},{320,470},{360,542}};
+  sizes = {20, 17, 20, 20 ,20};
 
   int size = static_cast<int>(texts.size());
   for (int i = 0; i < size; ++i) {
@@ -46,7 +46,7 @@ Menu::~Menu() {
 }
 int Menu::HandleKeyboard() {
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !pressed) {
-    if (pos < 3) {
+    if (pos < 4) {
       ++pos;
       pressed = true;
       texts[pos].setOutlineThickness(4);
@@ -67,17 +67,20 @@ int Menu::HandleKeyboard() {
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
     /*  Close        */
-    if (pos == 3)
+    if (pos == 4)
       return (-1);
     /*  Normal Mode  */
     if (pos == 0)
       return (1);
-    /*  Mayhem Mode  */
+    /*  Normal Random Mode  */
     if (pos == 1)
       return (2);
-    /*  Broken Cup   */
+    /*  Mayhem Mode   */
     if (pos == 2)
       return (3);
+    /*  Broken Cup   */
+    if (pos == 3)
+      return (4);
   }
   /*  Nothing has happened  */
   return 0;

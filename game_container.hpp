@@ -22,6 +22,8 @@
 
 #include <SFML/Window.hpp>
 
+#include <string>
+
 #include "window.hpp"
 #include "menu.hpp"
 #include "renderable.hpp"
