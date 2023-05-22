@@ -6,7 +6,7 @@ Button::Button(std::string buttonTexture) {
     return ;
   }
   add_sprite("button", buttonTexture);
-  size = sf::Vector2i(50, 20);
+  size = sf::Vector2i(350, 112);
   boundsBottomLeft = sf::Vector2i(0, 0);
   boundsTopLeft = sf::Vector2i(0, size.y);
   boundsBottomRight = sf::Vector2i(size.x, 0);
@@ -14,8 +14,7 @@ Button::Button(std::string buttonTexture) {
   fontLoaded = true;
   text.setFont(font);
   text.setCharacterSize(24);
-  textPosition = static_cast<sf::Vector2f>(position + sf::Vector2i(4, 8));
-  text.setPosition(textPosition);
+  text.setPosition(textOffset);
 }
 
 void Button::SetText(std::string text) {
@@ -29,8 +28,7 @@ void Button::SetPosition(sf::Vector2i position) {
   boundsTopLeft = sf::Vector2i(position.x, position.y + size.y);
   boundsBottomRight = sf::Vector2i(position.x + size.x, position.y);
   boundsTopRight = sf::Vector2i(position.x + size.x, position.y + size.y);
-  textPosition = static_cast<sf::Vector2f>(position + sf::Vector2i(8, 4));
-  text.setPosition(textPosition);
+  text.setPosition(textOffset);
 }
 
 bool Button::HoverOn(sf::Vector2i mouse) {
@@ -71,6 +69,6 @@ void Button::Draw(sf::RenderWindow *window) {
   } else {
     text.setOutlineThickness(0);
   }
-  window->draw(text);
   window->draw(*get_sprite(0));
+  window->draw(text);
 }
