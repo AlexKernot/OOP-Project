@@ -10,7 +10,7 @@ Game Modes can be chosen on the Main Menu accordingly:
 
 Normal Mode: Player has a team of 6 Pokemon chosen to battle against an enemy team (either random or team-selected)
 
-Mayhem Random battle: 6 Pokemon for the player that are given 4 random moves. Typing will be decided by the first two moves. Type Matchups are reversed.
+Mayhem battle: 6 Pokemon for the player that are given 4 random moves. Typing will be decided by the first two moves. Type Matchups are reversed.
 
 Broken Cup: 6 random Pokemon assigned random moves and typings to battle enemy team.
 
