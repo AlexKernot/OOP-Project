@@ -24,14 +24,15 @@
 
 #include "window.hpp"
 #include "menu.hpp"
+#include "renderable.hpp"
 
-class Game_container : public Window {
+class Game_container : public Window, Renderable {
 private:
 	void ButtonPress(sf::Event event);
 	int hp_index;
 	int background_index;
  public:
-	void draw();
+	void Draw(sf::RenderWindow *window);
 	void StartGame();
 	void TestRenderable();
 private:

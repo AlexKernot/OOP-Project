@@ -42,7 +42,10 @@ void Game_container::ButtonPress(sf::Event event)
     {
         std::cout << "Right\n";
     }
+}
 
+void Game_container::Draw(sf::RenderWindow *window) {
+  window->draw(*get_sprite(0));
 }
 
 int Game_container::MainMenu() {
@@ -70,6 +73,7 @@ void Game_container::StartGame() {
   if (gameMode == -1)
     return;
   ClearEntireWindow();
+  Renderable::add_sprite("Battleui", "./resources/bg_battle.png");
   while (true) {
     sf::Event event;
     while (Window::PollEvent(&event)) {
