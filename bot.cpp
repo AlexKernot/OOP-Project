@@ -12,8 +12,10 @@
 /*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
 /*         ██████  ██   ████ ██    |                            |            */
 /*                                                                           */
-/*        This is the base class for all objects that need rendering         */
-/*      It is an abstract class that holds the sprites for each object       */
+/*         This class represents a Bot in the Pokemon Showdown game.         */
+/*        It is a derived class of the Player class and overrides the        */
+/*       make_choice, make_move, and swap_pokemon functions to provide       */
+/*                         bot-specific behavior.                            */
 /*                                                                           */
 /*****************************************************************************/
 
@@ -30,7 +32,9 @@ Bot::Bot(std::string name, vector<Pokemon*> pokemons)
     : Player(name, pokemons){};
 
 void Bot::make_choice() {
+  // Generate a random probability between 0 and 10
   double prob = double(rand()) % 10;
+  // 90% chance to make a move, 10% chance to swap Pokemon
   if (prob < 9) {
     make_move();
   } else {

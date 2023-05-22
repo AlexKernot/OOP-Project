@@ -12,8 +12,10 @@
 /*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
 /*         ██████  ██   ████ ██    |                            |            */
 /*                                                                           */
-/*        This is the base class for all objects that need rendering         */
-/*      It is an abstract class that holds the sprites for each object       */
+/*         This class represents a Bot in the Pokemon Showdown game.         */
+/*        It is a derived class of the Player class and overrides the        */
+/*       make_choice, make_move, and swap_pokemon functions to provide       */
+/*                         bot-specific behavior.                            */
 /*                                                                           */
 /*****************************************************************************/
 
