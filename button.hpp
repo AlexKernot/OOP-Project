@@ -9,6 +9,7 @@
 #include "renderable.hpp"
 
 class Button : public Renderable{
+  const sf::Vector2i textOffset = sf::Vector2i(4, 8);
   sf::Vector2i position;
   sf::Vector2i size;
   sf::Vector2i boundsTopLeft;
@@ -18,6 +19,8 @@ class Button : public Renderable{
 
   sf::Font font;
   sf::Text text;
+  sf::Vector2f textPosition;
+
   bool fontLoaded = false;
   bool clickable = true;
 
