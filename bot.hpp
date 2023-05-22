@@ -29,9 +29,7 @@
 class Bot : public Player {
  public:
   Bot(std::string name, vector<Pokemon*> pokemons);
-  void make_choice();
-  Move make_move();
-  void swap_pokemon();
+  void bot_make_choice();
 };
 
 #endif

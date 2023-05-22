@@ -31,19 +31,13 @@
 Bot::Bot(std::string name, vector<Pokemon*> pokemons)
     : Player(name, pokemons){};
 
-void Bot::make_choice() {
+void Bot::bot_make_choice() {
   // Generate a random probability between 0 and 10
   double prob = double(rand()) % 10;
   // 90% chance to make a move, 10% chance to swap Pokemon
   if (prob < 9) {
-    make_move();
+    make_move(rand() % this->pokemons.size());
   } else {
-    swap_pokemon();
+    swap_pokemon(rand() % this->moves.size());
   }
 }
-
-Move Bot::make_move() { return get_move()[rand() % get_move().size()]; };
-
-void Bot::swap_pokemon() {
-  current_pokemon = this->pokemons[rand() % this->pokemons.size()];
-};
