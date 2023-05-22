@@ -74,6 +74,8 @@ void Game_container::StartGame() {
     return;
   ClearEntireWindow();
   Renderable::add_sprite("Battleui", "./resources/bg_battle.png");
+  Renderable::set_size(0, sf::Vector2f(0.75f, 0.75f));
+  Renderable::set_position(0, sf::Vector2i(200, 0));
   AddToWindow(this);
   while (true) {
     sf::Event event;
