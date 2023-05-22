@@ -22,16 +22,19 @@
 
 #include "game_container.hpp"
 #include "player.hpp"
+#include "button.hpp"
 
 class Gamestate : public Game_container {
  private:
   int current_turn;
   Player* players;
+  Button* pokemon_buttons;
+  Button* move_buttons;
 
  public:
   Gamestate();
-  void draw(sf::RenderWindow* window);
   void swap_move();
+  void buttons();
 };
 
 #endif
