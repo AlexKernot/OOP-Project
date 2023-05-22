@@ -12,23 +12,42 @@
 /*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
 /*         ██████  ██   ████ ██    |                            |            */
 /*                                                                           */
-/*        This is the base class for all objects that need rendering         */
-/*      It is an abstract class that holds the sprites for each object       */
+/*        This class represents a Move in the Pokemon Showdown game.         */
+/*       It stores information about the move such as its name, power,       */
+/*                        accuracy, effect, and type.                        */
 /*                                                                           */
 /*****************************************************************************/
 
 #include "move.hpp"
 
+// Constructor
 Move::Move(string name, int power, int accuracy, string effect, string type)
-    : name(name), power(power), accuracy(accuracy), 
-      effect(effect), type(type) {}
+    : name(name),
+      power(power),
+      accuracy(accuracy),
+      effect(effect),
+      type(type) {}
 
+// Set the name of the move
 void Move::set_name(string name) { this->name = name; }
-void Move::set_effect(string effect) { this->effect = effect; }
-void Move::set_type(string type) { this->type = Type(type); }
-void Move::set_power(int power) {  this->power = power;  }
 
-int Move::get_power() {  return power;  }
+// Set the effect of the move
+void Move::set_effect(string effect) { this->effect = effect; }
+
+// Set the type of the move
+void Move::set_type(string type) { this->type = Type(type); }
+
+// Set the power of the move
+void Move::set_power(int power) { this->power = power; }
+
+// Get the power of the move
+int Move::get_power() { return power; }
+
+// Get the name of the move
 string Move::get_name() { return name; }
+
+// Get the effect of the move
 string Move::get_effect() { return effect; }
+
+// Get the type of the move
 Type Move::get_type() { return type; }

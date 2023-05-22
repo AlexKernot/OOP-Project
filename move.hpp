@@ -12,8 +12,9 @@
 /*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
 /*         ██████  ██   ████ ██    |                            |            */
 /*                                                                           */
-/*        This is the base class for all objects that need rendering         */
-/*      It is an abstract class that holds the sprites for each object       */
+/*        This class represents a Move in the Pokemon Showdown game.         */
+/*       It stores information about the move such as its name, power,       */
+/*                        accuracy, effect, and type.                        */
 /*                                                                           */
 /*****************************************************************************/
 
