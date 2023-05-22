@@ -22,6 +22,7 @@
 
 #include "game_container.hpp"
 #include "player.hpp"
+#include "bot.hpp"
 #include "button.hpp"
 
 class Gamestate : public Game_container {
