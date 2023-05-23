@@ -8,7 +8,7 @@ This project aims to be a recreation of a generation 1 Pokémon battle simulator
 
 Game Modes can be chosen on the Main Menu accordingly:
 
-Normal Mode: Player has a team of 6 Pokemon chosen to battle against an enemy team (either random or team-selected)
+Normal Mode: Player has a team of 6 Pokemon chosen to battle against an enemy team (either random or team-selected).
 
 Mayhem battle: 6 Pokemon for the player that are given 4 random moves. Typing will be decided by the first two moves. Type Matchups are reversed.
 
