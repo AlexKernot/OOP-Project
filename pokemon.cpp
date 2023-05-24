@@ -60,7 +60,7 @@ Pokemon& Pokemon::operator=(const Pokemon& pokemon) {
 }
 
 /*   ructor for creating Pokemon that gives it stats and 4 moves each  */
-Pokemon::Pokemon(string name, Type type_one, Type type_two, 
+Pokemon::Pokemon(string name, Type type_one, Type type_two,
 					        Stats baseStats, vector<Move> moves, int level) {
   this->name = name;
   this->typeOne = type_one;
@@ -82,7 +82,7 @@ void Pokemon::PrettyPrint() {
   << "Level:    " << level << std::endl
   << "Max HP:   " << maxHp << std::endl
   << "Current HP: " << currentHp << std::endl
-  << "Stats: " << std::endl 
+  << "Stats: " << std::endl
   << "  HP: " << stats.GetHP() << std::endl
   << "  Attack: " << stats.GetAttack() << std::endl
   << "  Special Atk: " << stats.GetSpecialAttack() << std::endl
@@ -101,8 +101,9 @@ void Pokemon::PrettyPrint() {
 void Pokemon::take_damage(int pwr) {
 	if(currentHp > 0) {
 		currentHp -= pwr;
-		if (currentHp < 0) {
+		if (currentHp < 0 || currentHp == 0) {
 			currentHp = 0;
+      isFainted = true;
 		}
 	}
 }

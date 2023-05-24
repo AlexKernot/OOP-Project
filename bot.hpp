@@ -33,6 +33,8 @@ class Bot : public Player {
   int bot_make_choice();
   void swap_pokemon();
   Move make_move();
+private:
+  bool CheckLoss();
 };
 
 #endif

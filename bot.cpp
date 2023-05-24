@@ -34,24 +34,41 @@ Bot::Bot(vector<Pokemon> pokemons) : Player(pokemons) {
   }
 };
 
+bool Bot::CheckLoss() {
+  size_t size = getPokemons()->size();
+  for (size_t i = 0; i < size; ++i) {
+    if (getPokemons()->at(i).GetIsFainted() == false)
+      return false;
+  }
+  return true;
+}
+
 int Bot::bot_make_choice() {
+  if (getPokemons()->at(get_current_pokemon()).GetIsFainted() == true)
+  {
+    if (CheckLoss() == true)
+      return -1;
+    return 1;
+  }
   // Generate a random probability between 0 and 10
   int prob = rand() % 10;
   // 90% chance to make a move, 10% chance to swap Pokemon
   if (prob < 9)
     return 0;
   return 1;
- /*   make_move(rand() % this->getPokemons()->size());
-  } else {
-    swap_pokemon(rand() % getPokemons()->at(get_current_pokemon()).get_moves().size());*/
 }
 
 void Bot::swap_pokemon() {
   int number = 0;
-  do {
+  while (true) {
     number = rand() % getPokemons()->size();
-  } while (number == get_current_pokemon());
-  set_current_pokemon(number);
+    if (number == get_current_pokemon())
+      continue;
+    if (getPokemons()->at(number).GetIsFainted() == true)
+      continue;
+    set_current_pokemon(number);
+    return ;
+  }
 }
 
 Move Bot::make_move() {

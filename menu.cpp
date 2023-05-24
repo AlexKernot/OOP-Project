@@ -56,7 +56,7 @@ int Menu::HandleKeyboard() {
     return 0;
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !pressed) {
-    if (pos >= 0) {
+    if (pos > 0) {
       --pos;
       pressed = true;
       texts[pos].setOutlineThickness(4);

@@ -18,11 +18,15 @@
 /*****************************************************************************/
 
 #include "game_state.hpp"
+#include <iostream>
 
 /* This will start the program */
 int main()
 {
- 	Gamestate game;
- 	game.StartGame();
+ 	Gamestate *game = new Gamestate();
+ 	game->StartGame();
+	delete game;
+	std::string output;
+	std::cin >> output;
  	return 0;
 }

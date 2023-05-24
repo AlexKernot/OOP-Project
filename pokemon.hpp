@@ -54,6 +54,7 @@ private:
   Stats baseStats;
   Stats stats;
   vector<Move> moveList;
+  bool isFainted = false;
 public:
   Pokemon(string name, Type type_one, Type type_two, 
           Stats stats, vector<Move> moves, int level);
@@ -81,6 +82,7 @@ public:
   int get_level() {return level;}
   Stats get_base_stats() {return baseStats;}
   Stats get_stats() {return stats;}
+  bool GetIsFainted() {return isFainted;}
 
 private:
   void take_damage(int pwr);

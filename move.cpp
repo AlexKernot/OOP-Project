@@ -29,7 +29,7 @@ Move::Move(string name, int power, int accuracy, string effect, string type)
       type(type) {}
 
 /* Default Constructor to create a placeholder move */
-Move::Move() : Move("Struggle", 50, 100, "Recoil 50", "Normal") {}
+Move::Move() : Move("Struggle", 50, 100, "Recoil 50", "normal") {}
 
 /* Set the name of the move */
 void Move::set_name(string name) { this->name = name; }

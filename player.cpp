@@ -78,12 +78,11 @@ Player::Player(std::vector<Pokemon> pokemons) {
   this->moves = pokemons.at(current_pokemon).get_moves();
   for (size_t i = 0; i < pokemons.size(); ++i) {
     std::string name = pokemons.at(i).get_name();
+    add_sprite("Pokemon" + std::to_string(i), "resources/sprites/" + name + ".png");
     if (name == "Missingno") {
-      add_sprite("Pokemon" + std::to_string(i), "resources/sprites/" + name + ".png");
       set_size(i, sf::Vector2f(0.4, 0.4));
       set_position(i, sf::Vector2i(300, 300));
     } else {
-      add_sprite("Pokemon" + std::to_string(i), "resources/sprites/" + name + ".bmp");
       set_size(i, sf::Vector2f(2, 2));
       set_position(i, sf::Vector2i(300, 300));
     }

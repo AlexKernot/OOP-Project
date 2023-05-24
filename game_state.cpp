@@ -22,26 +22,97 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <cstdlib>
+#include <time.h>
 
 #include "bot.hpp"
 #include "button.hpp"
 #include "player.hpp"
 #include "pokemon.hpp"
+#include "readPokemonTeam.hpp"
+#include "generateRandomPokemon.hpp"
 
 //  ructor
-Gamestate::Gamestate() : current_turn(0) {
-  std::vector<Pokemon> pokemon = {Pokemon("Ditto", Type("Normal"), Type("NULL"), Stats(1, 1, 1, 1, 1, 1), {Move(), Move(), Move(), Move()}, 1), Pokemon(), Pokemon(), Pokemon(), Pokemon(), Pokemon()};
-  player1 = new Player(pokemon);
-  player2 = new Bot(pokemon);
+Gamestate::Gamestate() : current_turn(0) {}
+
+void Gamestate::CreatePokemon() {
+  srand(time(0));
+  if (gamemode == 2) {
+    std::vector<Pokemon> playerPokemon;
+    std::vector<Pokemon> botPokemon;
+    for (int i = 0; i < 6; ++i) {
+      playerPokemon.push_back(GenerateRandomPokemon());
+      botPokemon.push_back(GenerateRandomPokemon());
+    }
+    player1 = new Player(playerPokemon);
+    player2 = new Bot(botPokemon);
+  }
+  if (gamemode == 1) {
+    std::string input;
+    std::cout << "Please enter the name of your file relative "
+    << "to the resources/playerTeams folder and without the .json prefix" << std::endl;
+    std::cin >> input;
+    std::vector<Pokemon> playerPokemon;
+    std::vector<Pokemon> botPokemon;
+    bool generateAll = true;
+    for (int i = 0; i < 6; ++i) {
+      if (generateAll == true) {
+        playerPokemon.push_back(ReadPokemonTeam("playerTeams/" + input, i));
+        generateAll = ReadPokemonTeam("playerTeams/" + input, i).GetGenerateAll();
+      } else {
+        playerPokemon.push_back(GenerateRandomPokemon());
+      }
+      botPokemon.push_back(GenerateRandomPokemon());
+    }
+    player1 = new Player(playerPokemon);
+    player2 = new Bot(botPokemon);
+  }
 }
 
 Gamestate::~Gamestate() {
+  delete player1;
+  delete player2;
   size_t pokemonSize = pokemon_buttons.size();
   size_t moveSize = move_buttons.size();
   for (size_t i = 0; i < pokemonSize; ++i)
     delete pokemon_buttons[i];
   for (size_t i = 0; i < moveSize; ++i)
     delete move_buttons[i];
+}
+
+void Gamestate::DisableMoveButtons() {
+  for (size_t i = 0; i < move_buttons.size(); ++i) {
+    move_buttons[i]->DisableButton();
+  }
+}
+
+void Gamestate::DisablePokemonButtons() {
+  for (size_t i = 0; i < pokemon_buttons.size(); ++i) {
+    pokemon_buttons[i]->DisableButton();
+  }
+}
+
+void Gamestate::EnablePokemonButtons() {
+  for (size_t i = 0; i < pokemon_buttons.size(); ++i) {
+    if (static_cast<int>(i) == player1->get_current_pokemon())
+      continue;
+    if (player1->getPokemons()->at(i).GetIsFainted() == true)
+      continue;
+    pokemon_buttons[i]->EnableButton();
+  }
+}
+
+void Gamestate::EnableMoveButtons() {
+  for (size_t i = 0; i < move_buttons.size(); ++i) {
+    move_buttons[i]->EnableButton();
+  }
+}
+
+void Gamestate::UpdateButtons(Pokemon pokemon) {
+  move_buttons[0]->SetText(pokemon.get_moves()[0]->get_name());
+  move_buttons[1]->SetText(pokemon.get_moves()[1]->get_name());
+  move_buttons[2]->SetText(pokemon.get_moves()[2]->get_name());
+  move_buttons[3]->SetText(pokemon.get_moves()[3]->get_name());
 }
 
 void Gamestate::ButtonClick() {
@@ -51,10 +122,11 @@ void Gamestate::ButtonClick() {
     int sizePokemonButtons = static_cast<int>(pokemon_buttons.size());
     for (int i = 0; i < sizePokemonButtons; ++i) {
       if (pokemon_buttons[i]->ClickedOn(sf::Mouse::getPosition(*GetWindow()))) {
-        pokemon_buttons.at(player1->get_current_pokemon())->EnableButton();
-        pokemon_buttons.at(i)->DisableButton();
         player1->swap_pokemon(i);
-        std::cout << "You swapped to Pokemon: " 
+        UpdateButtons(player1->getPokemons()->at(i));
+        DisablePokemonButtons();
+        EnablePokemonButtons();
+        std::cout << "You: swapped to Pokemon: " 
         << player1->getPokemons()->at(i).get_name() << std::endl;
         ++current_turn;
         return ;
@@ -65,7 +137,7 @@ void Gamestate::ButtonClick() {
     for (int i = 0; i < sizeMoveButtons; ++i) {
       if (move_buttons[i]->ClickedOn(sf::Mouse::getPosition(*GetWindow()))) {
         player1->make_move(i);
-        std::cout << player1->getPokemons()
+        std::cout << "You: " << player1->getPokemons()
           ->at(player1->get_current_pokemon()).get_name() << " used "
         << player1->getPokemons()->at(player1->get_current_pokemon())
           .get_moves().at(i)->get_name() 
@@ -124,13 +196,16 @@ void Gamestate::AddButtons() {
   }
   /*  The current pokemon will always start as the first one.  */
   /*   This disables that button.  */
-  pokemon_buttons[0]->DisableButton();
+  DisablePokemonButtons();
+  EnablePokemonButtons();
 }
 
 void Gamestate::StartGame() {
-  int gameMode = MainMenu();
-  if (gameMode == -1)
+  ClearEntireWindow();
+  gamemode = MainMenu();
+  if (gamemode == -1)
     return;
+  CreatePokemon();
   ClearEntireWindow();
   AddGameSprites();
   AddToWindow(player1);
@@ -143,26 +218,48 @@ void Gamestate::StartGame() {
   while (true) {
     sf::Event event;
     while (Window::PollEvent(&event)) {
-      if (event.type == sf::Event::Closed) {
-        std::cout << "Close\n";
+      if (player1->getPokemons()
+        ->at(player1->get_current_pokemon()).GetIsFainted())
+      {
+        DisableMoveButtons();
+        if (event.type == sf::Event::MouseButtonPressed) {
+          ButtonClick();
+          if (player1->getPokemons()
+            ->at(player1->get_current_pokemon()).GetIsFainted() == false) {
+              EnableMoveButtons();
+              DisablePokemonButtons();
+              EnablePokemonButtons();
+              --current_turn;
+            }
+        }
+      }
+      if (event.type == sf::Event::Closed)
         return ;
-      }
-      if (event.type == sf::Event::MouseButtonPressed) {
+      if (event.type == sf::Event::MouseButtonPressed)
         ButtonClick();
-      }
       if (current_turn == 1) {
         Pokemon *tempPokemon = &player2->getPokemons()
           ->at(player2->get_current_pokemon());
         Move move = player2->make_move();
-        if (player2->bot_make_choice() == 0) {
+        int botChoice = player2->bot_make_choice();
+        if (botChoice == -1) {
+          std::cout << "\nYou win!!" << std::endl;
+          return ;
+        }
+        if (botChoice == 0) {
           player1->getPokemons()->at(player1->get_current_pokemon())
             .receive_move(move, tempPokemon->get_level(), 
               tempPokemon->get_stats().GetAttack(), tempPokemon
                 ->get_base_stats().GetAttack());
-            std::cout << tempPokemon->get_name() << " used " 
+            std::cout << "Bot: " << tempPokemon->get_name() << " used " 
               << move.get_name() << std::endl;
+        if (player1->getPokemons()
+          ->at(player1->get_current_pokemon()).GetIsFainted())
+          std::cout << "You: " << player1->getPokemons()
+            ->at(player1->get_current_pokemon()).get_name() 
+          << " fainted. Please switch pokemon." << std::endl;
         } else {
-          std::cout << "Bot switched out " 
+          std::cout << "Bot: switched out " 
           << player2->getPokemons()
             ->at(player2->get_current_pokemon()).get_name()
           << " into ";
@@ -171,7 +268,7 @@ void Gamestate::StartGame() {
             ->at(player2->get_current_pokemon()).get_name()
           << std::endl;
         }
-        current_turn--;
+        --current_turn;
       }
     }
   UpdateHealth(1, player1->getPokemons()

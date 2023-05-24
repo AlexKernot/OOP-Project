@@ -28,6 +28,7 @@ class Gamestate : public Game_container {
  private:
   std::vector<Button*> pokemon_buttons;
   std::vector<Button*> move_buttons;
+  int gamemode;
   int current_turn = 0;
   Player *player1;
   Bot *player2;
@@ -38,7 +39,13 @@ class Gamestate : public Game_container {
   void ButtonClick();
   void StartGame();
 private:
+  void CreatePokemon();
   void AddButtons();
+  void DisablePokemonButtons();
+  void EnablePokemonButtons();
+  void EnableMoveButtons();
+  void DisableMoveButtons();
+  void UpdateButtons(Pokemon pokemon);
 };
 
 #endif

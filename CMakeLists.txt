@@ -4,7 +4,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(EXECUTABLE_OUTPUT_PATH ../)
 set(RUNTIME_OUTPUT_DIRECTORY ./bin)
 set(CMAKE_EXECUTABLE_SUFFIX ".out")
-add_executable(pokemon button.cpp move.cpp pokemon.cpp stats.cpp type.cpp renderable.cpp sprites.cpp window.cpp menu.cpp game_state.cpp player.cpp bot.cpp game_container.cpp main.cpp)
+add_executable(pokemon generateRandomPokemon.cpp button.cpp move.cpp pokemon.cpp
+                 stats.cpp type.cpp renderable.cpp sprites.cpp window.cpp 
+                 menu.cpp game_state.cpp player.cpp bot.cpp 
+                 game_container.cpp main.cpp json.cpp readPokemonTeam.cpp)
 
 include(FetchContent)
 

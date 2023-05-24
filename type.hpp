@@ -27,12 +27,12 @@ class Type {
   std::string type;
   /* This map is to convert the type names to an index for the array below. */
     std::map<std::string, int> typeToNumber = {
-    {"Normal", 0}, {"Fighting", 1}, {"Flying", 2},
-    {"Poison", 3}, {"Ground", 4}, {"Rock", 5},
-    {"Bug", 6}, {"Ghost", 7}, {"Steel", 8},
-    {"Fire", 9}, {"Water", 10}, {"Grass", 11},
-    {"Electric", 12}, {"Psychic", 13}, {"Ice", 14},
-    {"Dragon", 15}, {"Dark", 16}, {"NULL", 17}};
+    {"normal", 0}, {"fighting", 1}, {"flying", 2},
+    {"poison", 3}, {"ground", 4}, {"rock", 5},
+    {"bug", 6}, {"ghost", 7}, {"steel", 8},
+    {"fire", 9}, {"water", 10}, {"grass", 11},
+    {"electric", 12}, {"psychic", 13}, {"ice", 14},
+    {"dragon", 15}, {"dark", 16}, {"NULL", 17}};
 
   /* This array represents the game's type matchups. Along the rows are the */
   /* move's type, and the columns represent a pokemon's type. For example,  */
@@ -57,7 +57,7 @@ class Type {
     {1, 0.5, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 0.5}};
 
 public:
-  Type() : Type("Normal") {};
+  Type() : Type("normal") {};
   Type(std::string type);
   Type(const Type &type);
   Type& operator=(const Type& newType);

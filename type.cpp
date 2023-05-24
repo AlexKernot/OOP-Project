@@ -27,7 +27,7 @@ Type::Type(const std::string type) {
   if (validateType > 17 || validateType < 0)
   {
     std::cout << "Type " << type << " not recognised. Defaulting to normal.\n";
-    this->type = "Normal";
+    this->type = "normal";
     return ;
   }
   this->type = type;

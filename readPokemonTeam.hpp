@@ -26,8 +26,10 @@
 class ReadPokemonTeam: public Pokemon, protected JSON {
   private:
    static JSON data;
+   bool generateAll = true;
   public:
    ReadPokemonTeam(string fileName, int index);
+   bool GetGenerateAll() {return generateAll;}
 };
 
 

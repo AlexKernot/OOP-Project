@@ -40,6 +40,7 @@ public:
   vector<Move> CreateMoveList(json pokemonData, string pokemon);
   bool GetParseResult() {return parseSuccess;}
   json ParseFile(std::string fileName);
+  vector<json> *GetJsonData() {return &pokemonData;}
 
 protected:
   void GenerateTypeError(json data, std::string expectedType, 

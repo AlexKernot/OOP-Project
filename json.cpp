@@ -69,30 +69,34 @@ Move JSON::CreateMove(std::string name) {
   if (moveJson.is_null()) {
     std::cout << "!! - Alert - !! move " << name 
     << " defaulting to struggle.\n";
-    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
+    return Move();
   }
   json tempJson = GetField(moveJson, "type");
   if (!tempJson.is_string()) {
     GenerateTypeError(moveJson, "string", "type");
     std::cout << "!! - Alert - !! move " << name 
     << " defaulting to struggle.\n";
-    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
+    return Move();
   }
   std::string moveType = tempJson;
-  tempJson = GetField(moveJson, "base_power");
-  if (!tempJson.is_number_integer()) {
-    GenerateTypeError(moveJson, "integer (number)", "base_power");
+  tempJson = GetField(moveJson, "power");
+  if (tempJson.is_null())
+    tempJson = 50;
+  else if (!tempJson.is_number_integer()) {
+    GenerateTypeError(moveJson, "integer (number)", "power");
     std::cout << "!! - Alert - !! move " << name 
     << " defaulting to struggle.\n";
-    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
+    return Move();
   }
   int movePower = tempJson;
   tempJson = GetField(moveJson, "accuracy");
-  if (!tempJson.is_number_integer()) {
+  if (tempJson.is_null())
+    tempJson = 50;
+  else if (!tempJson.is_number_integer()) {
     GenerateTypeError(moveJson, "integer (number)", "accuracy");
     std::cout << "!! - Alert - !! move " << name 
     << " defaulting to struggle.\n";
-    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
+    return Move();
   }
   int moveAccuracy = tempJson;
   tempJson = GetField(moveJson, "effect");
@@ -100,7 +104,7 @@ Move JSON::CreateMove(std::string name) {
     GenerateTypeError(moveJson, "string", "effect");
     std::cout << "!! - Alert - !! move " << name 
     << " defaulting to struggle.\n";
-    return Move("Struggle", 50, 100, "Recoil 50", "Normal");
+    return Move();
   }
   std::string moveEffect = tempJson;
   return Move(name,  movePower, moveAccuracy, moveEffect, moveType);
@@ -137,6 +141,9 @@ json JSON::GetField(json data, std::string name) {
     field = data.at(name);
   } catch (  json::out_of_range&) {
     std::cout << name << " field not found in " << data.at("name");
+    return json(nullptr);
+  } catch (  json::type_error&) {
+    std::cout << "Invalid type";
     return json(nullptr);
   }
   return field;
@@ -185,7 +192,7 @@ vector<Move> JSON::CreateMoveList(json pokemonData, string pokemon) {
     tempJson = moveJson.at(i);
     if (!tempJson.is_string()) {
       GenerateTypeError(moveJson, "string", "index " + std::to_string(i));
-      moves.push_back(Move("Struggle", 50, 100, "Recoil 50", "Normal"));
+      moves.push_back(Move());
       std::cout << "!! -- Alert -- !! Move defaulting to Struggle\n";
       continue;
     }
@@ -205,10 +212,10 @@ vector<Move> JSON::CreateMoveList(json pokemonData, string pokemon) {
 /*  learning the move.                                                        */
 bool JSON::ValidateMove(string moveName, string pokemon) {
   json pokemonJson = LoadSingleJsonObject(pokemon, pokemonData);
-  pokemonJson = GetField(pokemonJson, "possible_moves");
+  pokemonJson = GetField(pokemonJson, "moves");
   if (pokemonJson.is_array() == false)
   {
-    GenerateTypeError(pokemonJson, "array", "possible_moves");
+    GenerateTypeError(pokemonJson, "array", "moves");
     return false;
   }
   vector<json> moveJson = pokemonJson;
@@ -256,7 +263,23 @@ Pokemon JSON::CreatePokemon(std::string name, vector<Move> moves, int level) {
 
 void JSON::GenerateTypeError(json data, std::string expectedType, std::string at)
 {
+  if (data.is_null()) {
+      std::cout << "Invalid syntax detected. Expected: " << expectedType
+      << ", found: NULL"
+      << " at: \n" << data.dump(2) << std::endl;
+    return ;
+  }
+  if (data.is_array()) {
+      std::cout << "Invalid syntax detected. Expected: " << expectedType
+      << ", found: Array"
+      << " at: \n" << data.dump(2) << std::endl;
+    return ;
+  }
+  try {
   std::cout << "Invalid syntax detected. Expected: " << expectedType
-  << ", found: " << data.at(at).type_name()
-  << " at: \n" << data.dump(2) << std::endl;
+    << ", found: " << data.at(at).type_name()
+    << " at: \n" << data.dump(2) << std::endl;
+  } catch (json::type_error&) {
+    std::cout << "Type error: \n" << data.dump(2);
+  }
 }
