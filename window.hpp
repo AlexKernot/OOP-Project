@@ -36,7 +36,7 @@ private:
 
 public:
 	Window();
-	~Window();
+	virtual ~Window();
 	int GetWindowWidth() {return width;}
 	int GetWindowHeight() {return height;}
 	bool PollEvent(sf::Event *event);

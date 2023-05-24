@@ -47,6 +47,7 @@ public:
     sprite_list.get_sprite_index(index)->setScale(size);
   }
   bool offset_position(int index, sf::Vector2i offset);
+  virtual ~Renderable() {}
 
 private:
   void render_single(int index);

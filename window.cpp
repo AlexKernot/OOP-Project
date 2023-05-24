@@ -33,6 +33,7 @@ Window::Window() {
 /*Closes the renderable Window*/
 Window::~Window() {
   sfWindow->close();
+  delete sfWindow;
 }
 
 void Window::AddToWindow(Renderable *object) {
