@@ -35,6 +35,7 @@ private:
 	int background_index;
 	sf::Text hpText1;
   	sf::Text hpText2;
+	sf::Font font;
 public:
 	void UpdateHealth(int player, int health);
   void ButtonPress(sf::Event event);

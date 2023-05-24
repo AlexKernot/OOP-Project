@@ -45,7 +45,6 @@ void Game_container::ButtonPress(sf::Event event)
 }
 
 void Game_container::AddGameSprites() {
-  sf::Font font;
   if (!font.loadFromFile("./resources/Minecraft.ttf")) {
     std::cout << "Font could not be loaded." << std::endl;
   }
@@ -55,8 +54,8 @@ void Game_container::AddGameSprites() {
   hpText2.setString("0");
   hpText1.setCharacterSize(14);
   hpText2.setCharacterSize(14);
-  hpText1.setPosition(sf::Vector2f(100, 100));
-  hpText2.setPosition(sf::Vector2f(200, 200));
+  hpText1.setPosition(100, 100);
+  hpText2.setPosition(200, 200);
   add_sprite("Battleui", "./resources/bg_battle.png");
   set_size(0, sf::Vector2f(0.75f, 0.75f));
   set_position(0, sf::Vector2i(200, 0));
