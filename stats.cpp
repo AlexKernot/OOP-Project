@@ -20,12 +20,15 @@ Stats::Stats(const Stats& statsClass) {
 }
 
 /*  Deep copy of a class' stats and stat modifiers.                           */
-void Stats::operator=(const Stats& statsClass) {
+Stats& Stats::operator=(const Stats& statsClass) {
+  if (&statsClass == this)
+    return *this;
   for (int i = 0; i < 6; ++i)
   {
     stats[i] = statsClass.stats[i];
     statModifiers[i] = statsClass.statModifiers[i];
   }
+  return *this;
 }
 
 void Stats::GenerateStats(int level) {

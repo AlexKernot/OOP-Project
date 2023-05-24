@@ -16,8 +16,11 @@ Type::Type(const Type &type) {
   this->type = type.type;
 }
 
-void Type::operator=(const Type newType) {
-  this->type = newType.type;
+Type& Type::operator=(const Type newType) {
+  if (this == &newType)
+    return *this;
+  type = newType.type;
+  return *this;
 }
 
 float Type::GenerateTypeEffectiveness(Type defendingType1, 

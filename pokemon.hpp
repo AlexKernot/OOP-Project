@@ -60,7 +60,7 @@ public:
   Pokemon(const Pokemon& pokemon);
   Pokemon();
   ~Pokemon() {}
-  void operator=(const Pokemon& pokemon);
+  Pokemon& operator=(const Pokemon& pokemon);
   void PrettyPrint();
   void receive_move(Move moves, int level, int atk, int baseAtk);
   void set_name(string name);

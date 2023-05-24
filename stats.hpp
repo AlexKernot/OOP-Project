@@ -14,7 +14,7 @@ public:
     Stats(int hp, int attack, int specialAttack, 
           int defense, int specialDefense, int speed);
     Stats(const Stats& statsClass);
-    void operator=(const Stats& stats);
+    Stats& operator=(const Stats& stats);
     ~Stats() {}
     void GenerateStats(int level);
     bool ModifyStats(std::vector<int> stats, int stages);

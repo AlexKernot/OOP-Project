@@ -33,6 +33,8 @@ Button::Button(const Button& button) {
 }
 
 Button& Button::operator=(const Button& button) {
+  if (this == &button)
+    return *this;
   if (!font.loadFromFile("./resources/Minecraft.ttf")) {
     std::cout << "Resources folder is potentially missing.\n";
     return *this;

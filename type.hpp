@@ -41,7 +41,7 @@ public:
   Type() : Type("Normal") {};
   Type(const std::string type);
   Type(const Type &type);
-  void operator=(const Type newType);
+  Type& operator=(const Type newType);
   std::string GetType() {return type;}
   //std::string SetType();
   float GenerateTypeEffectiveness(Type defendingType1, 

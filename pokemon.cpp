@@ -43,7 +43,9 @@ Pokemon::Pokemon(const Pokemon& pokemon) {
   moveList = pokemon.moveList;
 }
 
-void Pokemon::operator=(const Pokemon& pokemon) {
+Pokemon& Pokemon::operator=(const Pokemon& pokemon) {
+  if (this == &pokemon)
+    return *this;
   name = pokemon.name;
   typeOne = pokemon.typeOne;
   typeTwo = pokemon.typeTwo;
@@ -53,6 +55,8 @@ void Pokemon::operator=(const Pokemon& pokemon) {
   baseStats = pokemon.baseStats;
   stats = pokemon.stats;
   moveList = pokemon.moveList;
+
+  return *this;
 }
 
 /*  Constructor for creating Pokemon that gives it stats and 4 moves each  */
