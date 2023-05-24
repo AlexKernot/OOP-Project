@@ -28,12 +28,14 @@
 #include "move.hpp"
 #include "pokemon.hpp"
 
+/* Bot constructor */
 Bot::Bot(vector<Pokemon> pokemons) : Player(pokemons) {
   for (size_t i = 0; i < pokemons.size(); ++i) {
     set_position(i, sf::Vector2i(500, 40));
   }
 };
 
+/* Checks if Bot has lost */
 bool Bot::CheckLoss() {
   size_t size = getPokemons()->size();
   for (size_t i = 0; i < size; ++i) {
@@ -43,6 +45,7 @@ bool Bot::CheckLoss() {
   return true;
 }
 
+/* Allows bot to make a choice of move */
 int Bot::bot_make_choice() {
   if (getPokemons()->at(get_current_pokemon()).GetIsFainted() == true)
   {
@@ -58,6 +61,7 @@ int Bot::bot_make_choice() {
   return 1;
 }
 
+/* Allows the bot to swap Pokemon*/
 void Bot::swap_pokemon() {
   int number = 0;
   while (true) {
@@ -71,6 +75,7 @@ void Bot::swap_pokemon() {
   }
 }
 
+/* Allows the bot to make the chosen move */
 Move Bot::make_move() {
   int number = 0;
   vector<Move *> tempMove = getPokemons()->at(get_current_pokemon()).get_moves();
