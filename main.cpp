@@ -1,11 +1,11 @@
 #include "window.hpp"
-#include "game_container.hpp"
+#include "game_state.hpp"
 #include "menu.hpp"
 #include <iostream>
 
 int main()
 {
- 	Game_container game;
+ 	Gamestate game;
  	game.StartGame();
  	return 0;
 }

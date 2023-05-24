@@ -28,16 +28,13 @@
 #include "menu.hpp"
 #include "renderable.hpp"
 
-class Game_container : public Window, Renderable {
+class Game_container : public Window, public Renderable {
 private:
-	void ButtonPress(sf::Event event);
 	int hp_index;
 	int background_index;
  public:
+  void ButtonPress(sf::Event event);
 	void Draw(sf::RenderWindow *window);
-	void StartGame();
-	void TestRenderable();
-private:
 	int MainMenu();
 };
 
