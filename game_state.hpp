@@ -34,7 +34,7 @@ class Gamestate : public Game_container {
 
  public:
   Gamestate();
-  ~Gamestate() {}
+  ~Gamestate();
   void swap_move();
   void StartGame();
 private:

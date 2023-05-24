@@ -34,6 +34,15 @@ Gamestate::Gamestate() : current_turn(0) {
   player2 = Bot();
 }
 
+Gamestate::~Gamestate() {
+  size_t pokemonSize = pokemon_buttons.size();
+  size_t moveSize = move_buttons.size();
+  for (size_t i = 0; i < pokemonSize; ++i)
+    delete pokemon_buttons[i];
+  for (size_t i = 0; i < moveSize; ++i)
+    delete move_buttons[i];
+}
+
 void Gamestate::swap_move() {
   // Player's turn
   if (current_turn == 0) {
@@ -82,12 +91,13 @@ void Gamestate::AddButtons() {
   // Create move buttons
   const std::vector<sf::Vector2i> move_coords = {
     sf::Vector2i(200, 400),
-    sf::Vector2i(600, 500),
+    sf::Vector2i(500, 500),
     sf::Vector2i(200, 400),
-    sf::Vector2i(600, 500)
+    sf::Vector2i(500, 500)
   };
   int size_team = 
           static_cast<int>(player1.get_current_pokemon()->get_moves().size());
+          std::cout << size_team;
   for (int i = 0; i < size_team;
        ++i) {
     move_buttons.push_back(new Button());
