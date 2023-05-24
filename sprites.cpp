@@ -18,11 +18,36 @@
 /*****************************************************************************/
 
 #include "sprites.hpp"
+#include <iostream>
 
 Sprites::Sprites() {
   sprites = std::vector<sf::Sprite*>{};
   textures = std::vector<sf::Texture*>{};
   spriteName = std::vector<std::string>{};
+}
+
+Sprites::Sprites(const Sprites& copySprites) {
+  std::cout << "Sprites copy being called" << std::endl;
+  size_t size = copySprites.sprites.size();
+  sprites.resize(size);
+  for (size_t i = 0; i < size; ++i) {
+    sprites[i] = copySprites.sprites[i];
+  }
+  std::cout << "Copied: " << size << std::endl;
+  size = copySprites.textures.size();
+  textures.resize(size);
+  for (size_t i = 0; i < size; ++i) {
+    textures[i] = copySprites.textures[i];
+  }
+  size = copySprites.spriteName.size();
+  spriteName.resize(size);
+  for (size_t i = 0; i < size; ++i) {
+    spriteName[i] = copySprites.spriteName[i];
+  }
+}
+
+Sprites& Sprites::operator=(const Sprites&) {
+  return *this;
 }
 
 /*  Loads the texture from the relative path 'texture path' and puts the      */
@@ -54,11 +79,11 @@ sf::Sprite *Sprites::get_sprite_index(int index) {
 
 /* this will free all the sprites for a given renderable object.             */
 Sprites::~Sprites() {
-  int size = static_cast<int>(sprites.size());
+/*  int size = static_cast<int>(sprites.size());
   for (int i = 0; i < size; ++i)
   {
     if (sprites[i] == nullptr)
       return;
     delete sprites[i];
-  }
+  }*/
 }

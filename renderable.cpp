@@ -22,6 +22,17 @@
 // Add a sprite to the sprite list and return a pointer to the added sprite
 sf::Sprite *Renderable::add_sprite(std::string spriteName,
                                    std::string texturePath) {
+#include <iostream>
+sf::Sprite *Renderable::add_sprite(std::string spriteName, 
+                                  std::string texturePath) {
   sprite_list.add_sprite(spriteName, texturePath);
   return sprite_list.get_sprite_name(spriteName);
+}
+Renderable& Renderable::operator=(const Renderable& renderable) {
+  std::cout << "Renderable" << std::endl;
+  if (this == &renderable)
+    return *this;
+  int i = 0;
+  sprite_list = Sprites(renderable.sprite_list);
+  return *this;
 }

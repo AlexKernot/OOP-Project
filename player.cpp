@@ -31,7 +31,8 @@ Player::Player() {
   for (int i = 0; i < 6; ++i) {
     pokemons.push_back(Pokemon());
   }
-  current_pokemon = &(pokemons[0]);
+  current_pokemon = 0;
+  moves = pokemons.at(current_pokemon).get_moves();
 }
 
 Player::Player(const Player& player) {
@@ -49,7 +50,10 @@ Player::Player(const Player& player) {
 }
 
 Player& Player::operator=(const Player& player) {
+  Renderable::operator=(player);
   return *this;
+
+
   int pokemonSize = static_cast<int>(player.pokemons.size());
   pokemons.resize(pokemonSize);
   for (int i = 0; i < pokemonSize; ++i) {
@@ -61,26 +65,40 @@ Player& Player::operator=(const Player& player) {
     moves[i] = player.moves[i];
   }
   current_pokemon = player.current_pokemon;
-  this->get_current_pokemon()->PrettyPrint();
   return *this;
 }
 
 Player::Player(std::vector<Pokemon> pokemons) {
   this->pokemons = pokemons;
-  current_pokemon = &pokemons.at(0);
-  this->moves = current_pokemon->get_moves();
+  current_pokemon = 0;
+  this->moves = pokemons.at(current_pokemon).get_moves();
+  for (size_t i = 0; i < pokemons.size(); ++i) {
+    std::string name = pokemons.at(i).get_name();
+    if (name == "Missingno") {
+      add_sprite("Pokemon" + std::to_string(i), "resources/sprites/" + name + ".png");
+      set_size(i, sf::Vector2f(0.4, 0.4));
+      set_position(i, sf::Vector2i(300, 300));
+    } else {
+      add_sprite("Pokemon" + std::to_string(i), "resources/sprites/" + name + ".bmp");
+      set_size(i, sf::Vector2f(2, 2));
+      set_position(i, sf::Vector2i(300, 300));
+    }
+  }
 }
 
 // This allows the Player to make a move
-void Player::make_move(int i) { current_move = moves[i]; }
+Move *Player::make_move(int i) { return moves[i]; }
 
 // This allows the Player to swap between Pokemons
-void Player::swap_pokemon(int i) { current_pokemon = &pokemons[i]; }
+void Player::swap_pokemon(int i) { current_pokemon = i; }
 
-Pokemon* Player::get_current_pokemon() { return current_pokemon; }
+int Player::get_current_pokemon() { return current_pokemon; }
 
-std::vector<Pokemon> *Player::getPokemons() { return &pokemons; };
+std::vector<Pokemon> *Player::getPokemons() { return &pokemons; }
 
 void Player::Draw(sf::RenderWindow* window) {
-  return;
+  //add_sprite("Test", "resources/placeholder.png");
+  sf::Sprite sprite = *get_sprite(current_pokemon);
+  window->draw(sprite);
+  return ;
 }

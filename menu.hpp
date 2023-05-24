@@ -32,7 +32,7 @@ class Menu : public Renderable{
 
     sf::Font * font;
 
-    std::vector<const char *> options;
+    std::vector<std::string> options;
     std::vector<sf::Vector2f> coords;
     std::vector<sf::Text> texts;
     std::vector<std::size_t> sizes;

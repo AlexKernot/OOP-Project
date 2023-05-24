@@ -59,7 +59,7 @@ Pokemon& Pokemon::operator=(const Pokemon& pokemon) {
   return *this;
 }
 
-/*  Constructor for creating Pokemon that gives it stats and 4 moves each  */
+/*   ructor for creating Pokemon that gives it stats and 4 moves each  */
 Pokemon::Pokemon(string name, Type type_one, Type type_two, 
 					        Stats baseStats, vector<Move> moves, int level) {
   this->name = name;

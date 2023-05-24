@@ -33,7 +33,7 @@ json JSON::ParseFile(std::string name) {
   }
   try {
     tempData = tempData.at(name);
-  } catch (const json::out_of_range&) {
+  } catch (  json::out_of_range&) {
     std::cout << "Missing " << name << " field in json.\n";
     parseSuccess = false;
     return json(nullptr);
@@ -91,7 +91,7 @@ json JSON::LoadSingleJsonObject(std::string name, vector<json> data) {
   for (int i = 0; i < size; ++i) {
     try {
       tempJsonObjectName = data[i].at("name");
-    } catch (const json::out_of_range&) {
+    } catch (  json::out_of_range&) {
       std::cout << "Missing \"name\" field at index: " << i;
       return json(nullptr);
     }
@@ -111,7 +111,7 @@ json JSON::GetField(json data, std::string name) {
   json field;
   try {
     field = data.at(name);
-  } catch (const json::out_of_range&) {
+  } catch (  json::out_of_range&) {
     std::cout << name << " field not found in " << data.at("name");
     return json(nullptr);
   }

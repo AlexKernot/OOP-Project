@@ -20,7 +20,7 @@
 
 #include "move.hpp"
 
-// Constructor
+//  ructor
 Move::Move(string name, int power, int accuracy, string effect, string type)
     : name(name),
       power(power),
@@ -28,7 +28,7 @@ Move::Move(string name, int power, int accuracy, string effect, string type)
       effect(effect),
       type(type) {}
 
-// Default constructor to create a placeholder move
+// Default  ructor to create a placeholder move
 Move::Move() : Move("Struggle", 50, 100, "Recoil 50", "Normal") {}
 
 // Set the name of the move

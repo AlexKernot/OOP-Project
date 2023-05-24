@@ -45,6 +45,18 @@ void Game_container::ButtonPress(sf::Event event)
 }
 
 void Game_container::AddGameSprites() {
+  sf::Font font;
+  if (!font.loadFromFile("./resources/Minecraft.ttf")) {
+    std::cout << "Font could not be loaded." << std::endl;
+  }
+  hpText1.setFont(font);
+  hpText2.setFont(font);
+  hpText1.setString("0");
+  hpText2.setString("0");
+  hpText1.setCharacterSize(14);
+  hpText2.setCharacterSize(14);
+  hpText1.setPosition(sf::Vector2f(100, 100));
+  hpText2.setPosition(sf::Vector2f(200, 200));
   add_sprite("Battleui", "./resources/bg_battle.png");
   set_size(0, sf::Vector2f(0.75f, 0.75f));
   set_position(0, sf::Vector2i(200, 0));
@@ -61,6 +73,16 @@ void Game_container::Draw(sf::RenderWindow *window) {
   window->draw(*get_sprite(0));
   window->draw(*get_sprite(1));
   window->draw(*get_sprite(2));
+  window->draw(hpText1);
+  window->draw(hpText2);
+}
+
+void Game_container::UpdateHealth(int player, int health) {
+  if (player == 1) {
+    hpText1.setString(std::to_string(health));
+    return;
+  }
+  hpText2.setString(std::to_string(health));
 }
 
 int Game_container::MainMenu() {

@@ -7,7 +7,7 @@
 class Type {
   std::string type;
   /* This map is to convert the type names to an index for the array below. */
-  const std::map<std::string, int> typeToNumber = {
+    std::map<std::string, int> typeToNumber = {
     {"Normal", 0}, {"Fighting", 1}, {"Flying", 2},
     {"Poison", 3}, {"Ground", 4}, {"Rock", 5},
     {"Bug", 6}, {"Ghost", 7}, {"Steel", 8},
@@ -18,7 +18,7 @@ class Type {
   /* This array represents the game's type matchups. Along the rows are the */
   /* move's type, and the columns represent a pokemon's type. For example,  */
   /* a steel move (8) against an electric pokemon (12) would do 0.5x damage.*/
-  const float typeMatchups[17][17] = {
+    float typeMatchups[17][17] = {
     {1, 1, 1, 1, 1, 0.5, 1, 0, 1.5, 1, 1, 1, 1, 1, 1, 1, 1},
     {2, 1, 0.5, 0.5, 1, 2, 0.5, 0, 2, 1, 1, 1, 1, 0.5, 2, 1, 2},
     {1, 2, 1, 1, 1, 0.5, 2, 1, 0.5, 1, 1, 2, 0.5, 1, 1, 1, 1},
@@ -39,9 +39,9 @@ class Type {
 
 public:
   Type() : Type("Normal") {};
-  Type(const std::string type);
+  Type(std::string type);
   Type(const Type &type);
-  Type& operator=(const Type newType);
+  Type& operator=(const Type& newType);
   std::string GetType() {return type;}
   //std::string SetType();
   float GenerateTypeEffectiveness(Type defendingType1, 

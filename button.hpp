@@ -9,11 +9,11 @@
 #include "renderable.hpp"
 
 class Button : public Renderable{
-  const sf::Vector2f textOffset = sf::Vector2f(10, 50);
+    sf::Vector2f textOffset = sf::Vector2f(10, 35);
   sf::Vector2i position;
-  sf::Vector2i size;
-  sf::Vector2i boundsTopRight;
-  sf::Vector2i boundsBottomLeft;
+  sf::Vector2f size;
+  sf::Vector2i boundsBottomRight;
+  sf::Vector2i boundsTopLeft;
 
   sf::Font font;
   sf::Text text;

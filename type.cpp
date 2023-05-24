@@ -16,7 +16,7 @@ Type::Type(const Type &type) {
   this->type = type.type;
 }
 
-Type& Type::operator=(const Type newType) {
+Type& Type::operator=(const Type& newType) {
   if (this == &newType)
     return *this;
   type = newType.type;

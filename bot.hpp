@@ -30,7 +30,9 @@ class Bot : public Player {
  public:
   Bot() : Player() {}
   Bot(vector<Pokemon> pokemons);
-  void bot_make_choice();
+  int bot_make_choice();
+  void swap_pokemon();
+  Move make_move();
 };
 
 #endif

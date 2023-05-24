@@ -28,15 +28,35 @@
 #include "move.hpp"
 #include "pokemon.hpp"
 
-Bot::Bot(vector<Pokemon> pokemons) : Player(pokemons){};
+Bot::Bot(vector<Pokemon> pokemons) : Player(pokemons) {
+  for (size_t i = 0; i < pokemons.size(); ++i) {
+    set_position(i, sf::Vector2i(500, 40));
+  }
+};
 
-void Bot::bot_make_choice() {
+int Bot::bot_make_choice() {
   // Generate a random probability between 0 and 10
   int prob = rand() % 10;
   // 90% chance to make a move, 10% chance to swap Pokemon
-  if (prob < 9) {
-    make_move(rand() % this->getPokemons()->size());
+  if (prob < 9)
+    return 0;
+  return 1;
+ /*   make_move(rand() % this->getPokemons()->size());
   } else {
-    swap_pokemon(rand() % get_current_pokemon()->get_moves().size());
-  }
+    swap_pokemon(rand() % getPokemons()->at(get_current_pokemon()).get_moves().size());*/
+}
+
+void Bot::swap_pokemon() {
+  int number = 0;
+  do {
+    number = rand() % getPokemons()->size();
+  } while (number == get_current_pokemon());
+  set_current_pokemon(number);
+}
+
+Move Bot::make_move() {
+  int number = 0;
+  vector<Move *> tempMove = getPokemons()->at(get_current_pokemon()).get_moves();
+  number = rand() % tempMove.size();
+  return *tempMove.at(number);
 }

@@ -37,6 +37,8 @@ public:
   Sprites();
   virtual ~Sprites();
   void  add_sprite(std::string spriteName, std::string texturePath);
+  Sprites(const Sprites& sprites);
+  Sprites& operator=(const Sprites&);
   sf::Sprite *get_sprite_name(std::string spriteName);
   sf::Sprite *get_sprite_index(int index);
 };

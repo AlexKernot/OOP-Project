@@ -7,9 +7,9 @@ Button::Button(std::string buttonTexture) {
   }
   textureName = buttonTexture;
   add_sprite("button", textureName);
-  size = sf::Vector2i(350, 112);
-  boundsBottomLeft = sf::Vector2i(0, 0);
-  boundsTopRight = sf::Vector2i(size.x, size.y);
+  size = sf::Vector2f(350, 112);
+  boundsTopLeft = sf::Vector2i(0, 0);
+  boundsBottomRight = sf::Vector2i(size.x, size.y);
   fontLoaded = true;
   text.setFont(font);
   text.setCharacterSize(24);
@@ -26,8 +26,8 @@ Button::Button(const Button& button) {
   position = button.position;
   size = button.size;
   text = button.text;
-  boundsTopRight = button.boundsTopRight;
-  boundsBottomLeft = button.boundsBottomLeft;
+  boundsBottomRight = button.boundsBottomRight;
+  boundsTopLeft = button.boundsTopLeft;
   fontLoaded = button.fontLoaded;
   clickable = button.clickable;
 }
@@ -44,8 +44,8 @@ Button& Button::operator=(const Button& button) {
   position = button.position;
   size = button.size;
   text = button.text;
-  boundsTopRight = button.boundsTopRight;
-  boundsBottomLeft = button.boundsBottomLeft;
+  boundsBottomRight = button.boundsBottomRight;
+  boundsTopLeft = button.boundsTopLeft;
   fontLoaded = button.fontLoaded;
   clickable = button.clickable;
   return *this;
@@ -56,41 +56,48 @@ void Button::SetText(std::string text) {
 }
 
 void Button::SetPosition(sf::Vector2i position) {
+  this->position = position;
   sf::Vector2f positionFloat = static_cast<sf::Vector2f>(position);
   get_sprite(0)->setPosition(positionFloat);
-  boundsBottomLeft = sf::Vector2i(position.x, position.y);
-  boundsTopRight = sf::Vector2i(position.x + size.x, position.y + size.y);
-  text.setPosition(textOffset);
+  boundsTopLeft = sf::Vector2i(position.x, position.y);
+  boundsBottomRight = sf::Vector2i(position.x + size.x, position.y + size.y);
+  text.setPosition(positionFloat + textOffset);
 }
 
 bool Button::HoverOn(sf::Vector2i mouse) {
   if (clickable == false)
     return false;
-  if (mouse.x < position.x || mouse.x > (position.x + size.x))
+  if (mouse.x < boundsTopLeft.x || mouse.x > boundsBottomRight.x)
     return false;
-  if (mouse.y < position.y || mouse.y > (position.y + size.y))
+  if (mouse.y < boundsTopLeft.y || mouse.y > boundsBottomRight.y)
     return false;
   return true;
 }
 void Button::SetSize(sf::Vector2f scale) {
   get_sprite(0)->setScale(scale);
+  size = sf::Vector2f(size.x * scale.x, size.y * scale.y);
+  boundsTopLeft = sf::Vector2i(position.x, position.y);
+  boundsBottomRight = sf::Vector2i(position.x + size.x, position.y + size.y);
 }
 
 void Button::EnableButton() {
+  clickable = true;
   get_sprite(0)->setColor(sf::Color::White);
+  text.setFillColor(sf::Color::White);
 }
 
 void Button::DisableButton() {
   clickable = false;
-  get_sprite(0)->setColor(sf::Color(100, 100, 100, 100));
+  get_sprite(0)->setColor(sf::Color(100, 100, 100, 200));
+  text.setFillColor(sf::Color(100, 100, 100, 200));
 }
 
 bool Button::ClickedOn(sf::Vector2i mouse) {
   if (clickable == false)
     return false;
-  if (mouse.x < position.x || mouse.x > (position.x + size.x))
+  if (mouse.x < boundsTopLeft.x || mouse.x > boundsBottomRight.x)
     return false;
-  if (mouse.y < position.y || mouse.y > (position.y + size.y))
+  if (mouse.y < boundsTopLeft.y || mouse.y > boundsBottomRight.y)
     return false;
   return true;
 }
