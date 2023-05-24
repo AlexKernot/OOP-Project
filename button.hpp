@@ -12,21 +12,21 @@ class Button : public Renderable{
   const sf::Vector2f textOffset = sf::Vector2f(10, 50);
   sf::Vector2i position;
   sf::Vector2i size;
-  sf::Vector2i boundsTopLeft;
   sf::Vector2i boundsTopRight;
   sf::Vector2i boundsBottomLeft;
-  sf::Vector2i boundsBottomRight;
 
   sf::Font font;
   sf::Text text;
-  
+  std::string textureName;
   bool fontLoaded = false;
   bool clickable = true;
 
 public:
   Button() : Button("resources/button.png") {}
+  Button(const Button& button);
   Button(std::string buttonTexture);
   ~Button() {};
+  void operator=(const Button& button);
   void SetPosition(sf::Vector2i position);
   void SetSize(sf::Vector2f scale);
   void EnableButton();

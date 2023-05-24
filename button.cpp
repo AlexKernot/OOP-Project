@@ -5,16 +5,42 @@ Button::Button(std::string buttonTexture) {
     std::cout << "Resources folder is potentially missing.";
     return ;
   }
-  add_sprite("button", buttonTexture);
+  textureName = buttonTexture;
+  add_sprite("button", textureName);
   size = sf::Vector2i(350, 112);
   boundsBottomLeft = sf::Vector2i(0, 0);
-  boundsTopLeft = sf::Vector2i(0, size.y);
-  boundsBottomRight = sf::Vector2i(size.x, 0);
   boundsTopRight = sf::Vector2i(size.x, size.y);
   fontLoaded = true;
   text.setFont(font);
   text.setCharacterSize(24);
   text.setPosition(textOffset);
+}
+
+Button::Button(const Button& button) {
+  if (!font.loadFromFile("./resources/Minecraft.ttf")) {
+    std::cout << "Resources folder is potentially missing.";
+    return ;
+  }
+  textureName = button.textureName;
+  add_sprite("Button_Copy", textureName);
+  position = button.position;
+  size = button.size;
+  text = button.text;
+  boundsTopRight = button.boundsTopRight;
+  boundsBottomLeft = button.boundsBottomLeft;
+  fontLoaded = button.fontLoaded;
+  clickable = button.clickable;
+}
+
+void Button::operator=(const Button& button) {
+  add_sprite("Button_Copy", button.textureName);
+  position = button.position;
+  size = button.size;
+  text = button.text;
+  boundsTopRight = button.boundsTopRight;
+  boundsBottomLeft = button.boundsBottomLeft;
+  fontLoaded = button.fontLoaded;
+  clickable = button.clickable;
 }
 
 void Button::SetText(std::string text) {
@@ -25,8 +51,6 @@ void Button::SetPosition(sf::Vector2i position) {
   sf::Vector2f positionFloat = static_cast<sf::Vector2f>(position);
   get_sprite(0)->setPosition(positionFloat);
   boundsBottomLeft = sf::Vector2i(position.x, position.y);
-  boundsTopLeft = sf::Vector2i(position.x, position.y + size.y);
-  boundsBottomRight = sf::Vector2i(position.x + size.x, position.y);
   boundsTopRight = sf::Vector2i(position.x + size.x, position.y + size.y);
   text.setPosition(textOffset);
 }
