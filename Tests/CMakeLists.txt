@@ -17,14 +17,12 @@ target_link_libraries(buttonTest PRIVATE
                       sfml-window
                       sfml-graphics)
 
-add_executable(pokemonTest pokemonTest.cpp ../pokemon.cpp
+add_executable(PokemonStatMoveTest pokemonTest.cpp ../pokemon.cpp
                       ../move.cpp ../type.cpp ../stats.cpp)
-target_compile_options(jsonTest PRIVATE -Wall; -Wextra; -Werror; -g)
+target_compile_options(PokemonStatMoveTest PRIVATE -Wall; -Wextra; -Werror; -g)
 target_link_libraries(pokemonTest
                     PRIVATE nlohmann_json::nlohmann_json
                     sfml-system
                     sfml-window
                     sfml-graphics
                     )
-
-add_test(NAME jsonTest COMMAND ../../jsonTest)
