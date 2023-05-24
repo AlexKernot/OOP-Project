@@ -25,7 +25,11 @@ include(CTest)
 
 enable_testing()
 add_subdirectory(Tests)
-target_compile_options(pokemon PRIVATE -Wall; -Wextra; -g)
+target_compile_options(pokemon PRIVATE -Wall; -Wextra; 
+                        -Wpedantic; -Wconversion; 
+                        -Wunreachable-code;
+                        -Wcast-align; -Wunused; -Wold-style-cast;
+                        -Wpointer-arith; -Wcast-qual; -Wno-missing-braces; -g)
 target_link_libraries(pokemon 
                       PRIVATE nlohmann_json::nlohmann_json
                       sfml-system
