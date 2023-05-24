@@ -23,21 +23,22 @@
 #include "game_container.hpp"
 #include "player.hpp"
 #include "bot.hpp"
-#include "button.hpp"
 
 class Gamestate : public Game_container {
  private:
+  std::vector<Button*> pokemon_buttons;
+  std::vector<Button*> move_buttons;
   int current_turn;
   Player player1;
   Bot player2;
-  std::vector<Button> pokemon_buttons;
-  std::vector<Button> move_buttons;
 
  public:
   Gamestate();
+  ~Gamestate() {}
   void swap_move();
-  void buttons();
   void StartGame();
+private:
+  void AddButtons();
 };
 
 #endif

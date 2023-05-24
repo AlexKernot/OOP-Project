@@ -44,6 +44,19 @@ void Game_container::ButtonPress(sf::Event event)
     }
 }
 
+void Game_container::AddGameSprites() {
+  add_sprite("Battleui", "./resources/bg_battle.png");
+  set_size(0, sf::Vector2f(0.75f, 0.75f));
+  set_position(0, sf::Vector2i(200, 0));
+  add_sprite("player 2_HP", "./resources/health bar.jpg");
+  set_size(1, sf::Vector2f(0.20f, 0.20f));
+  set_position(1, sf::Vector2i(680, 0));
+  add_sprite("player 1_HP", "./resources/health bar.jpg");
+  set_size(2, sf::Vector2f(0.20f, 0.20f));
+  set_position(2, sf::Vector2i(300, 380));
+  AddToWindow(this);
+}
+
 void Game_container::Draw(sf::RenderWindow *window) {
   window->draw(*get_sprite(0));
   window->draw(*get_sprite(1));
@@ -57,7 +70,7 @@ int Game_container::MainMenu() {
   while (true) {
     while (PollEvent(&event)) {
       if (event.type == sf::Event::Closed)
-        return false;
+        return -1;
       if(event.type == sf::Event::KeyPressed)
       {
         int result = menu.HandleKeyboard();
@@ -68,5 +81,3 @@ int Game_container::MainMenu() {
     RenderWindow();
   }
 }
-
-//void Game_container::draw()

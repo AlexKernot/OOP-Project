@@ -32,41 +32,24 @@
 Gamestate::Gamestate() : current_turn(0) {
   player1 = Player();
   player2 = Bot();
+  std::cout << "CONSTRUCTOR WAS CALLED HERE\n";
+  this->player1.get_current_pokemon()->PrettyPrint();
 }
-
-// Create buttons
-void Gamestate::buttons() {
-  // Create swap pokemon buttons
-  std::vector<sf::Vector2f> pokemon_coords = {};
-  for (int i = 0; i < 6; ++i) {
-    pokemon_buttons[i] = Button();
-    pokemon_buttons[i].SetPosition(static_cast<sf::Vector2i>(pokemon_coords[i]));
-    pokemon_buttons[i].SetText(player1.getPokemons()[i]->get_name());
-    AddToWindow(&pokemon_buttons[i]);
-  }
-
-  // Create move buttons
-  std::vector<sf::Vector2f> moves_coords;
-  for (int i = 0; i < player1.get_current_pokemon()->get_moves().size();
-       ++i) {
-    move_buttons[i] = Button();
-    move_buttons[i].SetText(player1.get_current_pokemon()->get_moves()[i]->get_name());
-  }
-}
-
 
 void Gamestate::swap_move() {
   // Player's turn
   if (current_turn == 0) {
     // swap pokemon
-    for (int i = 0; i < pokemon_buttons.size(); ++i) {
-      if (pokemon_buttons[i].ClickedOn(sf::Mouse::getPosition())) {
+    int sizePokemonButtons = static_cast<int>(pokemon_buttons.size());
+    for (int i = 0; i < sizePokemonButtons; ++i) {
+      if (pokemon_buttons[i]->ClickedOn(sf::Mouse::getPosition())) {
         player1.swap_pokemon(i);
       }
     }
     // make move
-    for (int i = 0; i < move_buttons.size(); ++i) {
-      if (move_buttons[i].ClickedOn(sf::Mouse::getPosition())) {
+    int sizeMoveButtons = static_cast<int>(move_buttons.size());
+    for (int i = 0; i < sizeMoveButtons; ++i) {
+      if (move_buttons[i]->ClickedOn(sf::Mouse::getPosition())) {
         player1.make_move(i);
       }
     }
@@ -80,34 +63,62 @@ void Gamestate::swap_move() {
   }
 }
 
+// Create buttons
+void Gamestate::AddButtons() {
+  // Create swap pokemon buttons
+  const std::vector<sf::Vector2i> pokemon_coords = {
+    sf::Vector2i(10, 100),
+    sf::Vector2i(10, 150),
+    sf::Vector2i(10, 200),
+    sf::Vector2i(10, 250),
+    sf::Vector2i(10, 300),
+    sf::Vector2i(10, 350)
+    };
+  for (int i = 0; i < 6; ++i) {
+    pokemon_buttons.push_back(new Button());
+    pokemon_buttons[i]->SetPosition(pokemon_coords[i]);
+    pokemon_buttons[i]->SetSize(sf::Vector2f(0.75, 0.75));
+    pokemon_buttons[i]->SetText(player1.getPokemons()->at(i).get_name());
+    AddToWindow(pokemon_buttons[i]);
+  }
+  // Create move buttons
+  const std::vector<sf::Vector2i> move_coords = {
+    sf::Vector2i(200, 100),
+    sf::Vector2i(300, 100),
+    sf::Vector2i(200, 200),
+    sf::Vector2i(300, 200)
+  };
+  int size_team = 
+          static_cast<int>(player1.get_current_pokemon()->get_moves().size());
+  for (int i = 0; i < size_team;
+       ++i) {
+    move_buttons.push_back(new Button());
+    move_buttons[i]->SetPosition(move_coords[i]);
+    pokemon_buttons[i]->SetSize(sf::Vector2f(0.75, 0.75));
+    move_buttons[i]->SetText(player1.get_current_pokemon()->get_moves()[i]->get_name());
+    AddToWindow(move_buttons[i]);
+  }
+}
+
 void Gamestate::StartGame() {
   int gameMode = MainMenu();
   if (gameMode == -1)
     return;
   ClearEntireWindow();
-  add_sprite("Battleui", "./resources/bg_battle.png");
-  set_size(0, sf::Vector2f(0.75f, 0.75f));
-  set_position(0, sf::Vector2i(200, 0));
-  add_sprite("player 2_HP", "./resources/health bar.jpg");
-  set_size(1, sf::Vector2f(0.20f, 0.20f));
-  set_position(1, sf::Vector2i(680, 0));
-  add_sprite("player 1_HP", "./resources/health bar.jpg");
-  set_size(2, sf::Vector2f(0.20f, 0.20f));
-  set_position(2, sf::Vector2i(300, 380));
-  AddToWindow(this);
-  buttons();
+  player1.get_current_pokemon()->PrettyPrint();
+  AddGameSprites();
+  AddButtons();
   while (true) {
     sf::Event event;
     while (Window::PollEvent(&event)) {
-      if (event.type == sf::Event::Closed)
-      {
+      if (event.type == sf::Event::Closed) {
         std::cout << "Close\n";
         return ;
       }
-    if (event.type == sf::Event::MouseButtonPressed) {
-      ButtonPress(event);
+      if (event.type == sf::Event::MouseButtonPressed) {
+        ButtonPress(event);
+      }
     }
-  }
   RenderWindow();
-}
+  }
 }

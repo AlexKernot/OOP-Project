@@ -27,15 +27,17 @@
 #include "window.hpp"
 #include "menu.hpp"
 #include "renderable.hpp"
+#include "button.hpp"
 
 class Game_container : public Window, public Renderable {
 private:
 	int hp_index;
 	int background_index;
- public:
+public:
   void ButtonPress(sf::Event event);
 	void Draw(sf::RenderWindow *window);
 	int MainMenu();
+	void AddGameSprites();
 };
 
 #endif
