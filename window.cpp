@@ -36,10 +36,12 @@ Window::~Window() {
   delete sfWindow;
 }
 
+/*This adds all the renderable objects into the objects vector to be able to display all sprites for the draw function*/
 void Window::AddToWindow(Renderable *object) {
   objects.push_back(object);
 }
 
+/* Polls event from the renderable window */
 bool Window::PollEvent(sf::Event *event)
 {
   bool eventsPending;
@@ -47,6 +49,7 @@ bool Window::PollEvent(sf::Event *event)
   return eventsPending;
 }
 
+/* Removes a specific renderable object passed as a pointer to remove from the Window vector */
 void Window::ClearFromWindow(Renderable *object) {
   int size = static_cast<int>(objects.size());
   for (int i = 0; i < size; ++i) {
@@ -58,10 +61,12 @@ void Window::ClearFromWindow(Renderable *object) {
   return;
 }
 
+/* Clears all renderable objects from the Window vector */
 void Window::ClearEntireWindow() {
   objects.clear();
 }
 
+/* Renders the window by drawing all the renderable objects in the Window vector */
 void Window::RenderWindow() {
   sfWindow->clear();
   int size = static_cast<int>(objects.size());

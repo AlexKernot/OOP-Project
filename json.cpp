@@ -1,5 +1,25 @@
+/*****************************************************************************/
+/*                                                                           */
+/*         █████  ██████  ███████ ██       █████  ██ ██████  ███████         */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ███████ ██   ██ █████   ██      ███████ ██ ██   ██ █████           */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ██   ██ ██████  ███████ ███████ ██   ██ ██ ██████  ███████         */
+/*                                                                           */
+/*        ██    ██ ███    ██ ██    |                            |            */
+/*        ██    ██ ████   ██ ██    |   OOP Semester 1 2023      |            */
+/*        ██    ██ ██ ██  ██ ██    |   Camille, Rose, Alex      |            */
+/*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
+/*         ██████  ██   ████ ██    |                            |            */
+/*                                                                           */
+/*          This is the class that parses PokeApi information                */
+/*             that allows us to use Generation 1 Pokemon                    */
+/*                                                                           */
+/*****************************************************************************/
+
 #include "json.hpp"
 
+/* Parses the Pokemon and Move List */
 JSON::JSON() {
   json temp;
   temp = ParseFile("pokemonList");
@@ -16,6 +36,7 @@ JSON::JSON() {
   moveData = temp;
 }
 
+/*Constructs the filename and parses JSON data into said file*/
 json JSON::ParseFile(std::string name) {
   std::string fileName = "resources/" + name + ".json";
   std::ifstream file(fileName);
@@ -42,6 +63,7 @@ json JSON::ParseFile(std::string name) {
   return tempData;
 }
 
+/* Extracts all Move data to create the Moves for the Pokemon */
 Move JSON::CreateMove(std::string name) {
   json moveJson = LoadSingleJsonObject(name, moveData);
   if (moveJson.is_null()) {
@@ -84,6 +106,7 @@ Move JSON::CreateMove(std::string name) {
   return Move(name,  movePower, moveAccuracy, moveEffect, moveType);
 }
 
+/* Returns a JSON object by iterating through the data vector */
 json JSON::LoadSingleJsonObject(std::string name, vector<json> data) {
   json tempJsonObjectName;
   json jsonObject;
@@ -107,6 +130,7 @@ json JSON::LoadSingleJsonObject(std::string name, vector<json> data) {
   return jsonObject;
 }
 
+/* Allows a JSON objects field to be retrieved based on the name */
 json JSON::GetField(json data, std::string name) {
   json field;
   try {
@@ -118,6 +142,7 @@ json JSON::GetField(json data, std::string name) {
   return field;
 }
 
+/*Extracts a JSON objects individual stats */
 int JSON::GetIndividualStat(json statsJson, std::string name) {
   json tempStat;
   tempStat = GetField(statsJson, name);
@@ -129,6 +154,7 @@ int JSON::GetIndividualStat(json statsJson, std::string name) {
   return tempStat;
 }
 
+/*Returns the Stat for the Stat class*/
 Stats JSON::GetStatsJson(json statsJson) {
   Stats pokemonStats = Stats(11, 4, 4, 4, 4, 4);
   pokemonStats.SetHP(GetIndividualStat(statsJson, "hp"));
@@ -140,6 +166,7 @@ Stats JSON::GetStatsJson(json statsJson) {
   return pokemonStats;
 }
 
+/* Creates the Move List for a specific Pokemon and returns it */
 vector<Move> JSON::CreateMoveList(json pokemonData, string pokemon) {
   vector<Move> moves{};
   json tempJson = GetField(pokemonData, "moves");
