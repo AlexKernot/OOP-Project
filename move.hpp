@@ -36,6 +36,7 @@ private:
   bool isStab = false;
 
 public:
+  Move();
   Move(string name, int power, int accuracy, string effect, string type);
 
   void set_name(string name);

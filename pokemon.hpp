@@ -58,8 +58,7 @@ public:
   Pokemon(string name, Type type_one, Type type_two, 
           Stats stats, vector<Move> moves, int level);
   Pokemon(const Pokemon& pokemon);
-  Pokemon() : Pokemon("Missingno", Type("Normal"), Type("NULL"), Stats(), 
-                       vector<Move>{}, 1) {}
+  Pokemon();
   ~Pokemon() {}
   void operator=(const Pokemon& pokemon);
   void PrettyPrint();

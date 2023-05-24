@@ -19,6 +19,18 @@
 
 #include "pokemon.hpp"
 
+Pokemon::Pokemon() {
+  name = "Missingno";
+  typeOne = Type("Normal");
+  typeTwo = Type("NULL");
+  baseStats = Stats(1, 1, 1, 1, 1, 1);
+  level = 1;
+  baseStats.GenerateStats(level);
+  maxHp = baseStats.GetHP();
+  currentHp = maxHp;
+  moveList = vector<Move> {Move(), Move(), Move(), Move()};
+}
+
 Pokemon::Pokemon(const Pokemon& pokemon) {
 	name = pokemon.name;
   typeOne = pokemon.typeOne;
