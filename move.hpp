@@ -22,6 +22,7 @@
 #define __MOVE_H__
 
 #include <iostream>
+
 #include "type.hpp"
 
 using std::string;

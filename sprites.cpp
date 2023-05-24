@@ -20,12 +20,14 @@
 #include "sprites.hpp"
 #include <iostream>
 
+/* Constructor for the Sprites to give them texture and add them to a list */
 Sprites::Sprites() {
   sprites = std::vector<sf::Sprite*>{};
   textures = std::vector<sf::Texture*>{};
   spriteName = std::vector<std::string>{};
 }
 
+/* Copy Constructor for Sprites */
 Sprites::Sprites(const Sprites& copySprites) {
   std::cout << "Sprites copy being called" << std::endl;
   size_t size = copySprites.sprites.size();

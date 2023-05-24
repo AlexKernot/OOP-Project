@@ -28,26 +28,26 @@
 #include "window.hpp"
 
 class Player : public Renderable {
- private:
-  std::vector<Pokemon> pokemons;
-  int current_pokemon;
-  std::vector<Move*> moves;
-  Move* current_move;
-  std::string name;
-  std::string choice;
+  private:
+    std::vector<Pokemon> pokemons;
+    int current_pokemon;
+    std::vector<Move*> moves;
+    Move* current_move;
+    std::string name;
+    std::string choice;
 
- public:
-  Player();
-  Player(vector<Pokemon> pokemons);
-  Player(const Player& player);
-  Player& operator=(const Player& player);
-  void Draw(sf::RenderWindow* window);
-  void swap_pokemon(int i);
-  Move *make_move(int i);
-  int get_current_pokemon();
-  void set_current_pokemon(int index) {current_pokemon = index;}
-  std::vector<Pokemon> *getPokemons();
-  ~Player() {};
+  public:
+    Player();
+    Player(vector<Pokemon> pokemons);
+    Player(const Player& player);
+    Player& operator=(const Player& player);
+    void Draw(sf::RenderWindow* window);
+    void swap_pokemon(int i);
+    Move *make_move(int i);
+    int get_current_pokemon();
+    void set_current_pokemon(int index) {current_pokemon = index;}
+    std::vector<Pokemon> *getPokemons();
+    ~Player() {};
 };
 
 #endif

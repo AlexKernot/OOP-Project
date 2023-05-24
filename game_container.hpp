@@ -30,18 +30,18 @@
 #include "button.hpp"
 
 class Game_container : public Window, public Renderable {
-private:
-	int hp_index;
-	int background_index;
-	sf::Text hpText1;
-  	sf::Text hpText2;
-	sf::Font font;
-public:
-	void UpdateHealth(int player, int health);
-  void ButtonPress(sf::Event event);
-	void Draw(sf::RenderWindow *window);
-	int MainMenu();
-	void AddGameSprites();
+	private:
+    int hp_index;
+    int background_index;
+    sf::Text hpText1;
+    sf::Text hpText2;
+    sf::Font font;
+ public:
+    void UpdateHealth(int player, int health);
+    void ButtonPress(sf::Event event);
+    void Draw(sf::RenderWindow *window);
+    int MainMenu();
+    void AddGameSprites();
 };
 
 #endif

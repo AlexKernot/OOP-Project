@@ -17,33 +17,12 @@
 /*                                                                           */
 /*****************************************************************************/
 
-#include "game_container.hpp"
-#include "renderable.hpp"
 #include <iostream>
 
-/*class TestClass : public Renderable {
-public:
-  TestClass() {
-    Renderable::add_sprite("test", "noFile.png");
-  }
-  void Draw(sf::RenderWindow *window) {
-    window->draw(*Renderable::get_sprite(0));
-  }
-};*/
+#include "game_container.hpp"
+#include "renderable.hpp"
 
-void Game_container::ButtonPress(sf::Event event)
-{
-    if (event.mouseButton.button == sf::Mouse::Left)
-    {
-        std::cout << "Left\n";
-        // Button logic here
-    }
-    if (event.mouseButton.button == sf::Mouse::Right)
-    {
-        std::cout << "Right\n";
-    }
-}
-
+/* Adds the game sprites to the Window */
 void Game_container::AddGameSprites() {
   if (!font.loadFromFile("./resources/Minecraft.ttf")) {
     std::cout << "Font could not be loaded." << std::endl;
@@ -72,6 +51,7 @@ void Game_container::AddGameSprites() {
   AddToWindow(this);
 }
 
+/* Renders the added sprites to the Window*/
 void Game_container::Draw(sf::RenderWindow *window) {
   window->draw(*get_sprite(0));
   window->draw(*get_sprite(1));
@@ -80,6 +60,7 @@ void Game_container::Draw(sf::RenderWindow *window) {
   window->draw(hpText2);
 }
 
+/* Updates the health bar every turn */
 void Game_container::UpdateHealth(int player, int health) {
   if (player == 1) {
     hpText1.setString(std::to_string(health));
@@ -88,6 +69,7 @@ void Game_container::UpdateHealth(int player, int health) {
   hpText2.setString(std::to_string(health));
 }
 
+/* Displays the Main Menu */
 int Game_container::MainMenu() {
   Menu menu = Menu();
   AddToWindow(&menu);

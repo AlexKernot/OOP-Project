@@ -27,6 +27,7 @@
 #include "move.hpp"
 #include "pokemon.hpp"
 
+/* Constructor for the Player class */
 Player::Player() {
   for (int i = 0; i < 6; ++i) {
     pokemons.push_back(Pokemon());
@@ -35,6 +36,7 @@ Player::Player() {
   moves = pokemons.at(current_pokemon).get_moves();
 }
 
+/* Copy Constructor for Player */
 Player::Player(const Player& player) {
   int pokemonSize = static_cast<int>(player.pokemons.size());
   pokemons.resize(pokemonSize);
@@ -49,6 +51,7 @@ Player::Player(const Player& player) {
   current_pokemon = player.current_pokemon;
 }
 
+/* Assignment operator for Player class */
 Player& Player::operator=(const Player& player) {
   Renderable::operator=(player);
   return *this;
@@ -68,6 +71,7 @@ Player& Player::operator=(const Player& player) {
   return *this;
 }
 
+/* Sets up Sprites for every Pokemon */
 Player::Player(std::vector<Pokemon> pokemons) {
   this->pokemons = pokemons;
   current_pokemon = 0;
