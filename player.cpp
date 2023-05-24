@@ -32,31 +32,36 @@ Player::Player() {
     pokemons.push_back(Pokemon());
   }
   current_pokemon = &(pokemons[0]);
-  int i = 0;
 }
 
 Player::Player(const Player& player) {
   int pokemonSize = static_cast<int>(player.pokemons.size());
+  pokemons.resize(pokemonSize);
   for (int i = 0; i < pokemonSize; ++i) {
     pokemons.push_back(player.pokemons[i]);
   }
   int moveSize = static_cast<int>(player.moves.size());
+  pokemons.resize(moveSize);
   for (int i = 0; i < moveSize; ++i) {
     moves.push_back(player.moves[i]);
   }
   current_pokemon = player.current_pokemon;
 }
 
-Player Player::operator=(const Player& player) {
+Player& Player::operator=(const Player& player) {
+  return *this;
   int pokemonSize = static_cast<int>(player.pokemons.size());
+  pokemons.resize(pokemonSize);
   for (int i = 0; i < pokemonSize; ++i) {
-    pokemons.push_back(player.pokemons[i]);
+    pokemons[i] = player.pokemons[i];
   }
   int moveSize = static_cast<int>(player.moves.size());
+  moves.resize(moveSize);
   for (int i = 0; i < moveSize; ++i) {
-    moves.push_back(player.moves[i]);
+    moves[i] = player.moves[i];
   }
   current_pokemon = player.current_pokemon;
+  this->get_current_pokemon()->PrettyPrint();
   return *this;
 }
 
@@ -71,8 +76,6 @@ void Player::make_move(int i) { current_move = moves[i]; }
 
 // This allows the Player to swap between Pokemons
 void Player::swap_pokemon(int i) { current_pokemon = &pokemons[i]; }
-
-void Draw(sf::RenderWindow* window){};
 
 Pokemon* Player::get_current_pokemon() { return current_pokemon; }
 

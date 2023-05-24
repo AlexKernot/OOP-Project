@@ -40,7 +40,7 @@ class Player : public Renderable {
   Player();
   Player(vector<Pokemon> pokemons);
   Player(const Player& player);
-  Player operator=(const Player& player);
+  Player& operator=(const Player& player);
   void Draw(sf::RenderWindow* window);
   void swap_pokemon(int i);
   void make_move(int i);

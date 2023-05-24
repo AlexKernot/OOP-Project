@@ -32,8 +32,6 @@
 Gamestate::Gamestate() : current_turn(0) {
   player1 = Player();
   player2 = Bot();
-  std::cout << "CONSTRUCTOR WAS CALLED HERE\n";
-  this->player1.get_current_pokemon()->PrettyPrint();
 }
 
 void Gamestate::swap_move() {
@@ -77,16 +75,16 @@ void Gamestate::AddButtons() {
   for (int i = 0; i < 6; ++i) {
     pokemon_buttons.push_back(new Button());
     pokemon_buttons[i]->SetPosition(pokemon_coords[i]);
-    pokemon_buttons[i]->SetSize(sf::Vector2f(0.75, 0.75));
+    pokemon_buttons[i]->SetSize(sf::Vector2f(0.5, 0.5));
     pokemon_buttons[i]->SetText(player1.getPokemons()->at(i).get_name());
     AddToWindow(pokemon_buttons[i]);
   }
   // Create move buttons
   const std::vector<sf::Vector2i> move_coords = {
-    sf::Vector2i(200, 100),
-    sf::Vector2i(300, 100),
-    sf::Vector2i(200, 200),
-    sf::Vector2i(300, 200)
+    sf::Vector2i(200, 400),
+    sf::Vector2i(600, 500),
+    sf::Vector2i(200, 400),
+    sf::Vector2i(600, 500)
   };
   int size_team = 
           static_cast<int>(player1.get_current_pokemon()->get_moves().size());
@@ -94,7 +92,7 @@ void Gamestate::AddButtons() {
        ++i) {
     move_buttons.push_back(new Button());
     move_buttons[i]->SetPosition(move_coords[i]);
-    pokemon_buttons[i]->SetSize(sf::Vector2f(0.75, 0.75));
+    move_buttons[i]->SetSize(sf::Vector2f(0.5, 0.5));
     move_buttons[i]->SetText(player1.get_current_pokemon()->get_moves()[i]->get_name());
     AddToWindow(move_buttons[i]);
   }
