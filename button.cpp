@@ -2,7 +2,7 @@
 
 Button::Button(std::string buttonTexture) {
   if (!font.loadFromFile("./resources/Minecraft.ttf")) {
-    std::cout << "Resources folder is potentially missing.";
+    std::cout << "Resources folder is potentially missing.\n";
     return ;
   }
   textureName = buttonTexture;
@@ -18,7 +18,7 @@ Button::Button(std::string buttonTexture) {
 
 Button::Button(const Button& button) {
   if (!font.loadFromFile("./resources/Minecraft.ttf")) {
-    std::cout << "Resources folder is potentially missing.";
+    std::cout << "Resources folder is potentially missing.\n";
     return ;
   }
   textureName = button.textureName;
@@ -32,8 +32,13 @@ Button::Button(const Button& button) {
   clickable = button.clickable;
 }
 
-void Button::operator=(const Button& button) {
-  add_sprite("Button_Copy", button.textureName);
+Button& Button::operator=(const Button& button) {
+  if (!font.loadFromFile("./resources/Minecraft.ttf")) {
+    std::cout << "Resources folder is potentially missing.\n";
+    return *this;
+  }
+  textureName = button.textureName;
+  add_sprite("Button_Copy", textureName);
   position = button.position;
   size = button.size;
   text = button.text;
@@ -41,6 +46,7 @@ void Button::operator=(const Button& button) {
   boundsBottomLeft = button.boundsBottomLeft;
   fontLoaded = button.fontLoaded;
   clickable = button.clickable;
+  return *this;
 }
 
 void Button::SetText(std::string text) {

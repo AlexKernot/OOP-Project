@@ -26,7 +26,7 @@ public:
   Button(const Button& button);
   Button(std::string buttonTexture);
   ~Button() {};
-  void operator=(const Button& button);
+  Button& operator=(const Button& button);
   void SetPosition(sf::Vector2i position);
   void SetSize(sf::Vector2f scale);
   void EnableButton();
