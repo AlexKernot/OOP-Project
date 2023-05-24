@@ -29,7 +29,7 @@
 
 class Player : public Renderable {
  private:
-  std::vector<Pokemon*> pokemons;
+  std::vector<Pokemon> pokemons;
   Pokemon* current_pokemon;
   std::vector<Move*> moves;
   Move* current_move;
@@ -38,13 +38,15 @@ class Player : public Renderable {
 
  public:
   Player();
-  Player(vector<Pokemon*> pokemons);
+  Player(vector<Pokemon> pokemons);
+  Player(const Player& player);
+  Player operator=(const Player& player);
   void Draw(sf::RenderWindow* window);
   void swap_pokemon(int i);
   void make_move(int i);
   Pokemon* get_current_pokemon();
-  std::vector<Pokemon*> getPokemons();
-  ~Player();
+  std::vector<Pokemon> *getPokemons();
+  ~Player() {};
 };
 
 #endif
