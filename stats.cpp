@@ -1,5 +1,25 @@
+/*****************************************************************************/
+/*                                                                           */
+/*         █████  ██████  ███████ ██       █████  ██ ██████  ███████         */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ███████ ██   ██ █████   ██      ███████ ██ ██   ██ █████           */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ██   ██ ██████  ███████ ███████ ██   ██ ██ ██████  ███████         */
+/*                                                                           */
+/*        ██    ██ ███    ██ ██    |                            |            */
+/*        ██    ██ ████   ██ ██    |   OOP Semester 1 2023      |            */
+/*        ██    ██ ██ ██  ██ ██    |   Camille, Rose, Alex      |            */
+/*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
+/*         ██████  ██   ████ ██    |                            |            */
+/*                                                                           */
+/*     This is the class handling Pokemon stats throughout the game.         */
+/*                                                                           */
+/*                                                                           */
+/*****************************************************************************/
+
 #include "stats.hpp"
 
+/* Initializes Stats with values */
 Stats::Stats(int hp, int attack, int specialAttack, 
               int defense, int specialDefense, int speed) {
   stats[0] = hp;
@@ -10,7 +30,7 @@ Stats::Stats(int hp, int attack, int specialAttack,
   stats[5] = speed;
 }
 
-/*  Deep copy of a class' stats and stat modifiers.                           */
+/*  Deep copy of a class' stats and stat modifiers. */
 Stats::Stats(const Stats& statsClass) {
   for (int i = 0; i < 6; ++i)
   {
@@ -19,7 +39,7 @@ Stats::Stats(const Stats& statsClass) {
   }
 }
 
-/*  Deep copy of a class' stats and stat modifiers.                           */
+/*  Deep copy of a class' stats and stat modifiers. */
 Stats& Stats::operator=(const Stats& statsClass) {
   if (&statsClass == this)
     return *this;
@@ -31,6 +51,7 @@ Stats& Stats::operator=(const Stats& statsClass) {
   return *this;
 }
 
+/* Calculates stats based on given level */
 void Stats::GenerateStats(int level) {
   stats[0] =(((2 * stats[0] /* + IV + EV/4*/)* level) / 100 );
   stats[0] = floor(stats[0]) + level + 10;
@@ -41,6 +62,7 @@ void Stats::GenerateStats(int level) {
   }
 }
 
+/* Allows for stats modifications that are valid and limited*/
 bool Stats::ModifyStats(std::vector<int> statsMod, int stages) {
   if (stages == 0 || stages < -6 || stages > 6)
     return false;

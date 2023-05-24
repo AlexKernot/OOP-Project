@@ -21,7 +21,7 @@
 
 #include <SFML/Window.hpp>
 
-/*Creates a new renderable window to display the UI of the game*/
+/* Creates a new renderable window to display the UI of the game */
 Window::Window() {
   sfWindow = new sf::RenderWindow(
     sf::VideoMode(static_cast<unsigned int>(width), 
@@ -30,13 +30,14 @@ Window::Window() {
     sf::Style::Close);
 }
 
-/*Closes the renderable Window*/
+/* Closes the renderable Window */
 Window::~Window() {
   sfWindow->close();
   delete sfWindow;
 }
 
-/*This adds all the renderable objects into the objects vector to be able to display all sprites for the draw function*/
+/* This adds all the renderable objects into the objects           */
+/* vector to be able to display all sprites for the draw function  */
 void Window::AddToWindow(Renderable *object) {
   objects.push_back(object);
 }

@@ -27,24 +27,24 @@
 #include "renderable.hpp"
 
 class Window {
-private:
-	  int width = 800;
-	  int height = 600;
-	  int fpsLimit = 10;
-	std::vector<Renderable *> objects;
-	sf::RenderWindow *sfWindow;
+	private:
+		int width = 800;
+		int height = 600;
+		int fpsLimit = 10;
+		std::vector<Renderable *> objects;
+		sf::RenderWindow *sfWindow;
 
-public:
-	Window();
-	virtual ~Window();
-	int GetWindowWidth() {return width;}
-	int GetWindowHeight() {return height;}
-	sf::RenderWindow *GetWindow() {return sfWindow;}
-	bool PollEvent(sf::Event *event);
-	void AddToWindow(Renderable *object);
-	void ClearFromWindow(Renderable *object);
-	void ClearEntireWindow();
-	void RenderWindow();
+	public:
+		Window();
+		virtual ~Window();
+		int GetWindowWidth() {return width;}
+		int GetWindowHeight() {return height;}
+		sf::RenderWindow *GetWindow() {return sfWindow;}
+		bool PollEvent(sf::Event *event);
+		void AddToWindow(Renderable *object);
+		void ClearFromWindow(Renderable *object);
+		void ClearEntireWindow();
+		void RenderWindow();
 };
 
 #endif

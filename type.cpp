@@ -1,6 +1,27 @@
-#include "type.hpp"
+/*****************************************************************************/
+/*                                                                           */
+/*         █████  ██████  ███████ ██       █████  ██ ██████  ███████         */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ███████ ██   ██ █████   ██      ███████ ██ ██   ██ █████           */
+/*        ██   ██ ██   ██ ██      ██      ██   ██ ██ ██   ██ ██              */
+/*        ██   ██ ██████  ███████ ███████ ██   ██ ██ ██████  ███████         */
+/*                                                                           */
+/*        ██    ██ ███    ██ ██    |                            |            */
+/*        ██    ██ ████   ██ ██    |   OOP Semester 1 2023      |            */
+/*        ██    ██ ██ ██  ██ ██    |   Camille, Rose, Alex      |            */
+/*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
+/*         ██████  ██   ████ ██    |                            |            */
+/*                                                                           */
+/*     This is the class handling Pokemon typing throughout the game.        */
+/*                                                                           */
+/*                                                                           */
+/*****************************************************************************/
+
 #include <iostream>
 
+#include "type.hpp"
+
+/* The type constructor checks that valid Type is assigned */
 Type::Type(const std::string type) {
   int validateType = typeToNumber.find(type)->second;
   if (validateType > 17 || validateType < 0)
@@ -12,10 +33,12 @@ Type::Type(const std::string type) {
   this->type = type;
 }
 
+/* This is the copy constructor of the Type class */
 Type::Type(const Type &type) {
   this->type = type.type;
 }
 
+/* Allows for the asignment of Type value to new Type objects */
 Type& Type::operator=(const Type& newType) {
   if (this == &newType)
     return *this;
@@ -23,6 +46,8 @@ Type& Type::operator=(const Type& newType) {
   return *this;
 }
 
+/* This function takes care of calculating the correct Type effectiveness */
+/* every Type shares                                                      */
 float Type::GenerateTypeEffectiveness(Type defendingType1, 
                                       Type defendingType2) {
   int attackingIndex = typeToNumber.find(type)->second;

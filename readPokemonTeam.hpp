@@ -12,7 +12,7 @@
 /*        ██    ██ ██  ██ ██ ██    |   Pokemon Showdown remake  |            */
 /*         ██████  ██   ████ ██    |                            |            */
 /*                                                                           */
-/*          Pokemon teams can be selected with this class.                   */
+/*              Pokemon teams can be selected with this class.               */
 /*                                                                           */
 /*                                                                           */
 /*****************************************************************************/
