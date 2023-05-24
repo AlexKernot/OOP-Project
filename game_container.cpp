@@ -54,17 +54,21 @@ void Game_container::AddGameSprites() {
   hpText2.setString("0");
   hpText1.setCharacterSize(14);
   hpText2.setCharacterSize(14);
-  hpText1.setPosition(100, 100);
-  hpText2.setPosition(200, 200);
+  hpText1.setPosition(295, 257);
+  hpText2.setPosition(720, 32);
+  hpText1.setOutlineColor(sf::Color::Black);
+  hpText2.setOutlineColor(sf::Color::Black);
+  hpText1.setOutlineThickness(0.8);
+  hpText2.setOutlineThickness(0.8);
   add_sprite("Battleui", "./resources/bg_battle.png");
   set_size(0, sf::Vector2f(0.75f, 0.75f));
   set_position(0, sf::Vector2i(200, 0));
   add_sprite("player 2_HP", "./resources/health bar.jpg");
   set_size(1, sf::Vector2f(0.20f, 0.20f));
-  set_position(1, sf::Vector2i(680, 0));
+  set_position(1, sf::Vector2i(675, 25));
   add_sprite("player 1_HP", "./resources/health bar.jpg");
   set_size(2, sf::Vector2f(0.20f, 0.20f));
-  set_position(2, sf::Vector2i(300, 380));
+  set_position(2, sf::Vector2i(250, 250));
   AddToWindow(this);
 }
 
