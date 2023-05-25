@@ -24,7 +24,8 @@ ReadPokemonTeam::ReadPokemonTeam(string fileName, int index) : JSON(){
   json playerData = ParseFile(fileName);
   if (GetParseResult() == false)
     return;
-  if (playerData.size() <= index) {
+  int size = static_cast<int>(playerData.size());
+  if (size <= index) {
     std::cout << "Only detected " << playerData.size() << " pokemon in file."
       << " Generating randoms.";
       generateAll = false;
@@ -50,13 +51,13 @@ ReadPokemonTeam::ReadPokemonTeam(string fileName, int index) : JSON(){
   }
   vector<Move> moves = CreateMoveList(playerData, pokemonName);
   Pokemon pokemon = CreatePokemon(pokemonName, moves, level);
-  set_name(pokemon.get_name());
-  set_type_one(pokemon.get_type_one());
-  set_type_two(pokemon.get_type_two());
-  set_level(pokemon.get_level());
-  set_max_hp(pokemon.get_max_hp());
-  set_current_hp(pokemon.get_hp());
-  set_base_stats(pokemon.get_base_stats());
-  set_stats(pokemon.get_stats());
-  set_moves(pokemon.get_moves());
+  SetName(pokemon.GetName());
+  SetTypeOne(pokemon.GetTypeOne());
+  SetTypeTwo(pokemon.GetTypeTwo());
+  SetLevel(pokemon.GetLevel());
+  SetMaxHp(pokemon.GetMaxHp());
+  SetCurrentHp(pokemon.GetHp());
+  SetBaseStats(pokemon.GetBaseStats());
+  SetStats(pokemon.GetStats());
+  SetMoves(pokemon.GetMoves());
 }

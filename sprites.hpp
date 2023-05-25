@@ -34,12 +34,22 @@ private:
   std::vector<std::string> spriteName;
 
 public:
+/* Constructor for the Sprites to give them texture and add them to a list */
   Sprites();
+  /* Constructor that frees all the sprites for the derived object.         */
   virtual ~Sprites();
-  void  add_sprite(std::string spriteName, std::string texturePath);
+  /*  Loads the texture from the relative path 'texture path' and puts the  */
+  /*  pointer to the sprite on the heap.                                    */
+  void  AddSprite(std::string spriteName, std::string texturePath);
+  /* Copy Constructor for Sprites */
   Sprites(const Sprites& sprites);
+  /* Operator Function so Sprite value can be copied to new Sprite values */
   Sprites& operator=(const Sprites&);
-  sf::Sprite *get_sprite_name(std::string spriteName);
-  sf::Sprite *get_sprite_index(int index);
+  /* returns the sprite that corrosponds to a named texture within the array.*/
+  /* will return a null pointer if no texture with that name is found.       */
+  sf::Sprite *GetSpriteName(std::string spriteName);
+  /* returns the sprite that corrosponds to an index within the array.       */
+  /* This function will return a null pointer if that index doesn't exist.   */
+  sf::Sprite *GetSpriteIndex(int index);
 };
 #endif

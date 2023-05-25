@@ -38,16 +38,16 @@ private:
 
 public:
   virtual void Draw(sf::RenderWindow *window) = 0;
-  sf::Sprite *get_sprite(int index) {return (sprite_list.get_sprite_index(index));}
-  sf::Sprite *add_sprite(std::string spriteName, std::string texturePath);
+  sf::Sprite *GetSprite(int index) 
+            {return (sprite_list.GetSpriteIndex(index));}
+/* Add a sprite to the sprite list and return a pointer to the added sprite */
+  sf::Sprite *AddSprite(std::string spriteName, std::string texturePath);
+/* Operator function used for new Renderble objects to copy renderable values */
   Renderable& operator=(const Renderable& renderable);
-  void set_position(int index, sf::Vector2i position) {
-    sprite_list.get_sprite_index(index)->setPosition(static_cast<sf::Vector2f>(position));
-  }
-  void set_size(int index, sf::Vector2f size) {
-    sprite_list.get_sprite_index(index)->setScale(size);
-  }
-  bool offset_position(int index, sf::Vector2i offset);
+/* Sets the position of a sprite at index. Takes a 2D vector of coordinates.  */
+  void SetPosition(int index, sf::Vector2i position);
+/* Scales the sprite at index according to the 2D vector provided.            */
+  void SetSize(int index, sf::Vector2f size);
   virtual ~Renderable() {}
 
 private:

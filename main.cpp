@@ -26,7 +26,5 @@ int main()
  	Gamestate *game = new Gamestate();
  	game->StartGame();
 	delete game;
-	std::string output;
-	std::cin >> output;
  	return 0;
 }

@@ -63,31 +63,30 @@ public:
   ~Pokemon() {}
   Pokemon& operator=(const Pokemon& pokemon);
   void PrettyPrint();
-  void receive_move(Move moves, int level, int atk, int baseAtk);
-  void set_name(string name);
-  void set_type_one(Type type);
-  void set_type_two(Type type);
-  void set_moves(vector<Move*> moves);
-  void set_level(int level) {this->level = level;}
-  void set_current_hp(int hp) {currentHp = hp;}
-  void set_max_hp(int maxHp) {this->maxHp = maxHp;}
-  void set_base_stats(Stats baseStats) {this->baseStats = baseStats;}
-  void set_stats(Stats stats) {this->stats = stats;}
-  string get_name();
-  int get_hp() {return currentHp;}
-  int get_max_hp() {return maxHp;}
-  Type get_type_one();
-  Type get_type_two();
-  vector<Move*> get_moves();
-  int get_level() {return level;}
-  Stats get_base_stats() {return baseStats;}
-  Stats get_stats() {return stats;}
+  void ReceiveMove(Move moves, int level, int atk, int baseAtk);
+  void SetName(string name);
+  void SetTypeOne(Type type);
+  void SetTypeTwo(Type type);
+  void SetMoves(vector<Move*> moves);
+  void SetLevel(int level) {this->level = level;}
+  void SetCurrentHp(int hp) {currentHp = hp;}
+  void SetMaxHp(int maxHp) {this->maxHp = maxHp;}
+  void SetBaseStats(Stats baseStats) {this->baseStats = baseStats;}
+  void SetStats(Stats stats) {this->stats = stats;}
+  string GetName();
+  int GetHp() {return currentHp;}
+  int GetMaxHp() {return maxHp;}
+  Type GetTypeOne();
+  Type GetTypeTwo();
+  vector<Move*> GetMoves();
+  int GetLevel() {return level;}
+  Stats GetBaseStats() {return baseStats;}
+  Stats GetStats() {return stats;}
   bool GetIsFainted() {return isFainted;}
 
 private:
-  void take_damage(int pwr);
-  void attack_damage(Move move, int level, int atk, int baseAtk);
-  void special_attack_damage(Move move);
+  void TakeDamage(int pwr);
+  void AttackDamage(Move move, int level, int atk, int baseAtk);
 };
 
 #endif

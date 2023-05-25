@@ -55,7 +55,7 @@ Sprites& Sprites::operator=(const Sprites&) {
 
 /*  Loads the texture from the relative path 'texture path' and puts the  */
 /*  pointer to the sprite on the heap.                                    */
-void  Sprites::add_sprite(std::string spriteName, std::string texturePath){
+void  Sprites::AddSprite(std::string spriteName, std::string texturePath){
   sf::Sprite *newSprite = new sf::Sprite();
   sf::Texture *newTexture = new sf::Texture();
   bool loadResult = newTexture->loadFromFile(texturePath);
@@ -69,14 +69,14 @@ void  Sprites::add_sprite(std::string spriteName, std::string texturePath){
 
 /* returns the sprite that corrosponds to a named texture within the array.   */
 /* will return a null pointer if no texture with that name is found.          */
-sf::Sprite *Sprites::get_sprite_name(std::string spriteName) {
+sf::Sprite *Sprites::GetSpriteName(std::string spriteName) {
    int spriteIndex = spriteName.find(spriteName);
    return sprites[spriteIndex];
 }
 
 /* returns the sprite that corrosponds to an index within the array.         */
 /* This function will return a null pointer if that index doesn't exist.     */
-sf::Sprite *Sprites::get_sprite_index(int index) {
+sf::Sprite *Sprites::GetSpriteIndex(int index) {
    return sprites[index];
 }
 

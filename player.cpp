@@ -33,7 +33,7 @@ Player::Player() {
     pokemons.push_back(Pokemon());
   }
   current_pokemon = 0;
-  moves = pokemons.at(current_pokemon).get_moves();
+  moves = pokemons.at(current_pokemon).GetMoves();
 }
 
 /* Copy Constructor for Player */
@@ -75,16 +75,16 @@ Player& Player::operator=(const Player& player) {
 Player::Player(std::vector<Pokemon> pokemons) {
   this->pokemons = pokemons;
   current_pokemon = 0;
-  this->moves = pokemons.at(current_pokemon).get_moves();
+  this->moves = pokemons.at(current_pokemon).GetMoves();
   for (size_t i = 0; i < pokemons.size(); ++i) {
-    std::string name = pokemons.at(i).get_name();
-    add_sprite("Pokemon" + std::to_string(i), "resources/sprites/" + name + ".png");
+    std::string name = pokemons.at(i).GetName();
+    AddSprite("Pokemon" + std::to_string(i), "resources/sprites/" + name + ".png");
     if (name == "Missingno") {
-      set_size(i, sf::Vector2f(0.4, 0.4));
-      set_position(i, sf::Vector2i(300, 300));
+      SetSize(i, sf::Vector2f(0.4, 0.4));
+      SetPosition(i, sf::Vector2i(300, 300));
     } else {
-      set_size(i, sf::Vector2f(2, 2));
-      set_position(i, sf::Vector2i(300, 300));
+      SetSize(i, sf::Vector2f(2, 2));
+      SetPosition(i, sf::Vector2i(300, 300));
     }
   }
 }
@@ -101,7 +101,7 @@ std::vector<Pokemon> *Player::getPokemons() { return &pokemons; }
 
 void Player::Draw(sf::RenderWindow* window) {
   //add_sprite("Test", "resources/placeholder.png");
-  sf::Sprite sprite = *get_sprite(current_pokemon);
+  sf::Sprite sprite = *GetSprite(current_pokemon);
   window->draw(sprite);
   return ;
 }

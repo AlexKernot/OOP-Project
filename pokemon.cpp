@@ -98,7 +98,7 @@ void Pokemon::PrettyPrint() {
 }
 
 /*reduces the hp of the Pokemon by the damage passed in the parameter */
-void Pokemon::take_damage(int pwr) {
+void Pokemon::TakeDamage(int pwr) {
 	if(currentHp > 0) {
 		currentHp -= pwr;
 		if (currentHp < 0 || currentHp == 0) {
@@ -109,13 +109,13 @@ void Pokemon::take_damage(int pwr) {
 }
 
 /* this function receives the moves and sends the power to the dmg calculator based on the moves effect*/
-void Pokemon::receive_move(Move move, int level, int atk, int baseAtk) {
-		attack_damage(move, level, atk, baseAtk);
+void Pokemon::ReceiveMove(Move move, int level, int atk, int baseAtk) {
+		AttackDamage(move, level, atk, baseAtk);
 	//stat modifying moves go here
 }
 
 /* Dmg calculator for attack moves based on generation 1 calculation*/
-void Pokemon::attack_damage(Move move, int level, int atk, int baseAtk) {
+void Pokemon::AttackDamage(Move move, int level, int atk, int baseAtk) {
 	srand(static_cast<unsigned>(time(nullptr)));
 	int randomNumber = rand() % 10;
   int crit = 1;
@@ -159,41 +159,41 @@ void Pokemon::attack_damage(Move move, int level, int atk, int baseAtk) {
 			return ;
 		}
 		if (damage == 1) {
-			take_damage(damage);
+			TakeDamage(damage);
 			return ;
 		}
 		randomNumber = 217 + (rand() % (39));
 		damage = ((damage * randomNumber) / 255);
-		take_damage(damage);
+		TakeDamage(damage);
 }
 
 /* sets the name of the Pokemon */
-void Pokemon::set_name(string name) {
+void Pokemon::SetName(string name) {
 	this->name = name;
 }
 
 /* sets the type of the Pokemon */
-void Pokemon::set_type_one(Type type) {
+void Pokemon::SetTypeOne(Type type) {
 	this->typeOne = type;
 }
 
-void Pokemon::set_type_two(Type type) {
+void Pokemon::SetTypeTwo(Type type) {
 	this->typeTwo = type;
 }
 /* returns the name of the Pokemon */
-string Pokemon::get_name() {
+string Pokemon::GetName() {
 	return name;
 }
 
 /* returns the type of the Pokemon */
-Type Pokemon::get_type_one() {
+Type Pokemon::GetTypeOne() {
 	return typeOne;
 }
 
-Type Pokemon::get_type_two() {
+Type Pokemon::GetTypeTwo() {
 	return typeTwo;
 }
-void Pokemon::set_moves(vector<Move*> moves) {
+void Pokemon::SetMoves(vector<Move*> moves) {
   int size = static_cast<int>(moves.size());
   for (int i = 0; i < size; ++i) {
     moveList[i] = *moves[i];
@@ -201,7 +201,7 @@ void Pokemon::set_moves(vector<Move*> moves) {
 }
 
 /* returns all the moves of the Pokemon*/
-vector<Move*> Pokemon::get_moves() {
+vector<Move*> Pokemon::GetMoves() {
   vector<Move*> moves;
   int size = static_cast<int>(moveList.size());
   for (int i = 0; i < size; ++i)

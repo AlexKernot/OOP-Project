@@ -39,23 +39,23 @@ void Game_container::AddGameSprites() {
   hpText2.setOutlineColor(sf::Color::Black);
   hpText1.setOutlineThickness(0.8);
   hpText2.setOutlineThickness(0.8);
-  add_sprite("Battleui", "./resources/bg_battle.png");
-  set_size(0, sf::Vector2f(0.75f, 0.75f));
-  set_position(0, sf::Vector2i(200, 0));
-  add_sprite("player 2_HP", "./resources/health bar.jpg");
-  set_size(1, sf::Vector2f(0.20f, 0.20f));
-  set_position(1, sf::Vector2i(675, 25));
-  add_sprite("player 1_HP", "./resources/health bar.jpg");
-  set_size(2, sf::Vector2f(0.20f, 0.20f));
-  set_position(2, sf::Vector2i(250, 250));
+  AddSprite("Battleui", "./resources/bg_battle.png");
+  SetSize(0, sf::Vector2f(0.75f, 0.75f));
+  SetPosition(0, sf::Vector2i(200, 0));
+  AddSprite("player 2_HP", "./resources/health bar.jpg");
+  SetSize(1, sf::Vector2f(0.20f, 0.20f));
+  SetPosition(1, sf::Vector2i(675, 25));
+  AddSprite("player 1_HP", "./resources/health bar.jpg");
+  SetSize(2, sf::Vector2f(0.20f, 0.20f));
+  SetPosition(2, sf::Vector2i(250, 250));
   AddToWindow(this);
 }
 
 /* Renders the added sprites to the Window*/
 void Game_container::Draw(sf::RenderWindow *window) {
-  window->draw(*get_sprite(0));
-  window->draw(*get_sprite(1));
-  window->draw(*get_sprite(2));
+  window->draw(*GetSprite(0));
+  window->draw(*GetSprite(1));
+  window->draw(*GetSprite(2));
   window->draw(hpText1);
   window->draw(hpText2);
 }

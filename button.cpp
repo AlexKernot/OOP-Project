@@ -26,7 +26,7 @@ Button::Button(std::string buttonTexture) {
     return ;
   }
   textureName = buttonTexture;
-  add_sprite("button", textureName);
+  AddSprite("button", textureName);
   size = sf::Vector2f(350, 112);
   boundsTopLeft = sf::Vector2i(0, 0);
   boundsBottomRight = sf::Vector2i(size.x, size.y);
@@ -43,7 +43,7 @@ Button::Button(const Button& button) {
     return ;
   }
   textureName = button.textureName;
-  add_sprite("Button_Copy", textureName);
+  AddSprite("Button_Copy", textureName);
   position = button.position;
   size = button.size;
   text = button.text;
@@ -62,7 +62,7 @@ Button& Button::operator=(const Button& button) {
     return *this;
   }
   textureName = button.textureName;
-  add_sprite("Button_Copy", textureName);
+  AddSprite("Button_Copy", textureName);
   position = button.position;
   size = button.size;
   text = button.text;
@@ -82,7 +82,7 @@ void Button::SetText(std::string text) {
 void Button::SetPosition(sf::Vector2i position) {
   this->position = position;
   sf::Vector2f positionFloat = static_cast<sf::Vector2f>(position);
-  get_sprite(0)->setPosition(positionFloat);
+  GetSprite(0)->setPosition(positionFloat);
   boundsTopLeft = sf::Vector2i(position.x, position.y);
   boundsBottomRight = sf::Vector2i(position.x + size.x, position.y + size.y);
   text.setPosition(positionFloat + textOffset);
@@ -101,7 +101,7 @@ bool Button::HoverOn(sf::Vector2i mouse) {
 
 /* Sets the size of the button */
 void Button::SetSize(sf::Vector2f scale) {
-  get_sprite(0)->setScale(scale);
+  GetSprite(0)->setScale(scale);
   size = sf::Vector2f(size.x * scale.x, size.y * scale.y);
   boundsTopLeft = sf::Vector2i(position.x, position.y);
   boundsBottomRight = sf::Vector2i(position.x + size.x, position.y + size.y);
@@ -110,14 +110,14 @@ void Button::SetSize(sf::Vector2f scale) {
 /* Allows clicking on button */
 void Button::EnableButton() {
   clickable = true;
-  get_sprite(0)->setColor(sf::Color::White);
+  GetSprite(0)->setColor(sf::Color::White);
   text.setFillColor(sf::Color::White);
 }
 
 /* Disables clicking on button */
 void Button::DisableButton() {
   clickable = false;
-  get_sprite(0)->setColor(sf::Color(100, 100, 100, 200));
+  GetSprite(0)->setColor(sf::Color(100, 100, 100, 200));
   text.setFillColor(sf::Color(100, 100, 100, 200));
 }
 
@@ -139,6 +139,6 @@ void Button::Draw(sf::RenderWindow *window) {
   } else {
     text.setOutlineThickness(0);
   }
-  window->draw(*get_sprite(0));
+  window->draw(*GetSprite(0));
   window->draw(text);
 }

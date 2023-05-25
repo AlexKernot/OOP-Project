@@ -31,7 +31,7 @@
 /* Bot constructor */
 Bot::Bot(vector<Pokemon> pokemons) : Player(pokemons) {
   for (size_t i = 0; i < pokemons.size(); ++i) {
-    set_position(i, sf::Vector2i(500, 40));
+    SetPosition(i, sf::Vector2i(500, 40));
   }
 };
 
@@ -78,7 +78,7 @@ void Bot::swap_pokemon() {
 /* Allows the bot to make the chosen move */
 Move Bot::make_move() {
   int number = 0;
-  vector<Move *> tempMove = getPokemons()->at(get_current_pokemon()).get_moves();
+  vector<Move *> tempMove = getPokemons()->at(get_current_pokemon()).GetMoves();
   number = rand() % tempMove.size();
   return *tempMove.at(number);
 }

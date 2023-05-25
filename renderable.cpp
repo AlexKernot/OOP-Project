@@ -21,10 +21,20 @@
 #include <iostream>
 
 /* Add a sprite to the sprite list and return a pointer to the added sprite */
-sf::Sprite *Renderable::add_sprite(std::string spriteName,
+sf::Sprite *Renderable::AddSprite(std::string spriteName,
                                    std::string texturePath) {
-  sprite_list.add_sprite(spriteName, texturePath);
-  return sprite_list.get_sprite_name(spriteName);
+  sprite_list.AddSprite(spriteName, texturePath);
+  return sprite_list.GetSpriteName(spriteName);
+}
+
+/* Scales the sprite at index according to the 2D vector provided.            */
+void Renderable::SetSize(int index, sf::Vector2f size) {
+  sprite_list.GetSpriteIndex(index)->setScale(size);
+}
+
+/* Sets the position of a sprite at index. Takes a 2D vector of coordinates.  */
+void Renderable::SetPosition(int index, sf::Vector2i position) {
+  sprite_list.GetSpriteIndex(index)->setPosition(static_cast<sf::Vector2f>(position));
 }
 
 /* Operator function used for new Renderble objects to copy renderable values */

@@ -109,10 +109,10 @@ void Gamestate::EnableMoveButtons() {
 }
 
 void Gamestate::UpdateButtons(Pokemon pokemon) {
-  move_buttons[0]->SetText(pokemon.get_moves()[0]->get_name());
-  move_buttons[1]->SetText(pokemon.get_moves()[1]->get_name());
-  move_buttons[2]->SetText(pokemon.get_moves()[2]->get_name());
-  move_buttons[3]->SetText(pokemon.get_moves()[3]->get_name());
+  move_buttons[0]->SetText(pokemon.GetMoves()[0]->get_name());
+  move_buttons[1]->SetText(pokemon.GetMoves()[1]->get_name());
+  move_buttons[2]->SetText(pokemon.GetMoves()[2]->get_name());
+  move_buttons[3]->SetText(pokemon.GetMoves()[3]->get_name());
 }
 
 void Gamestate::ButtonClick() {
@@ -127,7 +127,7 @@ void Gamestate::ButtonClick() {
         DisablePokemonButtons();
         EnablePokemonButtons();
         std::cout << "You: swapped to Pokemon: " 
-        << player1->getPokemons()->at(i).get_name() << std::endl;
+        << player1->getPokemons()->at(i).GetName() << std::endl;
         ++current_turn;
         return ;
       }
@@ -138,19 +138,19 @@ void Gamestate::ButtonClick() {
       if (move_buttons[i]->ClickedOn(sf::Mouse::getPosition(*GetWindow()))) {
         player1->make_move(i);
         std::cout << "You: " << player1->getPokemons()
-          ->at(player1->get_current_pokemon()).get_name() << " used "
+          ->at(player1->get_current_pokemon()).GetName() << " used "
         << player1->getPokemons()->at(player1->get_current_pokemon())
-          .get_moves().at(i)->get_name() 
+          .GetMoves().at(i)->get_name() 
         << " on " << player2->getPokemons()->at(player1->get_current_pokemon())
-          .get_name() << std::endl;
+          .GetName() << std::endl;
         ++current_turn;
         Pokemon *tempPokemon = &player1->getPokemons()
           ->at(player1->get_current_pokemon());
         player2->getPokemons()->at(player2->get_current_pokemon())
-          .receive_move(
-            *tempPokemon->get_moves().at(i), tempPokemon->get_level(), 
-            tempPokemon->get_stats().GetAttack(), 
-            tempPokemon->get_base_stats().GetAttack());
+          .ReceiveMove(
+            *tempPokemon->GetMoves().at(i), tempPokemon->GetLevel(), 
+            tempPokemon->GetStats().GetAttack(), 
+            tempPokemon->GetBaseStats().GetAttack());
         return ;
       }
     }
@@ -172,7 +172,7 @@ void Gamestate::AddButtons() {
     pokemon_buttons.push_back(new Button());
     pokemon_buttons[i]->SetPosition(pokemon_coords[i]);
     pokemon_buttons[i]->SetSize(sf::Vector2f(0.5, 0.80));
-    pokemon_buttons[i]->SetText(player1->getPokemons()->at(i).get_name());
+    pokemon_buttons[i]->SetText(player1->getPokemons()->at(i).GetName());
     AddToWindow(pokemon_buttons[i]);
   }
   // Create move buttons
@@ -184,14 +184,14 @@ void Gamestate::AddButtons() {
   };
   int size_team = 
           static_cast<int>(player1->getPokemons()
-            ->at(player1->get_current_pokemon()).get_moves().size());
+            ->at(player1->get_current_pokemon()).GetMoves().size());
   for (int i = 0; i < size_team;
        ++i) {
     move_buttons.push_back(new Button());
     move_buttons[i]->SetPosition(move_coords[i]);
     move_buttons[i]->SetSize(sf::Vector2f(0.70, 0.70));
     move_buttons[i]->SetText(player1->getPokemons()
-      ->at(player1->get_current_pokemon()).get_moves()[i]->get_name());
+      ->at(player1->get_current_pokemon()).GetMoves()[i]->get_name());
     AddToWindow(move_buttons[i]);
   }
   /*  The current pokemon will always start as the first one.  */
@@ -210,10 +210,10 @@ void Gamestate::StartGame() {
   AddGameSprites();
   AddToWindow(player1);
   UpdateHealth(1, player1->getPokemons()
-    ->at(player1->get_current_pokemon()).get_max_hp());
+    ->at(player1->get_current_pokemon()).GetMaxHp());
   AddToWindow(player2);
   UpdateHealth(1, player2->getPokemons()
-    ->at(player2->get_current_pokemon()).get_max_hp());
+    ->at(player2->get_current_pokemon()).GetMaxHp());
   AddButtons();
   while (true) {
     sf::Event event;
@@ -248,33 +248,33 @@ void Gamestate::StartGame() {
         }
         if (botChoice == 0) {
           player1->getPokemons()->at(player1->get_current_pokemon())
-            .receive_move(move, tempPokemon->get_level(), 
-              tempPokemon->get_stats().GetAttack(), tempPokemon
-                ->get_base_stats().GetAttack());
-            std::cout << "Bot: " << tempPokemon->get_name() << " used " 
+            .ReceiveMove(move, tempPokemon->GetLevel(), 
+              tempPokemon->GetStats().GetAttack(), tempPokemon
+                ->GetBaseStats().GetAttack());
+            std::cout << "Bot: " << tempPokemon->GetName() << " used " 
               << move.get_name() << std::endl;
         if (player1->getPokemons()
           ->at(player1->get_current_pokemon()).GetIsFainted())
           std::cout << "You: " << player1->getPokemons()
-            ->at(player1->get_current_pokemon()).get_name() 
+            ->at(player1->get_current_pokemon()).GetName() 
           << " fainted. Please switch pokemon." << std::endl;
         } else {
           std::cout << "Bot: switched out " 
           << player2->getPokemons()
-            ->at(player2->get_current_pokemon()).get_name()
+            ->at(player2->get_current_pokemon()).GetName()
           << " into ";
           player2->swap_pokemon();
           std::cout << player2->getPokemons()
-            ->at(player2->get_current_pokemon()).get_name()
+            ->at(player2->get_current_pokemon()).GetName()
           << std::endl;
         }
         --current_turn;
       }
     }
   UpdateHealth(1, player1->getPokemons()
-    ->at(player1->get_current_pokemon()).get_hp());
+    ->at(player1->get_current_pokemon()).GetHp());
   UpdateHealth(2, player2->getPokemons()
-    ->at(player2->get_current_pokemon()).get_hp());
+    ->at(player2->get_current_pokemon()).GetHp());
   RenderWindow();
   }
 }

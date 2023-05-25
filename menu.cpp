@@ -23,7 +23,7 @@
 Menu::Menu(){
   font = new sf::Font();
   font->loadFromFile("./resources/Minecraft.ttf");
-  add_sprite("background", "./resources/Title Screen.png");
+  AddSprite("background", "./resources/Title Screen.png");
   options = {"Normal Mode ", "Normal Random Mode", "Mayhem Mode", "Broken Cup", "Quit"};
 
   texts.resize(5);
@@ -87,7 +87,7 @@ int Menu::HandleKeyboard() {
 }
 
 void Menu::Draw(sf::RenderWindow* window) {
-  window->draw(*get_sprite(0));
+  window->draw(*GetSprite(0));
   int size = static_cast<int>(texts.size());
   for(int i = 0; i < size; ++i) {
    window->draw(texts[i]); 
